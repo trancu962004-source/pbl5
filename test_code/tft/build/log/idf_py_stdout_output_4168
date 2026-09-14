@@ -1,0 +1,508 @@
+[0;32mI (106) esp_image: segment 1: paddr=0001bc2c vaddr=3fc8deESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0xd (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40383f54
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fcd5820,len:0x1820
+load:0x403cc710,len:0xbcc
+load:0x403ce710,len:0x2f5c
+entry 0x403cc71a
+[0;32mI (24) boot: ESP-IDF v5.3.3-dirty 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time Apr 17 2026 01:18:27[0m
+[0;32mI (25) boot: chip revision: v0.4[0m
+[0;32mI (28) boot: efuse block revision: v1.3[0m
+[0;32mI (32) boot.esp32c3: SPI Speed      : 80MHz[0m
+[0;32mI (37) boot.esp32c3: SPI Mode       : DIO[0m
+[0;32mI (42) boot.esp32c3: SPI Flash Size : 2MB[0m
+[0;32mI (47) boot: Enabling RNG early entropy source...[0m
+[0;32mI (52) boot: Partition Table:[0m
+[0;32mI (56) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (63) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (70) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (78) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (85) boot: End of partition table[0m
+[0;32mI (89) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=0bc04h ( 48132) map[0m
+[0;32mI (106) esp_image: segment 1: paddr=0001bc2c vaddr=3fc8de00 size=01414h (  5140) load[0m
+[0;32mI (107) esp_image: segment 2: paddr=0001d048 vaddr=40380000 size=02fd0h ( 12240) load[0m
+[0;32mI (117) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=1b9e0h (113120) map[0m
+[0;32mI (142) esp_image: segment 4: paddr=0003ba08 vaddr=40382fd0 size=0ada0h ( 44448) load[0m
+[0;32mI (154) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (154) boot: Disabling RNG early entropy source...[0m
+[0;32mI (166) cpu_start: Unicore app[0m
+[0;32mI (174) cpu_start: Pro cpu start user code[0m
+[0;32mI (174) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (174) app_init: Application information:[0m
+[0;32mI (177) app_init: Project name:     tft[0m
+[0;32mI (182) app_init: App version:      1[0m
+[0;32mI (186) app_init: Compile time:     Apr 17 2026 01:18:10[0m
+[0;32mI (192) app_init: ELF file SHA256:  689b07f72...[0m
+[0;32mI (197) app_init: ESP-IDF:          v5.3.3-dirty[0m
+[0;32mI (203) efuse_init: Min chip rev:     v0.3[0m
+[0;32mI (207) efuse_init: Max chip rev:     v1.99 [0m
+[0;32mI (212) efuse_init: Chip rev:         v0.4[0m
+[0;32mI (217) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (224) heap_init: At 3FC900F0 len 0002FF10 (191 KiB): RAM[0m
+[0;32mI (231) heap_init: At 3FCC0000 len 0001C710 (113 KiB): Retention RAM[0m
+[0;32mI (238) heap_init: At 3FCDC710 len 00002950 (10 KiB): Retention RAM[0m
+[0;32mI (244) heap_init: At 50000000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (252) spi_flash: detected chip: generic[0m
+[0;32mI (255) spi_flash: flash io: dio[0m
+[0;33mW (259) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (273) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (279) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (287) main_task: Started on CPU0[0m
+[0;32mI (287) main_task: Calling app_main()[0m
+[0;32mI (287) gpio: GPIO[10]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (297) gpio: GPIO[8]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (307) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (317) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (637) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (3097) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (3097) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (3097) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (3417) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (5877) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (5877) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (5877) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (6197) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (8657) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (8657) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (8657) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (8977) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (11437) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (11437) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (11437) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (11757) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (14217) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (14217) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (14217) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (14537) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (16997) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (16997) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (16997) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (17317) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (19777) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (19777) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (19777) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (20097) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (22557) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (22557) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (22557) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (22877) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (25337) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (25337) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (25337) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (25657) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (28117) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (28117) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (28117) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (28437) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (30897) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (30897) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (30897) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (31217) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (33677) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (33677) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (33677) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (33997) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (36457) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (36457) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (36457) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (36777) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (39237) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (39237) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (39237) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (39557) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (42017) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (42017) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (42017) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (42337) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (44797) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (44797) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (44797) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (45117) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (47577) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (47577) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (47577) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (47897) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (50357) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (50357) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (50357) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (50677) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (53137) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (53137) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (53137) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (53457) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (55917) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (55917) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (55917) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (56237) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (58697) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (58697) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (58697) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (59017) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (61477) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (61477) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (61477) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (61797) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (64257) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (64257) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (64257) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (64577) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (67037) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (67037) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (67037) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (67357) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (69817) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (69817) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (69817) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (70137) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (72597) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (72597) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (72597) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (72917) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (75377) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (75377) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (75377) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (75697) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (78157) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (78157) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (78157) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (78477) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (80937) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (80937) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (80937) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (81257) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (83717) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (83717) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (83717) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (84037) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (86497) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (86497) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (86497) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (86817) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (89277) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (89277) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (89277) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (89597) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (92057) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (92057) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (92057) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (92377) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (94837) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (94837) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (94837) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (95157) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (97617) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (97617) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (97617) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (97937) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (100397) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (100397) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (100397) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (100717) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (103177) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (103177) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (103177) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (103497) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (105957) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (105957) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (105957) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (106277) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (108737) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (108737) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (108737) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (109057) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (111517) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (111517) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (111517) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (111837) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (114297) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (114297) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (114297) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (114617) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (117077) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (117077) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (117077) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (117397) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (119857) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (119857) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (119857) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (120177) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (122637) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (122637) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (122637) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (122957) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (125417) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (125417) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (125417) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (125737) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (128197) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (128197) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (128197) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (128517) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (130977) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (130977) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (130977) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (131297) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (133757) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (133757) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (133757) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (134077) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (136537) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (136537) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (136537) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (136857) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (139317) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (139317) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (139317) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (139637) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (142097) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (142097) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (142097) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (142417) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (144877) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (144877) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (144877) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (145197) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (147657) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (147657) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (147657) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (147977) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (150437) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (150437) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (150437) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (150757) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (153217) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (153217) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (153217) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (153537) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (155997) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (155997) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (155997) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (156317) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (158777) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (158777) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (158777) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (159097) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (161557) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (161557) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (161557) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (161877) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (164337) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (164337) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (164337) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (164657) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (167117) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (167117) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (167117) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (167437) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (169897) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (169897) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (169897) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (170217) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (172677) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (172677) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (172677) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (172997) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (175457) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (175457) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (175457) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (175777) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (178237) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (178237) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (178237) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (178557) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (181017) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (181017) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (181017) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (181337) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (183797) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (183797) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (183797) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (184117) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (186577) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (186577) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (186577) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (186897) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (189357) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (189357) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (189357) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (189677) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (192137) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (192137) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (192137) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (192457) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (194917) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (194917) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (194917) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (195237) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (197697) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (197697) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (197697) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (198017) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (200477) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (200477) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (200477) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (200797) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (203257) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (203257) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (203257) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (203577) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (206037) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (206037) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (206037) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (206357) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (208817) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (208817) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (208817) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (209137) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (211597) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (211597) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (211597) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (211917) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (214377) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (214377) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (214377) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (214697) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (217157) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (217157) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (217157) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (217477) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (219937) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (219937) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (219937) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (220257) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (222717) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (222717) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (222717) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (223037) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (225497) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (225497) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (225497) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (225817) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (228277) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (228277) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (228277) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (228597) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (231057) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (231057) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (231057) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (231377) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (233837) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (233837) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (233837) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (234157) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (236617) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (236617) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (236617) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (236937) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (239397) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (239397) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (239397) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (239717) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (242177) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (242177) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (242177) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (242497) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (244957) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (244957) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (244957) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (245277) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (247737) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (247737) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (247737) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (248057) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (250517) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (250517) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (250517) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (250837) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (253297) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (253297) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (253297) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (253617) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (256077) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (256077) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (256077) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (256397) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (258857) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (258857) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (258857) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (259177) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (261637) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (261637) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (261637) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (261957) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (264417) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (264417) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (264417) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (264737) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (267197) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (267197) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (267197) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (267517) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (269977) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (269977) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (269977) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (270297) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (272757) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (272757) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (272757) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (273077) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (275537) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (275537) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (275537) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (275857) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (278317) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (278317) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (278317) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (278637) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (281097) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (281097) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (281097) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (281417) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (283877) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (283877) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (283877) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (284197) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (286657) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (286657) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (286657) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (286977) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (289437) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (289437) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (289437) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (289757) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (292217) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (292217) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (292217) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (292537) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (294997) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (294997) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (294997) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (295317) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (297777) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (297777) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (297777) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (298097) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (300557) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (300557) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (300557) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (300877) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m
+[0;32mI (303337) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (303337) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (303337) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (303657) ST7789_AUTO_TEST: APPLY MODE 2: RGB INV=1 gap=(0,1)[0m
+[0;32mI (306117) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (306117) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (306117) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (306437) ST7789_AUTO_TEST: APPLY MODE 3: BGR INV=0 gap=(0,1)[0m
+[0;32mI (308897) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (308897) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (308897) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (309217) ST7789_AUTO_TEST: APPLY MODE 4: BGR INV=1 gap=(0,1)[0m
+[0;32mI (311677) gpio: GPIO[9]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (311677) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (311677) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (311997) ST7789_AUTO_TEST: APPLY MODE 1: RGB INV=0 gap=(0,1)[0m

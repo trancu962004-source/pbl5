@@ -1,0 +1,80 @@
+[0;33m--- Warning: GDB cannot open serial ports accessed as COMx[0m
+[0;33m--- Using \\.\COM25 instead...[0m
+[0;33m--- esp-idf-monitor 1.8.0 on \\.\COM25 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0m--- 0x40383d9d: [0;33m_esp_error_check_failed[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/esp_err.c[0m[0m:[1;31m49[0m
+[0;33m--- Stack dump detected[0m
+[0m--- 0x4038084c: [0;33mpanic_abort[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/panic.c[0m[0m:[1;31m463[0m
+[0m--- 0x40383da8: [0;33m__ubsan_include[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/ubsan.c[0m[0m:[1;31m311[0m
+[0m--- 0x42000c5e: [0;33mpanic_print_char_uart[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/panic.c[0m[0m:[1;31m88[0m
+[0m--- 0x42008892: [0;33mmpu6050_init[0m[0m at [0;32mD:/nckh_test1/mpu/main/mpu.c[0m[0m:[1;31m229[0m
+[0m--- 0x40383d9d: [0;33m_esp_error_check_failed[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/esp_err.c[0m[0m:[1;31m49[0m
+[0m--- 0x4038084c: [0;33mpanic_abort[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/panic.c[0m[0m:[1;31m463[0m
+[0m--- 0x40383da8: [0;33m__ubsan_include[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/ubsan.c[0m[0m:[1;31m311[0m
+[0m--- 0x40380001: [0;33m_vector_table[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/riscv/vectors_intc.S[0m[0m:[1;31m54[0m
+[0;33m--- Warning: Failed to run gdb_panic_server.py script: Command '['riscv32-esp-elf-gdb', '--batch', '-n', 'D:\\nckh_test1\\mpu\\build\\mpu.elf', '-ex', 'target remote | "D:\\esp32_c3\\Espressif\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe" -m esp_idf_panic_decoder --target esp32c3 "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\tmpdbdugh8q"', '-ex', 'bt']' returned non-zero exit status 1.
+--- Warning: b"\r\nwarning: could not convert 'main' from the host encoding (CP1252) to UTF-32.\r\nThis normally should not happen, please file a bug report.\r\nerror starting child process 'D:\\esp32_c3\\Espressif\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe -m esp_idf_panic_decoder --target esp32c3 C:\\Users\\ADMIN\\AppData\\Local\\Temp\\tmpdbdugh8q': CreateProcess: No such file or directory\r\nNo stack.\r\n"
+
+[0m
+[0m--- 0x40380804: [0;33mesp_restart_noos[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/port/soc/esp32c3/system_internal.c[0m[0m:[1;31m110[0m
+[0m--- 0x42008892: [0;33mmpu6050_init[0m[0m at [0;32mD:/nckh_test1/mpu/main/mpu.c[0m[0m:[1;31m229[0m
+[0m--- 0x40383d9d: [0;33m_esp_error_check_failed[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/esp_err.c[0m[0m:[1;31m49[0m
+[0;33m--- Stack dump detected[0m
+[0m--- 0x4038084c: [0;33mpanic_abort[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/panic.c[0m[0m:[1;31m463[0m
+[0m--- 0x40383da8: [0;33m__ubsan_include[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/ubsan.c[0m[0m:[1;31m311[0m
+[0m--- 0x40380001: [0;33m_vector_table[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/riscv/vectors_intc.S[0m[0m:[1;31m54[0m
+[0;33m--- Warning: Failed to run gdb_panic_server.py script: Command '['riscv32-esp-elf-gdb', '--batch', '-n', 'D:\\nckh_test1\\mpu\\build\\mpu.elf', '-ex', 'target remote | "D:\\esp32_c3\\Espressif\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe" -m esp_idf_panic_decoder --target esp32c3 "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\tmp_ownv69v"', '-ex', 'bt']' returned non-zero exit status 1.
+--- Warning: b"\r\nwarning: could not convert 'main' from the host encoding (CP1252) to UTF-32.\r\nThis normally should not happen, please file a bug report.\r\nerror starting child process 'D:\\esp32_c3\\Espressif\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe -m esp_idf_panic_decoder --target esp32c3 C:\\Users\\ADMIN\\AppData\\Local\\Temp\\tmp_ownv69v': CreateProcess: No such file or directory\r\nNo stack.\r\n"
+
+[0m
+[0m--- 0x40380804: [0;33mesp_restart_noos[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/port/soc/esp32c3/system_internal.c[0m[0m:[1;31m110[0m
+[0m--- 0x42008892: [0;33mmpu6050_init[0m[0m at [0;32mD:/nckh_test1/mpu/main/mpu.c[0m[0m:[1;31m229[0m
+[0m--- 0x40383d9d: [0;33m_esp_error_check_failed[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/esp_err.c[0m[0m:[1;31m49[0m
+[0;33m--- Stack dump detected[0m
+[0m--- 0x4038084c: [0;33mpanic_abort[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/panic.c[0m[0m:[1;31m463[0m
+[0m--- 0x40383da8: [0;33m__ubsan_include[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/ubsan.c[0m[0m:[1;31m311[0m
+[0m--- 0x40380001: [0;33m_vector_table[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/riscv/vectors_intc.S[0m[0m:[1;31m54[0m
+[0;33m--- Warning: Failed to run gdb_panic_server.py script: Command '['riscv32-esp-elf-gdb', '--batch', '-n', 'D:\\nckh_test1\\mpu\\build\\mpu.elf', '-ex', 'target remote | "D:\\esp32_c3\\Espressif\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe" -m esp_idf_panic_decoder --target esp32c3 "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\tmppy4qi0d3"', '-ex', 'bt']' returned non-zero exit status 1.
+--- Warning: b"\r\nwarning: could not convert 'main' from the host encoding (CP1252) to UTF-32.\r\nThis normally should not happen, please file a bug report.\r\nerror starting child process 'D:\\esp32_c3\\Espressif\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe -m esp_idf_panic_decoder --target esp32c3 C:\\Users\\ADMIN\\AppData\\Local\\Temp\\tmppy4qi0d3': CreateProcess: No such file or directory\r\nNo stack.\r\n"
+
+[0m
+[0m--- 0x40380804: [0;33mesp_restart_noos[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/port/soc/esp32c3/system_internal.c[0m[0m:[1;31m110[0m
+[0m--- 0x42008892: [0;33mmpu6050_init[0m[0m at [0;32mD:/nckh_test1/mpu/main/mpu.c[0m[0m:[1;31m229[0m
+[0m--- 0x40383d9d: [0;33m_esp_error_check_failed[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/esp_err.c[0m[0m:[1;31m49[0m
+[0;33m--- Stack dump detected[0m
+[0m--- 0x4038084c: [0;33mpanic_abort[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/panic.c[0m[0m:[1;31m463[0m
+[0m--- 0x40383da8: [0;33m__ubsan_include[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/ubsan.c[0m[0m:[1;31m311[0m
+[0m--- 0x40380001: [0;33m_vector_table[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/riscv/vectors_intc.S[0m[0m:[1;31m54[0m
+[0;33m--- Warning: Failed to run gdb_panic_server.py script: Command '['riscv32-esp-elf-gdb', '--batch', '-n', 'D:\\nckh_test1\\mpu\\build\\mpu.elf', '-ex', 'target remote | "D:\\esp32_c3\\Espressif\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe" -m esp_idf_panic_decoder --target esp32c3 "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\tmpimnzq97r"', '-ex', 'bt']' returned non-zero exit status 1.
+--- Warning: b"\r\nwarning: could not convert 'main' from the host encoding (CP1252) to UTF-32.\r\nThis normally should not happen, please file a bug report.\r\nerror starting child process 'D:\\esp32_c3\\Espressif\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe -m esp_idf_panic_decoder --target esp32c3 C:\\Users\\ADMIN\\AppData\\Local\\Temp\\tmpimnzq97r': CreateProcess: No such file or directory\r\nNo stack.\r\n"
+
+[0m
+[0m--- 0x40380804: [0;33mesp_restart_noos[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/port/soc/esp32c3/system_internal.c[0m[0m:[1;31m110[0m
+[0m--- 0x42008892: [0;33mmpu6050_init[0m[0m at [0;32mD:/nckh_test1/mpu/main/mpu.c[0m[0m:[1;31m229[0m
+[0m--- 0x40383d9d: [0;33m_esp_error_check_failed[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/esp_err.c[0m[0m:[1;31m49[0m
+[0;33m--- Stack dump detected[0m
+[0m--- 0x4038084c: [0;33mpanic_abort[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/panic.c[0m[0m:[1;31m463[0m
+[0m--- 0x40383da8: [0;33m__ubsan_include[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/ubsan.c[0m[0m:[1;31m311[0m
+[0m--- 0x40380001: [0;33m_vector_table[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/riscv/vectors_intc.S[0m[0m:[1;31m54[0m
+[0;33m--- Warning: Failed to run gdb_panic_server.py script: Command '['riscv32-esp-elf-gdb', '--batch', '-n', 'D:\\nckh_test1\\mpu\\build\\mpu.elf', '-ex', 'target remote | "D:\\esp32_c3\\Espressif\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe" -m esp_idf_panic_decoder --target esp32c3 "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\tmpu_0sxhpg"', '-ex', 'bt']' returned non-zero exit status 1.
+--- Warning: b"\r\nwarning: could not convert 'main' from the host encoding (CP1252) to UTF-32.\r\nThis normally should not happen, please file a bug report.\r\nerror starting child process 'D:\\esp32_c3\\Espressif\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe -m esp_idf_panic_decoder --target esp32c3 C:\\Users\\ADMIN\\AppData\\Local\\Temp\\tmpu_0sxhpg': CreateProcess: No such file or directory\r\nNo stack.\r\n"
+
+[0m
+[0m--- 0x40380804: [0;33mesp_restart_noos[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/port/soc/esp32c3/system_internal.c[0m[0m:[1;31m110[0m
+[0m--- 0x42008892: [0;33mmpu6050_init[0m[0m at [0;32mD:/nckh_test1/mpu/main/mpu.c[0m[0m:[1;31m229[0m
+[1;31m--- Error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))[0m
+[0;33m--- Waiting for the device to reconnect[0m[0;33m.[0m[0;33m[0m
+[0m--- 0x42008892: [0;33mmpu6050_init[0m[0m at [0;32mD:/nckh_test1/mpu/main/mpu.c[0m[0m:[1;31m229[0m
+[0m--- 0x40383d9d: [0;33m_esp_error_check_failed[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/esp_err.c[0m[0m:[1;31m49[0m
+[0;33m--- Stack dump detected[0m
+[0m--- 0x4038084c: [0;33mpanic_abort[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/panic.c[0m[0m:[1;31m463[0m
+[0m--- 0x40383da8: [0;33m__ubsan_include[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/ubsan.c[0m[0m:[1;31m311[0m
+[0m--- 0x40380001: [0;33m_vector_table[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/riscv/vectors_intc.S[0m[0m:[1;31m54[0m
+[1;31m--- Error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))[0m
+[0;33m--- Waiting for the device to reconnect[0m[0;33m--- Warning: Failed to run gdb_panic_server.py script: Command '['riscv32-esp-elf-gdb', '--batch', '-n', 'D:\\nckh_test1\\mpu\\build\\mpu.elf', '-ex', 'target remote | "D:\\esp32_c3\\Espressif\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe" -m esp_idf_panic_decoder --target esp32c3 "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\tmpflx8q__m"', '-ex', 'bt']' returned non-zero exit status 1.
+--- Warning: b"\r\nwarning: could not convert 'main' from the host encoding (CP1252) to UTF-32.\r\nThis normally should not happen, please file a bug report.\r\nerror starting child process 'D:\\esp32_c3\\Espressif\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe -m esp_idf_panic_decoder --target esp32c3 C:\\Users\\ADMIN\\AppData\\Local\\Temp\\tmpflx8q__m': CreateProcess: No such file or directory\r\nNo stack.\r\n"
+
+[0m
+[0m--- 0x40380804: [0;33mesp_restart_noos[0m[0m at [0;32mD:/esp32_c3/Espressif/frameworks/esp-idf-v5.3.3/components/esp_system/port/soc/esp32c3/system_internal.c[0m[0m:[1;31m110[0m
+[0;33m.[0m[0;33m.[0m[0;33m.[0m[0;33m.[0m[0;33m[0m
+[0m

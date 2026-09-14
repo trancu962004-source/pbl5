@@ -1,0 +1,7 @@
+[0;33m--- Warning: GDB cannot open serial ports accessed as COMx[0m
+[0;33m--- Using \\.\COM19lash instead...[0m
+[0;33m--- esp-idf-monitor 1.8.0 on \\.\COM19lash 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0;33m--- Connection to \\.\COM19lash failed. Available ports:
+--- COM19[0m
+[0m

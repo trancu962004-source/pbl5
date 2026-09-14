@@ -1,0 +1,595 @@
+[0;32mI (105) esp_image: segment 1: paddr=0001aacc vaddr=3fc8beESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0xf (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40382a1e
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fcd5820,len:0x1820
+load:0x403cc710,len:0xbcc
+load:0x403ce710,len:0x2f5c
+entry 0x403cc71a
+[0;32mI (24) boot: ESP-IDF v5.3.3-dirty 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time May 14 2026 13:54:44[0m
+[0;32mI (25) boot: chip revision: v0.4[0m
+[0;32mI (28) boot: efuse block revision: v1.3[0m
+[0;32mI (32) boot.esp32c3: SPI Speed      : 80MHz[0m
+[0;32mI (37) boot.esp32c3: SPI Mode       : DIO[0m
+[0;32mI (42) boot.esp32c3: SPI Flash Size : 2MB[0m
+[0;32mI (47) boot: Enabling RNG early entropy source...[0m
+[0;32mI (52) boot: Partition Table:[0m
+[0;32mI (56) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (63) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (70) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (78) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (85) boot: End of partition table[0m
+[0;32mI (89) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=0aaa4h ( 43684) map[0m
+[0;32mI (105) esp_image: segment 1: paddr=0001aacc vaddr=3fc8be00 size=01334h (  4916) load[0m
+[0;32mI (107) esp_image: segment 2: paddr=0001be08 vaddr=40380000 size=04210h ( 16912) load[0m
+[0;32mI (118) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=1a94ch (108876) map[0m
+[0;32mI (141) esp_image: segment 4: paddr=0003a974 vaddr=40384210 size=07aa4h ( 31396) load[0m
+[0;32mI (150) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (151) boot: Disabling RNG early entropy source...[0m
+[0;32mI (162) cpu_start: Unicore app[0m
+[0;32mI (171) cpu_start: Pro cpu start user code[0m
+[0;32mI (171) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (172) app_init: Application information:[0m
+[0;32mI (174) app_init: Project name:     mpu[0m
+[0;32mI (179) app_init: App version:      59b0a3b-dirty[0m
+[0;32mI (184) app_init: Compile time:     May 14 2026 13:54:31[0m
+[0;32mI (190) app_init: ELF file SHA256:  e9378fea5...[0m
+[0;32mI (196) app_init: ESP-IDF:          v5.3.3-dirty[0m
+[0;32mI (201) efuse_init: Min chip rev:     v0.3[0m
+[0;32mI (206) efuse_init: Max chip rev:     v1.99 [0m
+[0;32mI (211) efuse_init: Chip rev:         v0.4[0m
+[0;32mI (215) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (223) heap_init: At 3FC8E050 len 00031FB0 (199 KiB): RAM[0m
+[0;32mI (229) heap_init: At 3FCC0000 len 0001C710 (113 KiB): Retention RAM[0m
+[0;32mI (236) heap_init: At 3FCDC710 len 00002950 (10 KiB): Retention RAM[0m
+[0;32mI (243) heap_init: At 50000000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (250) spi_flash: detected chip: generic[0m
+[0;32mI (254) spi_flash: flash io: dio[0m
+[0;33mW (258) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (271) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (277) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (285) main_task: Started on CPU0[0m
+[0;32mI (285) main_task: Calling app_main()[0m
+[0;32mI (285) gpio: GPIO[2]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (295) gpio: GPIO[1]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (305) gpio: GPIO[4]| InputEn: 1| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (315) gpio: GPIO[3]| InputEn: 1| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (325) WATCH: Dang quet I2C...[0m
+[0;32mI (335) WATCH: Tim thay thiet bi I2C tai dia chi 0x57[0m
+[0;32mI (345) WATCH: Tim thay thiet bi I2C tai dia chi 0x68[0m
+[0;32mI (345) WATCH: MPU6050 dang o dia chi 0x68[0m
+[0;32mI (345) WATCH: MPU6050 WHO_AM_I = 0x70[0m
+[0;33mW (345) WATCH: WHO_AM_I khac 0x68, co the module clone hoac ket noi chua on dinh[0m
+[0;32mI (455) WATCH: MPU6050 init thanh cong[0m
+[0;32mI (455) WATCH: ====================================[0m
+[0;32mI (455) WATCH: BAT DAU DONG HO PHAT HIEN TE NGA[0m
+[0;32mI (455) WATCH: SDA GPIO4, SCL GPIO3[0m
+[0;32mI (455) WATCH: ALERT GPIO2[0m
+[0;32mI (465) WATCH: SOS BUTTON GPIO1[0m
+[0;32mI (465) WATCH: ====================================[0m
+[0;32mI (755) WATCH: A=1.00g | G=4.6dps | ax=-0.20 ay=0.04 az=0.98 | gx=-4.5 gy=0.5 gz=1.0[0m
+[0;32mI (1255) WATCH: A=1.00g | G=1.6dps | ax=-0.20 ay=0.04 az=0.98 | gx=0.3 gy=1.1 gz=-1.1[0m
+[0;32mI (1755) WATCH: A=0.99g | G=6.3dps | ax=-0.20 ay=0.05 az=0.97 | gx=-6.2 gy=1.0 gz=0.7[0m
+[0;32mI (2255) WATCH: A=1.03g | G=3.7dps | ax=-0.21 ay=0.07 az=1.00 | gx=-2.8 gy=-0.5 gz=2.3[0m
+[0;32mI (2755) WATCH: A=0.98g | G=8.2dps | ax=-0.20 ay=0.05 az=0.96 | gx=-7.1 gy=-1.3 gz=-3.8[0m
+[0;33mW (3255) WATCH: Nghi ngo roi tu do: A=0.42g[0m
+[0;32mI (3255) WATCH: A=0.42g | G=523.3dps | ax=0.15 ay=-0.21 az=0.33 | gx=411.8 gy=316.2 gz=65.9[0m
+[0;32mI (3755) WATCH: A=0.88g | G=11.3dps | ax=-0.19 ay=0.78 az=0.35 | gx=4.3 gy=7.5 gz=-7.4[0m
+[0;32mI (4255) WATCH: A=1.14g | G=59.4dps | ax=-0.17 ay=0.94 az=0.63 | gx=-57.1 gy=12.1 gz=-11.1[0m
+[0;32mI (4275) WATCH: Huy trang thai roi tu do[0m
+[0;33mW (4515) WATCH: Nghi ngo roi tu do: A=0.54g[0m
+[0;32mI (4755) WATCH: A=0.86g | G=148.4dps | ax=-0.17 ay=-0.63 az=0.57 | gx=-15.3 gy=143.7 gz=-33.7[0m
+[0;32mI (5255) WATCH: A=0.94g | G=41.0dps | ax=-0.32 ay=-0.57 az=0.68 | gx=34.2 gy=22.6 gz=2.1[0m
+[0;33mW (5515) WATCH: Phat hien va cham sau roi: A=2.89g[0m
+[0;32mI (5755) WATCH: A=3.25g | G=476.9dps | ax=1.08 ay=2.34 az=-1.98 | gx=-149.4 gy=300.5 gz=338.9[0m
+[0;33mW (6015) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (6115) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (6155) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (6215) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (6255) WATCH: A=1.11g | G=19.4dps | ax=-0.08 ay=1.03 az=-0.40 | gx=-14.5 gy=10.4 gz=7.4[0m
+[0;32mI (6755) WATCH: A=1.00g | G=3.5dps | ax=-0.10 ay=0.95 az=-0.27 | gx=-2.4 gy=2.5 gz=-0.7[0m
+[0;32mI (7255) WATCH: A=1.01g | G=3.3dps | ax=-0.10 ay=0.98 az=-0.25 | gx=-2.3 gy=2.3 gz=-0.7[0m
+[0;32mI (7755) WATCH: A=1.01g | G=2.8dps | ax=-0.11 ay=0.97 az=-0.26 | gx=-2.2 gy=1.8 gz=0.2[0m
+[0;32mI (8255) WATCH: A=1.00g | G=2.5dps | ax=-0.10 ay=0.97 az=-0.24 | gx=-2.0 gy=1.5 gz=0.1[0m
+[0;31mE (8715) WATCH: CANH BAO: PHAT HIEN TE NGA![0m
+[0;31mE (8715) WATCH: ====================================[0m
+[0;31mE (8715) WATCH: YEU CAU GOI HO TRO![0m
+[0;31mE (8715) WATCH: LY DO: FALL_DETECTED[0m
+[0;31mE (8715) WATCH: ====================================[0m
+[0;32mI (8765) WATCH: A=1.00g | G=2.7dps | ax=-0.10 ay=0.97 az=-0.23 | gx=-1.7 gy=2.1 gz=0.1[0m
+[0;32mI (9265) WATCH: A=1.01g | G=5.1dps | ax=-0.10 ay=0.97 az=-0.26 | gx=-3.6 gy=3.5 gz=-0.6[0m
+[0;32mI (9765) WATCH: A=1.00g | G=4.1dps | ax=-0.11 ay=0.96 az=-0.24 | gx=-3.3 gy=2.3 gz=-0.6[0m
+[0;32mI (10265) WATCH: A=1.02g | G=2.2dps | ax=-0.11 ay=0.99 az=-0.23 | gx=-2.0 gy=-0.8 gz=0.6[0m
+[0;32mI (10765) WATCH: A=1.00g | G=23.3dps | ax=-0.13 ay=0.96 az=-0.24 | gx=-22.8 gy=0.9 gz=-5.1[0m
+[0;32mI (11265) WATCH: A=1.04g | G=75.8dps | ax=-0.30 ay=1.00 az=0.04 | gx=-55.4 gy=-19.0 gz=-48.2[0m
+[0;32mI (11765) WATCH: A=0.94g | G=48.1dps | ax=-0.44 ay=0.72 az=0.43 | gx=-45.9 gy=-13.8 gz=4.3[0m
+[0;32mI (12265) WATCH: A=0.97g | G=35.6dps | ax=-0.32 ay=0.51 az=0.76 | gx=-33.3 gy=5.9 gz=11.2[0m
+[0;32mI (12765) WATCH: A=1.00g | G=5.0dps | ax=-0.38 ay=0.19 az=0.91 | gx=2.3 gy=2.4 gz=3.8[0m
+[0;32mI (13265) WATCH: A=0.97g | G=12.7dps | ax=-0.29 ay=0.09 az=0.92 | gx=7.0 gy=9.9 gz=-3.7[0m
+[0;32mI (13745) WATCH: Ket thuc canh bao te nga, vao cooldown[0m
+[0;32mI (13765) WATCH: A=0.99g | G=30.1dps | ax=-0.34 ay=0.07 az=0.92 | gx=-28.6 gy=-8.0 gz=4.8[0m
+[0;32mI (14265) WATCH: A=0.61g | G=9.9dps | ax=-0.51 ay=-0.19 az=0.28 | gx=-8.8 gy=2.6 gz=3.7[0m
+[0;32mI (14765) WATCH: A=1.00g | G=5.5dps | ax=-0.38 ay=-0.21 az=0.90 | gx=-3.8 gy=0.2 gz=3.9[0m
+[0;32mI (15265) WATCH: A=0.92g | G=18.2dps | ax=-0.40 ay=-0.24 az=0.79 | gx=-12.7 gy=12.5 gz=3.7[0m
+[0;32mI (15765) WATCH: A=0.79g | G=47.2dps | ax=-0.42 ay=-0.38 az=0.55 | gx=-37.6 gy=28.5 gz=-1.6[0m
+[0;32mI (16265) WATCH: A=1.35g | G=117.5dps | ax=-0.23 ay=-0.07 az=1.33 | gx=107.7 gy=-44.2 gz=-15.7[0m
+[0;32mI (16765) WATCH: A=1.02g | G=17.7dps | ax=-0.02 ay=-0.28 az=0.98 | gx=-12.4 gy=-12.1 gz=-3.3[0m
+[0;32mI (17265) WATCH: A=0.98g | G=3.1dps | ax=-0.04 ay=-0.26 az=0.94 | gx=-1.6 gy=2.1 gz=-1.7[0m
+[0;32mI (17765) WATCH: A=0.95g | G=4.4dps | ax=-0.04 ay=-0.26 az=0.92 | gx=-1.6 gy=2.0 gz=3.6[0m
+[0;32mI (18265) WATCH: A=0.98g | G=3.8dps | ax=-0.04 ay=-0.26 az=0.94 | gx=-2.2 gy=3.1 gz=0.2[0m
+[0;32mI (18725) WATCH: Ket thuc canh bao goi ho tro[0m
+[0;32mI (18765) WATCH: A=0.99g | G=4.1dps | ax=-0.05 ay=-0.26 az=0.95 | gx=-3.9 gy=1.3 gz=-0.0[0m
+[0;32mI (19265) WATCH: A=0.98g | G=4.6dps | ax=-0.04 ay=-0.27 az=0.94 | gx=-4.2 gy=2.0 gz=-0.5[0m
+[0;32mI (19765) WATCH: A=0.98g | G=3.4dps | ax=-0.04 ay=-0.27 az=0.94 | gx=-1.8 gy=2.6 gz=-1.2[0m
+[0;32mI (20265) WATCH: A=0.99g | G=3.4dps | ax=-0.04 ay=-0.27 az=0.95 | gx=-2.6 gy=2.1 gz=0.2[0m
+[0;32mI (20765) WATCH: A=0.97g | G=4.8dps | ax=-0.04 ay=-0.27 az=0.93 | gx=-4.5 gy=1.6 gz=-0.4[0m
+[0;32mI (21265) WATCH: A=0.96g | G=4.5dps | ax=-0.04 ay=-0.29 az=0.92 | gx=0.7 gy=4.3 gz=-0.9[0m
+[0;32mI (21765) WATCH: A=0.99g | G=2.7dps | ax=-0.04 ay=-0.28 az=0.95 | gx=-2.1 gy=1.7 gz=-0.1[0m
+[0;32mI (22265) WATCH: A=0.96g | G=6.0dps | ax=-0.04 ay=-0.28 az=0.91 | gx=-2.7 gy=4.9 gz=-2.1[0m
+[0;32mI (22765) WATCH: A=0.97g | G=4.7dps | ax=-0.04 ay=-0.29 az=0.93 | gx=-2.9 gy=3.5 gz=-1.3[0m
+[0;32mI (23265) WATCH: A=0.98g | G=4.0dps | ax=-0.05 ay=-0.28 az=0.94 | gx=-3.3 gy=1.8 gz=-1.4[0m
+[0;32mI (23765) WATCH: San sang phat hien te nga lai[0m
+[0;32mI (23765) WATCH: A=1.57g | G=48.2dps | ax=-0.04 ay=0.00 az=1.57 | gx=5.3 gy=47.7 gz=-3.9[0m
+[0;32mI (24265) WATCH: A=0.84g | G=51.2dps | ax=-0.41 ay=-0.25 az=0.69 | gx=41.1 gy=27.4 gz=13.3[0m
+[0;32mI (24765) WATCH: A=1.01g | G=4.1dps | ax=-0.52 ay=-0.15 az=0.85 | gx=-3.9 gy=1.1 gz=-0.1[0m
+[0;32mI (25265) WATCH: A=1.03g | G=8.5dps | ax=-0.53 ay=-0.14 az=0.87 | gx=-7.8 gy=1.0 gz=-3.1[0m
+[0;32mI (25765) WATCH: A=0.96g | G=12.7dps | ax=-0.53 ay=-0.25 az=0.76 | gx=-9.6 gy=2.9 gz=-7.7[0m
+[0;32mI (26265) WATCH: A=0.99g | G=4.2dps | ax=-0.53 ay=-0.26 az=0.80 | gx=-3.0 gy=2.1 gz=-2.0[0m
+[0;32mI (26765) WATCH: A=1.00g | G=7.4dps | ax=-0.51 ay=-0.28 az=0.81 | gx=-5.6 gy=0.1 gz=-4.8[0m
+[0;32mI (27265) WATCH: A=2.15g | G=519.8dps | ax=-0.03 ay=-1.41 az=1.62 | gx=404.9 gy=269.0 gz=-184.1[0m
+[0;33mW (27365) WATCH: Va cham manh truc tiep: A=3.59g, G=668.3dps[0m
+[0;32mI (27765) WATCH: A=0.65g | G=133.5dps | ax=-0.38 ay=0.36 az=-0.39 | gx=-33.9 gy=-114.3 gz=-60.1[0m
+[0;33mW (27845) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (27945) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (28045) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (28265) WATCH: A=1.02g | G=8.0dps | ax=-0.35 ay=0.87 az=-0.39 | gx=-8.0 gy=0.5 gz=0.4[0m
+[0;32mI (28765) WATCH: A=1.04g | G=7.6dps | ax=-0.36 ay=0.91 az=-0.36 | gx=-7.4 gy=0.6 gz=1.6[0m
+[0;32mI (29265) WATCH: A=1.03g | G=2.8dps | ax=-0.35 ay=0.90 az=-0.35 | gx=-2.0 gy=2.0 gz=0.4[0m
+[0;32mI (29765) WATCH: A=1.02g | G=2.2dps | ax=-0.36 ay=0.90 az=-0.32 | gx=-1.5 gy=1.6 gz=0.2[0m
+[0;32mI (30265) WATCH: A=1.00g | G=3.3dps | ax=-0.35 ay=0.87 az=-0.35 | gx=-2.0 gy=2.6 gz=0.2[0m
+[0;31mE (30545) WATCH: CANH BAO: PHAT HIEN TE NGA![0m
+[0;31mE (30545) WATCH: ====================================[0m
+[0;31mE (30545) WATCH: YEU CAU GOI HO TRO![0m
+[0;31mE (30545) WATCH: LY DO: FALL_DETECTED[0m
+[0;31mE (30545) WATCH: ====================================[0m
+[0;32mI (30775) WATCH: A=1.00g | G=2.3dps | ax=-0.35 ay=0.88 az=-0.33 | gx=0.2 gy=2.2 gz=-0.9[0m
+[0;32mI (31275) WATCH: A=1.02g | G=4.3dps | ax=-0.35 ay=0.91 az=-0.32 | gx=2.8 gy=3.2 gz=0.1[0m
+[0;32mI (31775) WATCH: A=0.96g | G=47.9dps | ax=-0.26 ay=0.91 az=-0.15 | gx=-38.3 gy=20.5 gz=20.0[0m
+[0;32mI (32275) WATCH: A=1.25g | G=64.1dps | ax=-0.02 ay=1.19 az=0.37 | gx=21.5 gy=-32.1 gz=51.2[0m
+[0;32mI (32775) WATCH: A=1.01g | G=10.9dps | ax=-0.06 ay=1.01 az=0.08 | gx=-10.9 gy=0.9 gz=-0.2[0m
+[0;32mI (33275) WATCH: A=1.04g | G=75.1dps | ax=-0.01 ay=0.99 az=-0.33 | gx=-74.0 gy=-3.3 gz=12.4[0m
+[0;32mI (33775) WATCH: A=0.87g | G=26.8dps | ax=0.06 ay=0.86 az=0.08 | gx=14.2 gy=22.3 gz=4.4[0m
+[0;32mI (34275) WATCH: A=0.99g | G=10.1dps | ax=-0.05 ay=0.97 az=0.18 | gx=-10.0 gy=0.9 gz=-0.3[0m
+[0;32mI (34775) WATCH: A=0.99g | G=7.6dps | ax=-0.05 ay=0.98 az=0.15 | gx=7.0 gy=3.0 gz=-0.3[0m
+[0;32mI (35275) WATCH: A=0.99g | G=5.9dps | ax=-0.06 ay=0.97 az=0.16 | gx=-5.7 gy=1.5 gz=-0.2[0m
+[0;32mI (35575) WATCH: Ket thuc canh bao te nga, vao cooldown[0m
+[0;32mI (35775) WATCH: A=0.99g | G=10.8dps | ax=-0.05 ay=0.97 az=0.19 | gx=-10.8 gy=1.0 gz=-0.0[0m
+[0;32mI (36275) WATCH: A=1.00g | G=11.8dps | ax=-0.05 ay=0.98 az=0.17 | gx=-11.7 gy=1.5 gz=0.9[0m
+[0;32mI (36775) WATCH: A=0.98g | G=4.7dps | ax=-0.05 ay=0.96 az=0.18 | gx=-4.5 gy=1.5 gz=-0.4[0m
+[0;32mI (37275) WATCH: A=0.98g | G=4.6dps | ax=-0.07 ay=0.97 az=0.14 | gx=1.7 gy=3.8 gz=1.8[0m
+[0;32mI (37775) WATCH: A=0.99g | G=5.7dps | ax=-0.05 ay=0.97 az=0.16 | gx=-5.4 gy=1.8 gz=-0.0[0m
+[0;32mI (38275) WATCH: A=1.00g | G=2.1dps | ax=-0.05 ay=0.97 az=0.22 | gx=-0.4 gy=2.1 gz=-0.0[0m
+[0;32mI (38775) WATCH: A=0.98g | G=2.8dps | ax=-0.06 ay=0.96 az=0.19 | gx=-1.9 gy=2.1 gz=-0.1[0m
+[0;32mI (39275) WATCH: A=0.99g | G=3.3dps | ax=-0.06 ay=0.97 az=0.18 | gx=-2.6 gy=2.0 gz=-0.2[0m
+[0;32mI (39775) WATCH: A=1.00g | G=2.6dps | ax=-0.05 ay=0.98 az=0.19 | gx=-1.3 gy=2.2 gz=-0.2[0m
+[0;32mI (40275) WATCH: A=1.01g | G=2.6dps | ax=-0.05 ay=0.99 az=0.19 | gx=-1.5 gy=2.1 gz=-0.2[0m
+[0;32mI (40555) WATCH: Ket thuc canh bao goi ho tro[0m
+[0;32mI (40775) WATCH: A=1.00g | G=10.8dps | ax=-0.05 ay=0.98 az=0.19 | gx=-10.7 gy=1.4 gz=-0.5[0m
+[0;32mI (41275) WATCH: A=1.03g | G=1.6dps | ax=-0.07 ay=1.00 az=0.26 | gx=0.6 gy=-1.3 gz=-0.7[0m
+[0;32mI (41775) WATCH: A=0.99g | G=3.3dps | ax=-0.04 ay=0.97 az=0.19 | gx=-2.7 gy=2.0 gz=-0.2[0m
+[0;32mI (42275) WATCH: A=0.98g | G=2.3dps | ax=-0.05 ay=0.96 az=0.20 | gx=-2.0 gy=1.2 gz=-0.1[0m
+[0;32mI (42775) WATCH: A=0.99g | G=2.1dps | ax=-0.05 ay=0.97 az=0.18 | gx=-1.2 gy=1.6 gz=-0.0[0m
+[0;32mI (43275) WATCH: A=0.98g | G=2.6dps | ax=-0.04 ay=0.96 az=0.19 | gx=-2.1 gy=1.5 gz=0.1[0m
+[0;32mI (43775) WATCH: A=0.99g | G=4.1dps | ax=-0.06 ay=0.97 az=0.19 | gx=-3.6 gy=2.0 gz=-0.5[0m
+[0;32mI (44275) WATCH: A=0.96g | G=3.7dps | ax=-0.03 ay=0.94 az=0.20 | gx=-3.2 gy=1.7 gz=-0.4[0m
+[0;32mI (44775) WATCH: A=0.99g | G=5.2dps | ax=-0.04 ay=0.97 az=0.17 | gx=2.2 gy=2.9 gz=-3.6[0m
+[0;32mI (45275) WATCH: A=1.02g | G=6.1dps | ax=-0.05 ay=1.00 az=0.18 | gx=-4.9 gy=2.8 gz=2.2[0m
+[0;32mI (45595) WATCH: San sang phat hien te nga lai[0m
+[0;32mI (45775) WATCH: A=0.97g | G=2.6dps | ax=-0.05 ay=0.96 az=0.16 | gx=-1.9 gy=1.7 gz=0.2[0m
+[0;32mI (46275) WATCH: A=0.99g | G=1.9dps | ax=-0.04 ay=0.97 az=0.17 | gx=-1.7 gy=0.7 gz=-0.3[0m
+[0;32mI (46775) WATCH: A=0.98g | G=2.1dps | ax=-0.05 ay=0.96 az=0.18 | gx=0.8 gy=0.5 gz=-1.8[0m
+[0;32mI (47275) WATCH: A=0.98g | G=3.5dps | ax=-0.04 ay=0.97 az=0.18 | gx=-3.5 gy=0.3 gz=0.2[0m
+[0;32mI (47775) WATCH: A=0.98g | G=2.4dps | ax=-0.05 ay=0.97 az=0.18 | gx=-1.1 gy=1.7 gz=-1.2[0m
+[0;32mI (48275) WATCH: A=0.97g | G=120.3dps | ax=-0.35 ay=0.88 az=0.19 | gx=75.5 gy=-77.1 gz=-53.0[0m
+[0;32mI (48775) WATCH: A=0.89g | G=114.5dps | ax=-0.37 ay=0.20 az=0.79 | gx=-71.1 gy=77.3 gz=-45.5[0m
+[0;33mW (48955) WATCH: Nghi ngo roi tu do: A=0.53g[0m
+[0;32mI (49275) WATCH: A=2.08g | G=83.1dps | ax=-0.19 ay=-0.18 az=2.07 | gx=-62.0 gy=-47.8 gz=-27.8[0m
+[0;33mW (49435) WATCH: Phat hien va cham sau roi: A=4.59g[0m
+[0;32mI (49775) WATCH: A=0.93g | G=29.9dps | ax=-0.30 ay=0.14 az=0.87 | gx=-19.5 gy=12.0 gz=-19.3[0m
+[0;33mW (49875) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (49995) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (50175) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (50275) WATCH: A=1.01g | G=40.3dps | ax=-0.28 ay=0.15 az=0.96 | gx=-31.8 gy=12.5 gz=-21.4[0m
+[0;32mI (50775) WATCH: A=0.93g | G=79.6dps | ax=-0.29 ay=-0.13 az=0.88 | gx=42.5 gy=-8.2 gz=-66.8[0m
+[0;33mW (51015) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (51275) WATCH: A=0.99g | G=3.4dps | ax=-0.28 ay=0.02 az=0.95 | gx=-2.2 gy=1.1 gz=-2.4[0m
+[0;32mI (51775) WATCH: A=1.23g | G=141.9dps | ax=-0.33 ay=0.22 az=1.16 | gx=130.3 gy=54.7 gz=-13.8[0m
+[0;32mI (52275) WATCH: A=0.99g | G=87.6dps | ax=-0.16 ay=0.27 az=0.94 | gx=-82.7 gy=18.2 gz=-22.1[0m
+[0;32mI (52775) WATCH: A=0.71g | G=73.1dps | ax=-0.46 ay=-0.32 az=0.44 | gx=36.1 gy=31.0 gz=-55.5[0m
+[0;32mI (53275) WATCH: A=4.74g | G=588.9dps | ax=1.01 ay=3.11 az=-3.44 | gx=-185.7 gy=466.1 gz=308.4[0m
+[0;33mW (53655) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (53775) WATCH: A=0.96g | G=37.9dps | ax=-0.21 ay=0.91 az=-0.24 | gx=-35.7 gy=-11.6 gz=-5.1[0m
+[0;33mW (53795) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (54275) WATCH: A=1.01g | G=8.7dps | ax=-0.21 ay=0.95 az=-0.26 | gx=-8.5 gy=2.0 gz=-0.1[0m
+[0;32mI (54775) WATCH: A=1.01g | G=9.1dps | ax=-0.21 ay=0.96 az=-0.22 | gx=-7.2 gy=5.3 gz=-1.7[0m
+[0;32mI (55275) WATCH: A=0.99g | G=1.9dps | ax=-0.21 ay=0.95 az=-0.18 | gx=-1.9 gy=0.3 gz=-0.1[0m
+[0;32mI (55775) WATCH: A=0.99g | G=3.2dps | ax=-0.21 ay=0.95 az=-0.17 | gx=-1.7 gy=2.6 gz=-0.3[0m
+[0;32mI (56275) WATCH: A=1.01g | G=6.8dps | ax=-0.22 ay=0.97 az=-0.17 | gx=-6.8 gy=-0.6 gz=-0.7[0m
+[0;31mE (56295) WATCH: CANH BAO: PHAT HIEN TE NGA![0m
+[0;31mE (56295) WATCH: ====================================[0m
+[0;31mE (56295) WATCH: YEU CAU GOI HO TRO![0m
+[0;31mE (56295) WATCH: LY DO: FALL_DETECTED[0m
+[0;31mE (56305) WATCH: ====================================[0m
+[0;32mI (56785) WATCH: A=1.03g | G=3.2dps | ax=-0.22 ay=0.99 az=-0.19 | gx=-2.8 gy=-1.0 gz=1.3[0m
+[0;32mI (57285) WATCH: A=1.02g | G=11.3dps | ax=-0.22 ay=0.99 az=-0.16 | gx=-10.8 gy=2.5 gz=-2.2[0m
+[0;32mI (57785) WATCH: A=0.59g | G=257.2dps | ax=-0.32 ay=-0.16 az=0.47 | gx=-83.4 gy=-195.7 gz=-144.6[0m
+[0;32mI (58285) WATCH: A=1.02g | G=71.9dps | ax=0.05 ay=0.05 az=1.02 | gx=-50.9 gy=-50.6 gz=-3.2[0m
+[0;32mI (58785) WATCH: A=0.95g | G=6.4dps | ax=-0.01 ay=-0.06 az=0.95 | gx=2.5 gy=5.1 gz=-3.1[0m
+[0;32mI (59285) WATCH: A=1.06g | G=10.7dps | ax=0.16 ay=0.03 az=1.05 | gx=-7.3 gy=-1.5 gz=7.8[0m
+[0;32mI (59785) WATCH: A=0.98g | G=13.6dps | ax=0.08 ay=-0.05 az=0.97 | gx=1.1 gy=11.5 gz=-7.2[0m
+[0;32mI (60285) WATCH: A=0.99g | G=3.8dps | ax=0.08 ay=-0.06 az=0.98 | gx=-3.5 gy=1.2 gz=0.7[0m
+[0;32mI (60785) WATCH: A=1.00g | G=4.8dps | ax=0.08 ay=-0.04 az=0.99 | gx=-4.6 gy=-0.1 gz=1.3[0m
+[0;32mI (61285) WATCH: A=0.96g | G=3.1dps | ax=0.08 ay=-0.06 az=0.96 | gx=-2.8 gy=1.3 gz=0.1[0m
+[0;32mI (61325) WATCH: Ket thuc canh bao te nga, vao cooldown[0m
+[0;32mI (61785) WATCH: A=0.97g | G=2.8dps | ax=0.09 ay=-0.08 az=0.97 | gx=-0.7 gy=2.7 gz=-0.6[0m
+[0;32mI (62285) WATCH: A=0.95g | G=6.5dps | ax=0.09 ay=-0.09 az=0.94 | gx=1.7 gy=5.7 gz=-2.6[0m
+[0;32mI (62785) WATCH: A=0.98g | G=3.6dps | ax=0.09 ay=-0.07 az=0.98 | gx=-1.7 gy=2.9 gz=-1.3[0m
+[0;32mI (63285) WATCH: A=0.97g | G=3.9dps | ax=0.09 ay=-0.06 az=0.97 | gx=-3.6 gy=1.4 gz=-0.3[0m
+[0;32mI (63785) WATCH: A=0.99g | G=3.9dps | ax=0.08 ay=-0.08 az=0.98 | gx=-3.8 gy=0.0 gz=0.6[0m
+[0;32mI (64285) WATCH: A=0.95g | G=3.0dps | ax=0.09 ay=-0.07 az=0.94 | gx=-2.2 gy=2.0 gz=-0.5[0m
+[0;32mI (64785) WATCH: A=0.99g | G=5.3dps | ax=0.10 ay=-0.07 az=0.98 | gx=-3.8 gy=1.8 gz=-3.2[0m
+[0;32mI (65285) WATCH: A=0.98g | G=4.1dps | ax=0.10 ay=-0.07 az=0.97 | gx=-3.8 gy=1.6 gz=-0.7[0m
+[0;32mI (65785) WATCH: A=0.98g | G=4.3dps | ax=0.09 ay=-0.09 az=0.97 | gx=-4.2 gy=0.2 gz=0.4[0m
+[0;32mI (66285) WATCH: A=0.97g | G=3.3dps | ax=0.09 ay=-0.09 az=0.96 | gx=0.9 gy=2.5 gz=-2.0[0m
+[0;32mI (66305) WATCH: Ket thuc canh bao goi ho tro[0m
+[0;32mI (66785) WATCH: A=0.67g | G=158.7dps | ax=0.05 ay=-0.50 az=0.45 | gx=-86.8 gy=122.5 gz=-51.5[0m
+[0;32mI (67285) WATCH: A=0.58g | G=468.7dps | ax=0.38 ay=-0.37 az=0.22 | gx=-67.1 gy=-173.8 gz=430.0[0m
+[0;32mI (67785) WATCH: A=0.26g | G=343.9dps | ax=-0.07 ay=0.04 az=0.25 | gx=-3.0 gy=57.9 gz=-339.0[0m
+[0;32mI (68285) WATCH: A=0.97g | G=71.6dps | ax=-0.28 ay=-0.11 az=0.93 | gx=-20.2 gy=23.1 gz=-64.7[0m
+[0;32mI (68785) WATCH: A=0.38g | G=229.4dps | ax=-0.32 ay=0.03 az=0.22 | gx=-39.9 gy=-21.4 gz=-224.9[0m
+[0;32mI (69285) WATCH: A=0.64g | G=137.8dps | ax=-0.46 ay=-0.28 az=0.35 | gx=-13.0 gy=-132.8 gz=34.5[0m
+[0;32mI (69785) WATCH: A=1.84g | G=224.4dps | ax=0.06 ay=0.90 az=1.60 | gx=-83.3 gy=177.7 gz=-108.9[0m
+[0;32mI (70285) WATCH: A=0.74g | G=63.5dps | ax=-0.21 ay=0.43 az=0.57 | gx=18.5 gy=-13.7 gz=59.2[0m
+[0;32mI (70785) WATCH: A=0.97g | G=6.4dps | ax=-0.24 ay=0.39 az=0.86 | gx=-4.3 gy=4.6 gz=1.2[0m
+[0;32mI (71285) WATCH: A=0.98g | G=3.3dps | ax=-0.23 ay=0.40 az=0.86 | gx=-2.7 gy=1.7 gz=0.9[0m
+[0;32mI (71345) WATCH: San sang phat hien te nga lai[0m
+[0;32mI (71785) WATCH: A=0.98g | G=3.7dps | ax=-0.23 ay=0.40 az=0.87 | gx=-2.5 gy=2.7 gz=-0.4[0m
+[0;32mI (72285) WATCH: A=0.97g | G=5.2dps | ax=-0.23 ay=0.39 az=0.86 | gx=-4.3 gy=2.8 gz=-0.8[0m
+[0;32mI (72785) WATCH: A=0.84g | G=71.9dps | ax=-0.33 ay=-0.41 az=0.66 | gx=-30.4 gy=-10.4 gz=-64.3[0m
+[0;32mI (73285) WATCH: A=0.81g | G=181.3dps | ax=-0.02 ay=-0.06 az=0.80 | gx=90.5 gy=27.2 gz=154.7[0m
+[0;32mI (73785) WATCH: A=0.99g | G=3.4dps | ax=-0.17 ay=0.33 az=0.92 | gx=2.5 gy=0.8 gz=-2.2[0m
+[0;32mI (74285) WATCH: A=1.23g | G=13.8dps | ax=-0.18 ay=0.50 az=1.11 | gx=9.1 gy=8.3 gz=-6.2[0m
+[0;33mW (74405) WATCH: Nghi ngo roi tu do: A=0.43g[0m
+[0;33mW (74565) WATCH: Phat hien va cham sau roi: A=3.64g[0m
+[0;32mI (74785) WATCH: A=1.37g | G=284.6dps | ax=0.13 ay=0.63 az=1.22 | gx=-116.2 gy=220.3 gz=-137.6[0m
+[0;33mW (74865) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (75285) WATCH: A=1.39g | G=233.3dps | ax=-0.52 ay=-0.46 az=-1.20 | gx=-36.5 gy=202.5 gz=-109.9[0m
+[0;32mI (75785) WATCH: A=1.11g | G=389.1dps | ax=0.09 ay=-0.08 az=1.10 | gx=128.5 gy=-333.6 gz=153.5[0m
+[0;32mI (76285) WATCH: A=4.33g | G=643.4dps | ax=0.87 ay=2.00 az=3.74 | gx=332.4 gy=-453.5 gz=312.7[0m
+[0;32mI (76785) WATCH: A=1.52g | G=306.6dps | ax=-0.75 ay=-0.65 az=1.15 | gx=212.8 gy=-144.5 gz=-166.8[0m
+[0;32mI (77285) WATCH: A=0.95g | G=43.3dps | ax=-0.09 ay=0.05 az=0.95 | gx=-20.5 gy=24.3 gz=-29.4[0m
+[0;33mW (77325) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (77785) WATCH: A=0.98g | G=2.5dps | ax=-0.11 ay=0.24 az=0.95 | gx=-0.3 gy=2.3 gz=-1.0[0m
+[0;32mI (78285) WATCH: A=0.98g | G=4.2dps | ax=-0.11 ay=0.22 az=0.95 | gx=-3.5 gy=2.2 gz=0.3[0m
+[0;32mI (78785) WATCH: A=1.09g | G=11.6dps | ax=-0.11 ay=0.31 az=1.04 | gx=1.7 gy=8.5 gz=-7.7[0m
+[0;33mW (78845) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (79285) WATCH: A=1.07g | G=128.8dps | ax=-0.35 ay=-0.15 az=1.00 | gx=-109.2 gy=60.7 gz=31.4[0m
+[0;32mI (79785) WATCH: A=1.32g | G=48.2dps | ax=-0.51 ay=0.26 az=1.19 | gx=-3.2 gy=25.9 gz=-40.5[0m
+[0;32mI (80285) WATCH: A=0.91g | G=31.8dps | ax=-0.71 ay=0.02 az=0.58 | gx=-29.3 gy=-10.6 gz=6.5[0m
+[0;33mW (80565) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (80785) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (80785) WATCH: A=0.95g | G=21.2dps | ax=-0.47 ay=0.20 az=0.80 | gx=-9.7 gy=14.1 gz=12.4[0m
+[0;33mW (81025) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (81285) WATCH: A=1.05g | G=49.0dps | ax=-0.43 ay=-0.03 az=0.95 | gx=30.2 gy=-38.4 gz=-3.4[0m
+[0;33mW (81345) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (81385) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (81465) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (81645) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (81725) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (81785) WATCH: A=1.01g | G=10.6dps | ax=-0.35 ay=0.15 az=0.93 | gx=-8.9 gy=4.5 gz=3.5[0m
+[0;33mW (81905) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (82085) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (82285) WATCH: A=0.98g | G=4.2dps | ax=-0.32 ay=0.19 az=0.90 | gx=1.0 gy=-4.1 gz=-0.1[0m
+[0;32mI (82585) WATCH: Qua thoi gian xac nhan, khong tinh la te nga[0m
+[0;32mI (82785) WATCH: A=0.98g | G=2.2dps | ax=-0.32 ay=0.19 az=0.91 | gx=0.0 gy=-0.5 gz=-2.2[0m
+[0;32mI (83285) WATCH: A=1.00g | G=3.8dps | ax=-0.32 ay=0.15 az=0.94 | gx=2.7 gy=-0.0 gz=-2.7[0m
+[0;32mI (83785) WATCH: A=1.02g | G=4.5dps | ax=-0.31 ay=0.17 az=0.96 | gx=3.3 gy=0.7 gz=-3.0[0m
+[0;32mI (84285) WATCH: A=0.99g | G=2.4dps | ax=-0.32 ay=0.19 az=0.92 | gx=0.7 gy=2.3 gz=-0.3[0m
+[0;32mI (84785) WATCH: A=0.97g | G=5.7dps | ax=-0.31 ay=0.18 az=0.90 | gx=-4.5 gy=2.6 gz=-2.3[0m
+[0;32mI (85285) WATCH: A=1.00g | G=5.1dps | ax=-0.31 ay=0.17 az=0.93 | gx=2.9 gy=1.6 gz=-3.9[0m
+[0;32mI (85785) WATCH: A=0.94g | G=5.3dps | ax=-0.30 ay=0.15 az=0.88 | gx=-0.3 gy=-4.9 gz=-2.0[0m
+[0;32mI (86285) WATCH: A=0.95g | G=10.3dps | ax=-0.31 ay=0.17 az=0.88 | gx=-3.5 gy=9.5 gz=-1.9[0m
+[0;32mI (86785) WATCH: A=0.85g | G=152.7dps | ax=-0.16 ay=-0.02 az=0.83 | gx=-140.5 gy=-44.3 gz=40.2[0m
+[0;32mI (87285) WATCH: A=0.95g | G=129.5dps | ax=0.03 ay=-0.61 az=0.72 | gx=-62.8 gy=78.0 gz=-82.1[0m
+[0;33mW (87765) WATCH: Va cham manh truc tiep: A=3.37g, G=634.4dps[0m
+[0;32mI (87785) WATCH: A=3.89g | G=765.6dps | ax=1.87 ay=-2.77 az=1.99 | gx=500.3 gy=500.3 gz=-292.6[0m
+[0;32mI (88285) WATCH: A=1.08g | G=180.6dps | ax=-0.24 ay=1.00 az=0.32 | gx=-153.3 gy=-72.5 gz=62.1[0m
+[0;33mW (88385) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (88545) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (88745) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (88785) WATCH: A=1.00g | G=46.8dps | ax=-0.30 ay=0.75 az=0.60 | gx=-26.3 gy=37.6 gz=-8.9[0m
+[0;33mW (88845) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (88925) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (88985) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (89065) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (89285) WATCH: A=0.98g | G=8.9dps | ax=-0.32 ay=0.76 az=0.53 | gx=-6.8 gy=-5.7 gz=0.5[0m
+[0;32mI (89785) WATCH: A=0.98g | G=3.4dps | ax=-0.30 ay=0.75 az=0.55 | gx=-3.0 gy=0.7 gz=-1.3[0m
+[0;32mI (90285) WATCH: A=0.98g | G=2.4dps | ax=-0.29 ay=0.75 az=0.56 | gx=-0.3 gy=2.4 gz=-0.1[0m
+[0;32mI (90785) WATCH: A=0.99g | G=4.8dps | ax=-0.29 ay=0.76 az=0.56 | gx=-4.1 gy=2.2 gz=-1.1[0m
+[0;32mI (91285) WATCH: A=0.98g | G=3.5dps | ax=-0.28 ay=0.74 az=0.58 | gx=-0.8 gy=3.0 gz=-1.7[0m
+[0;31mE (91565) WATCH: CANH BAO: PHAT HIEN TE NGA![0m
+[0;31mE (91565) WATCH: ====================================[0m
+[0;31mE (91565) WATCH: YEU CAU GOI HO TRO![0m
+[0;31mE (91565) WATCH: LY DO: FALL_DETECTED[0m
+[0;31mE (91565) WATCH: ====================================[0m
+[0;32mI (91795) WATCH: A=1.00g | G=4.5dps | ax=-0.28 ay=0.76 az=0.59 | gx=-4.0 gy=2.1 gz=-0.8[0m
+[0;32mI (92295) WATCH: A=1.00g | G=3.8dps | ax=-0.28 ay=0.77 az=0.58 | gx=-3.6 gy=0.6 gz=-1.0[0m
+[0;32mI (92795) WATCH: A=1.00g | G=15.4dps | ax=-0.22 ay=0.77 az=0.60 | gx=-14.8 gy=3.8 gz=-1.6[0m
+[0;32mI (93295) WATCH: A=0.83g | G=58.4dps | ax=-0.51 ay=-0.32 az=0.57 | gx=11.5 gy=39.3 gz=-41.7[0m
+[0;32mI (93795) WATCH: A=1.10g | G=199.1dps | ax=-0.10 ay=0.19 az=1.08 | gx=92.5 gy=-48.2 gz=-169.5[0m
+[0;32mI (94295) WATCH: A=1.03g | G=12.2dps | ax=-0.32 ay=0.37 az=0.90 | gx=2.7 gy=-8.8 gz=-8.1[0m
+[0;32mI (94795) WATCH: A=1.08g | G=67.7dps | ax=-0.47 ay=0.47 az=0.86 | gx=-54.5 gy=37.7 gz=13.5[0m
+[0;32mI (95295) WATCH: A=1.09g | G=108.1dps | ax=-0.41 ay=0.44 az=0.91 | gx=101.6 gy=3.2 gz=-36.6[0m
+[0;32mI (95795) WATCH: A=1.00g | G=9.0dps | ax=-0.31 ay=0.42 az=0.85 | gx=-7.4 gy=5.1 gz=-0.6[0m
+[0;32mI (96295) WATCH: A=1.00g | G=8.3dps | ax=-0.34 ay=0.40 az=0.85 | gx=-6.1 gy=5.5 gz=-1.4[0m
+[0;32mI (96595) WATCH: Ket thuc canh bao te nga, vao cooldown[0m
+[0;32mI (96795) WATCH: A=0.97g | G=3.3dps | ax=-0.33 ay=0.38 az=0.82 | gx=-1.2 gy=2.6 gz=-1.6[0m
+[0;32mI (97295) WATCH: A=0.98g | G=11.9dps | ax=-0.37 ay=0.46 az=0.79 | gx=5.2 gy=-10.7 gz=-1.0[0m
+[0;32mI (97795) WATCH: A=1.03g | G=9.0dps | ax=-0.33 ay=0.47 az=0.86 | gx=1.6 gy=5.9 gz=6.6[0m
+[0;32mI (98295) WATCH: A=0.99g | G=4.8dps | ax=-0.35 ay=0.43 az=0.82 | gx=-4.4 gy=-0.1 gz=1.8[0m
+[0;32mI (98795) WATCH: A=1.01g | G=6.4dps | ax=-0.36 ay=0.43 az=0.84 | gx=-5.4 gy=3.1 gz=1.7[0m
+[0;32mI (99295) WATCH: A=0.98g | G=4.9dps | ax=-0.37 ay=0.39 az=0.82 | gx=-2.4 gy=3.8 gz=-1.8[0m
+[0;32mI (99795) WATCH: A=0.99g | G=4.3dps | ax=-0.38 ay=0.40 az=0.82 | gx=-2.7 gy=3.3 gz=-0.7[0m
+[0;32mI (100295) WATCH: A=1.01g | G=2.8dps | ax=-0.40 ay=0.40 az=0.83 | gx=-0.4 gy=2.4 gz=-1.5[0m
+[0;32mI (100795) WATCH: A=0.96g | G=4.5dps | ax=-0.39 ay=0.37 az=0.79 | gx=-1.5 gy=4.2 gz=-0.6[0m
+[0;32mI (101295) WATCH: A=0.99g | G=2.6dps | ax=-0.37 ay=0.37 az=0.85 | gx=-2.4 gy=1.1 gz=-0.0[0m
+[0;32mI (101575) WATCH: Ket thuc canh bao goi ho tro[0m
+[0;32mI (101795) WATCH: A=0.97g | G=4.7dps | ax=-0.38 ay=0.38 az=0.81 | gx=-4.6 gy=0.8 gz=0.6[0m
+[0;32mI (102295) WATCH: A=1.00g | G=4.3dps | ax=-0.40 ay=0.39 az=0.83 | gx=-3.6 gy=2.4 gz=-0.2[0m
+[0;32mI (102795) WATCH: A=0.97g | G=2.6dps | ax=-0.39 ay=0.37 az=0.81 | gx=-0.7 gy=2.2 gz=-1.3[0m
+[0;32mI (103295) WATCH: A=0.99g | G=5.0dps | ax=-0.38 ay=0.40 az=0.82 | gx=-4.0 gy=2.7 gz=1.1[0m
+[0;32mI (103795) WATCH: A=1.01g | G=4.2dps | ax=-0.39 ay=0.40 az=0.84 | gx=-4.0 gy=1.1 gz=-1.0[0m
+[0;32mI (104295) WATCH: A=1.00g | G=4.7dps | ax=-0.38 ay=0.39 az=0.84 | gx=-3.9 gy=2.2 gz=1.4[0m
+[0;32mI (104795) WATCH: A=0.98g | G=3.2dps | ax=-0.39 ay=0.37 az=0.83 | gx=-1.8 gy=2.5 gz=-0.8[0m
+[0;32mI (105295) WATCH: A=0.97g | G=3.7dps | ax=-0.39 ay=0.37 az=0.80 | gx=-2.1 gy=3.0 gz=0.5[0m
+[0;32mI (105795) WATCH: A=0.98g | G=3.1dps | ax=-0.37 ay=0.36 az=0.83 | gx=-2.1 gy=1.6 gz=-1.6[0m
+[0;32mI (106295) WATCH: A=1.00g | G=3.7dps | ax=-0.40 ay=0.38 az=0.84 | gx=-2.5 gy=2.6 gz=-0.5[0m
+[0;32mI (106615) WATCH: San sang phat hien te nga lai[0m
+[0;32mI (106795) WATCH: A=1.00g | G=3.1dps | ax=-0.40 ay=0.36 az=0.84 | gx=-3.0 gy=0.6 gz=-0.7[0m
+[0;32mI (107295) WATCH: A=0.99g | G=3.4dps | ax=-0.40 ay=0.36 az=0.84 | gx=-2.9 gy=1.8 gz=-0.3[0m
+[0;32mI (107795) WATCH: A=0.96g | G=3.3dps | ax=-0.38 ay=0.33 az=0.82 | gx=-2.3 gy=2.0 gz=-1.4[0m
+[0;32mI (108295) WATCH: A=1.02g | G=2.5dps | ax=-0.41 ay=0.37 az=0.86 | gx=-1.0 gy=2.2 gz=-0.8[0m
+[0;32mI (108795) WATCH: A=1.00g | G=3.5dps | ax=-0.39 ay=0.37 az=0.84 | gx=-2.8 gy=2.1 gz=-0.0[0m
+[0;32mI (109295) WATCH: A=0.99g | G=5.8dps | ax=-0.40 ay=0.37 az=0.83 | gx=-3.1 gy=4.2 gz=2.5[0m
+[0;32mI (109795) WATCH: A=0.98g | G=2.0dps | ax=-0.40 ay=0.38 az=0.81 | gx=-0.4 gy=1.8 gz=0.7[0m
+[0;32mI (110295) WATCH: A=1.01g | G=3.8dps | ax=-0.40 ay=0.37 az=0.85 | gx=-3.2 gy=1.1 gz=-1.7[0m
+[0;32mI (110795) WATCH: A=0.98g | G=4.3dps | ax=-0.39 ay=0.37 az=0.82 | gx=-3.7 gy=1.5 gz=1.5[0m
+[0;32mI (111295) WATCH: A=0.99g | G=3.2dps | ax=-0.40 ay=0.36 az=0.83 | gx=-2.6 gy=1.9 gz=-0.3[0m
+[0;32mI (111795) WATCH: A=1.01g | G=3.1dps | ax=-0.41 ay=0.37 az=0.85 | gx=-2.1 gy=2.3 gz=0.5[0m
+[0;32mI (112295) WATCH: A=0.99g | G=5.8dps | ax=-0.40 ay=0.37 az=0.83 | gx=-2.2 gy=5.2 gz=1.1[0m
+[0;32mI (112795) WATCH: A=0.98g | G=3.1dps | ax=-0.39 ay=0.38 az=0.82 | gx=-0.4 gy=3.1 gz=-0.0[0m
+[0;32mI (113295) WATCH: A=1.00g | G=2.9dps | ax=-0.40 ay=0.38 az=0.83 | gx=-1.6 gy=2.4 gz=-0.3[0m
+[0;32mI (113795) WATCH: A=0.99g | G=4.3dps | ax=-0.40 ay=0.35 az=0.83 | gx=-2.7 gy=2.9 gz=-1.6[0m
+[0;32mI (114295) WATCH: A=0.99g | G=2.0dps | ax=-0.39 ay=0.36 az=0.84 | gx=-1.4 gy=1.1 gz=-0.7[0m
+[0;32mI (114795) WATCH: A=0.99g | G=2.9dps | ax=-0.39 ay=0.35 az=0.84 | gx=-2.4 gy=1.4 gz=-0.6[0m
+[0;32mI (115295) WATCH: A=1.00g | G=4.3dps | ax=-0.39 ay=0.37 az=0.84 | gx=-3.8 gy=1.7 gz=0.8[0m
+[0;32mI (115795) WATCH: A=1.03g | G=4.2dps | ax=-0.39 ay=0.38 az=0.87 | gx=-3.4 gy=2.3 gz=0.7[0m
+[0;32mI (116295) WATCH: A=1.01g | G=2.9dps | ax=-0.40 ay=0.38 az=0.84 | gx=-2.5 gy=1.3 gz=0.5[0m
+[0;32mI (116795) WATCH: A=0.99g | G=3.1dps | ax=-0.39 ay=0.38 az=0.83 | gx=-2.0 gy=2.0 gz=1.4[0m
+[0;32mI (117295) WATCH: A=0.99g | G=3.1dps | ax=-0.38 ay=0.37 az=0.83 | gx=-2.5 gy=1.8 gz=-0.3[0m
+[0;32mI (117795) WATCH: A=1.00g | G=2.8dps | ax=-0.39 ay=0.36 az=0.85 | gx=-2.2 gy=1.8 gz=-0.3[0m
+[0;32mI (118295) WATCH: A=0.99g | G=3.9dps | ax=-0.39 ay=0.38 az=0.82 | gx=-2.0 gy=3.3 gz=-0.0[0m
+[0;32mI (118795) WATCH: A=1.00g | G=4.3dps | ax=-0.39 ay=0.38 az=0.84 | gx=-3.6 gy=2.1 gz=1.3[0m
+[0;32mI (119295) WATCH: A=0.99g | G=3.0dps | ax=-0.39 ay=0.38 az=0.83 | gx=-2.1 gy=2.1 gz=-0.5[0m
+[0;32mI (119795) WATCH: A=1.00g | G=4.1dps | ax=-0.39 ay=0.37 az=0.84 | gx=-3.7 gy=1.7 gz=0.4[0m
+[0;32mI (120295) WATCH: A=0.98g | G=3.3dps | ax=-0.38 ay=0.36 az=0.82 | gx=-1.3 gy=2.9 gz=-0.9[0m
+[0;32mI (120795) WATCH: A=0.98g | G=3.3dps | ax=-0.38 ay=0.36 az=0.82 | gx=-2.9 gy=1.4 gz=-0.4[0m
+[0;32mI (121295) WATCH: A=0.97g | G=4.0dps | ax=-0.38 ay=0.37 az=0.81 | gx=-1.9 gy=3.5 gz=-0.2[0m
+[0;32mI (121795) WATCH: A=1.00g | G=2.9dps | ax=-0.39 ay=0.36 az=0.85 | gx=-0.6 gy=2.3 gz=-1.7[0m
+[0;32mI (122295) WATCH: A=1.02g | G=4.6dps | ax=-0.38 ay=0.38 az=0.86 | gx=-4.3 gy=-0.0 gz=1.8[0m
+[0;32mI (122795) WATCH: A=0.99g | G=5.1dps | ax=-0.39 ay=0.37 az=0.83 | gx=-1.9 gy=4.8 gz=0.0[0m
+[0;32mI (123295) WATCH: A=1.00g | G=3.2dps | ax=-0.39 ay=0.37 az=0.84 | gx=-2.9 gy=1.4 gz=0.3[0m
+[0;32mI (123795) WATCH: A=0.95g | G=4.1dps | ax=-0.38 ay=0.36 az=0.80 | gx=-3.3 gy=2.4 gz=0.5[0m
+[0;32mI (124295) WATCH: A=0.99g | G=2.2dps | ax=-0.39 ay=0.35 az=0.84 | gx=-0.7 gy=1.6 gz=-1.4[0m
+[0;32mI (124795) WATCH: A=1.03g | G=3.3dps | ax=-0.39 ay=0.37 az=0.87 | gx=-2.8 gy=1.7 gz=0.1[0m
+[0;32mI (125295) WATCH: A=1.00g | G=2.2dps | ax=-0.39 ay=0.35 az=0.86 | gx=-1.1 gy=0.8 gz=-1.8[0m
+[0;32mI (125795) WATCH: A=1.00g | G=2.5dps | ax=-0.39 ay=0.35 az=0.85 | gx=-1.8 gy=1.6 gz=-0.5[0m
+[0;32mI (126295) WATCH: A=0.98g | G=2.3dps | ax=-0.39 ay=0.35 az=0.83 | gx=-2.0 gy=0.7 gz=-1.0[0m
+[0;32mI (126795) WATCH: A=1.00g | G=3.2dps | ax=-0.37 ay=0.35 az=0.86 | gx=-2.9 gy=1.5 gz=0.1[0m
+[0;32mI (127295) WATCH: A=1.01g | G=3.2dps | ax=-0.39 ay=0.37 az=0.85 | gx=-2.8 gy=1.5 gz=-0.1[0m
+[0;32mI (127795) WATCH: A=1.03g | G=32.8dps | ax=-0.37 ay=0.45 az=0.85 | gx=-1.0 gy=29.0 gz=15.1[0m
+[0;33mW (127855) WATCH: Nghi ngo roi tu do: A=0.45g[0m
+[0;32mI (128295) WATCH: A=0.78g | G=219.1dps | ax=-0.24 ay=-0.52 az=0.52 | gx=-64.5 gy=-86.5 gz=190.7[0m
+[0;32mI (128795) WATCH: A=0.92g | G=86.6dps | ax=0.08 ay=0.75 az=0.52 | gx=-47.4 gy=60.3 gz=40.2[0m
+[0;32mI (128875) WATCH: Huy trang thai roi tu do[0m
+[0;33mW (129175) WATCH: Nghi ngo roi tu do: A=0.37g[0m
+[0;32mI (129295) WATCH: A=0.88g | G=50.5dps | ax=0.21 ay=0.49 az=0.70 | gx=15.3 gy=47.3 gz=9.1[0m
+[0;32mI (129795) WATCH: A=0.96g | G=3.0dps | ax=0.32 ay=0.48 az=0.77 | gx=-1.7 gy=2.5 gz=0.1[0m
+[0;32mI (130195) WATCH: Huy trang thai roi tu do[0m
+[0;32mI (130295) WATCH: A=0.96g | G=3.6dps | ax=0.32 ay=0.47 az=0.77 | gx=-2.8 gy=2.2 gz=0.1[0m
+[0;32mI (130795) WATCH: A=0.97g | G=3.1dps | ax=0.32 ay=0.48 az=0.78 | gx=-2.0 gy=2.3 gz=-0.1[0m
+[0;32mI (131295) WATCH: A=0.97g | G=2.9dps | ax=0.32 ay=0.47 az=0.79 | gx=-1.7 gy=2.3 gz=-0.2[0m
+[0;32mI (131795) WATCH: A=0.96g | G=2.9dps | ax=0.31 ay=0.48 az=0.77 | gx=-2.0 gy=2.2 gz=-0.1[0m
+[0;32mI (132295) WATCH: A=0.96g | G=3.2dps | ax=0.31 ay=0.47 az=0.77 | gx=-2.5 gy=2.1 gz=-0.2[0m
+[0;32mI (132795) WATCH: A=0.95g | G=3.0dps | ax=0.30 ay=0.46 az=0.78 | gx=-2.2 gy=2.0 gz=-0.2[0m
+[0;32mI (133295) WATCH: A=0.97g | G=3.1dps | ax=0.32 ay=0.47 az=0.78 | gx=-2.3 gy=2.1 gz=-0.2[0m
+[0;32mI (133795) WATCH: A=0.97g | G=2.9dps | ax=0.32 ay=0.48 az=0.78 | gx=-1.9 gy=2.1 gz=-0.1[0m
+[0;32mI (134295) WATCH: A=0.96g | G=2.9dps | ax=0.32 ay=0.47 az=0.78 | gx=-1.9 gy=2.2 gz=-0.2[0m
+[0;32mI (134795) WATCH: A=0.96g | G=2.6dps | ax=0.31 ay=0.47 az=0.78 | gx=-1.4 gy=2.1 gz=-0.3[0m
+[0;32mI (135295) WATCH: A=0.97g | G=3.3dps | ax=0.31 ay=0.49 az=0.78 | gx=-2.5 gy=2.1 gz=-0.2[0m
+[0;32mI (135795) WATCH: A=0.96g | G=4.1dps | ax=0.31 ay=0.46 az=0.78 | gx=-3.6 gy=1.9 gz=-0.1[0m
+[0;32mI (136295) WATCH: A=0.96g | G=3.5dps | ax=0.31 ay=0.48 az=0.78 | gx=-2.9 gy=2.0 gz=-0.1[0m
+[0;32mI (136795) WATCH: A=0.97g | G=2.7dps | ax=0.32 ay=0.48 az=0.78 | gx=-1.7 gy=2.2 gz=-0.2[0m
+[0;32mI (137295) WATCH: A=0.96g | G=3.7dps | ax=0.32 ay=0.46 az=0.78 | gx=-3.2 gy=1.9 gz=-0.1[0m
+[0;32mI (137795) WATCH: A=0.96g | G=3.0dps | ax=0.32 ay=0.48 az=0.77 | gx=-2.1 gy=2.1 gz=-0.2[0m
+[0;32mI (138295) WATCH: A=0.96g | G=2.9dps | ax=0.32 ay=0.48 az=0.77 | gx=-2.1 gy=2.0 gz=-0.2[0m
+[0;32mI (138795) WATCH: A=0.95g | G=3.9dps | ax=0.30 ay=0.46 az=0.78 | gx=-3.4 gy=1.9 gz=-0.2[0m
+[0;32mI (139295) WATCH: A=0.97g | G=3.6dps | ax=0.32 ay=0.47 az=0.78 | gx=-3.1 gy=2.0 gz=-0.2[0m
+[0;32mI (139795) WATCH: A=0.98g | G=2.8dps | ax=0.33 ay=0.47 az=0.79 | gx=-1.8 gy=2.1 gz=-0.2[0m
+[0;32mI (140295) WATCH: A=0.94g | G=2.9dps | ax=0.30 ay=0.45 az=0.77 | gx=-2.1 gy=2.0 gz=-0.2[0m
+[0;32mI (140795) WATCH: A=0.97g | G=2.8dps | ax=0.32 ay=0.48 az=0.78 | gx=-1.7 gy=2.2 gz=-0.2[0m
+[0;32mI (141295) WATCH: A=0.96g | G=3.3dps | ax=0.32 ay=0.48 az=0.78 | gx=-2.6 gy=2.0 gz=-0.2[0m
+[0;32mI (141795) WATCH: A=0.94g | G=3.4dps | ax=0.31 ay=0.45 az=0.77 | gx=-2.8 gy=1.8 gz=-0.2[0m
+[0;32mI (142295) WATCH: A=0.96g | G=4.2dps | ax=0.32 ay=0.48 az=0.78 | gx=-3.8 gy=1.8 gz=-0.0[0m
+[0;32mI (142795) WATCH: A=0.97g | G=3.7dps | ax=0.33 ay=0.48 az=0.78 | gx=-3.1 gy=1.9 gz=-0.2[0m
+[0;32mI (143295) WATCH: A=0.97g | G=3.4dps | ax=0.32 ay=0.47 az=0.78 | gx=-2.7 gy=2.0 gz=-0.1[0m
+[0;32mI (143795) WATCH: A=0.96g | G=2.5dps | ax=0.32 ay=0.48 az=0.77 | gx=-1.0 gy=2.3 gz=-0.2[0m
+[0;32mI (144295) WATCH: A=0.96g | G=4.6dps | ax=0.32 ay=0.47 az=0.78 | gx=-4.3 gy=1.8 gz=0.1[0m
+[0;32mI (144795) WATCH: A=0.97g | G=2.5dps | ax=0.32 ay=0.48 az=0.78 | gx=-1.3 gy=2.2 gz=-0.1[0m
+[0;32mI (145295) WATCH: A=0.96g | G=2.9dps | ax=0.32 ay=0.47 az=0.77 | gx=-2.0 gy=2.1 gz=-0.2[0m
+[0;32mI (145795) WATCH: A=0.99g | G=2.9dps | ax=0.33 ay=0.48 az=0.79 | gx=1.4 gy=2.5 gz=-0.3[0m
+[0;32mI (146295) WATCH: A=0.97g | G=3.7dps | ax=0.32 ay=0.48 az=0.78 | gx=-3.1 gy=2.0 gz=-0.0[0m
+[0;32mI (146795) WATCH: A=0.96g | G=3.0dps | ax=0.32 ay=0.48 az=0.77 | gx=-2.1 gy=2.1 gz=-0.2[0m
+[0;32mI (147295) WATCH: A=0.97g | G=4.4dps | ax=0.32 ay=0.47 az=0.78 | gx=-4.1 gy=1.6 gz=0.0[0m
+[0;32mI (147795) WATCH: A=0.97g | G=4.2dps | ax=0.32 ay=0.47 az=0.79 | gx=-3.8 gy=1.8 gz=-0.1[0m
+[0;32mI (148295) WATCH: A=0.94g | G=3.0dps | ax=0.28 ay=0.45 az=0.77 | gx=-2.2 gy=2.0 gz=-0.4[0m
+[0;32mI (148795) WATCH: A=0.96g | G=8.5dps | ax=0.30 ay=0.50 az=0.76 | gx=7.8 gy=3.3 gz=-0.7[0m
+[0;32mI (149295) WATCH: A=0.99g | G=3.4dps | ax=0.33 ay=0.51 az=0.78 | gx=2.2 gy=2.5 gz=-0.7[0m
+[0;32mI (149795) WATCH: A=0.98g | G=3.3dps | ax=0.33 ay=0.48 az=0.79 | gx=-2.8 gy=1.9 gz=-0.1[0m
+[0;32mI (150295) WATCH: A=0.95g | G=4.5dps | ax=0.30 ay=0.47 az=0.77 | gx=-4.0 gy=2.0 gz=-0.1[0m
+[0;32mI (150795) WATCH: A=0.99g | G=10.1dps | ax=0.32 ay=0.47 az=0.81 | gx=-10.0 gy=1.5 gz=0.5[0m
+[0;32mI (151295) WATCH: A=0.95g | G=4.6dps | ax=0.30 ay=0.46 az=0.77 | gx=-4.3 gy=1.7 gz=-0.1[0m
+[0;32mI (151795) WATCH: A=0.97g | G=2.4dps | ax=0.28 ay=0.48 az=0.80 | gx=0.3 gy=2.2 gz=-0.9[0m
+[0;32mI (152295) WATCH: A=0.94g | G=3.1dps | ax=0.28 ay=0.48 az=0.76 | gx=-2.2 gy=2.2 gz=-0.3[0m
+[0;32mI (152795) WATCH: A=0.96g | G=2.9dps | ax=0.31 ay=0.49 az=0.77 | gx=-2.0 gy=2.1 gz=-0.3[0m
+[0;32mI (153295) WATCH: A=0.95g | G=2.6dps | ax=0.28 ay=0.48 az=0.77 | gx=-1.2 gy=2.3 gz=-0.3[0m
+[0;32mI (153795) WATCH: A=0.99g | G=2.8dps | ax=0.33 ay=0.49 az=0.79 | gx=-2.2 gy=1.7 gz=-0.1[0m
+[0;32mI (154295) WATCH: A=0.97g | G=2.6dps | ax=0.30 ay=0.48 az=0.78 | gx=-1.6 gy=2.1 gz=0.1[0m
+[0;32mI (154795) WATCH: A=0.97g | G=4.3dps | ax=0.31 ay=0.47 az=0.78 | gx=-3.8 gy=1.8 gz=-0.1[0m
+[0;32mI (155295) WATCH: A=0.97g | G=3.9dps | ax=0.34 ay=0.48 az=0.77 | gx=-3.5 gy=1.7 gz=-0.1[0m
+[0;32mI (155795) WATCH: A=0.97g | G=3.7dps | ax=0.31 ay=0.48 az=0.79 | gx=-3.2 gy=1.8 gz=-0.1[0m
+[0;32mI (156295) WATCH: A=0.95g | G=3.0dps | ax=0.29 ay=0.48 az=0.77 | gx=-2.0 gy=2.2 gz=-0.2[0m
+[0;32mI (156795) WATCH: A=0.96g | G=4.1dps | ax=0.28 ay=0.52 az=0.76 | gx=3.1 gy=2.7 gz=-0.1[0m
+[0;32mI (157295) WATCH: A=0.96g | G=3.7dps | ax=0.30 ay=0.48 az=0.77 | gx=-3.2 gy=1.9 gz=-0.0[0m
+[0;32mI (157795) WATCH: A=0.95g | G=4.1dps | ax=0.30 ay=0.48 az=0.77 | gx=-3.6 gy=1.9 gz=-0.4[0m
+[0;32mI (158295) WATCH: A=0.96g | G=3.4dps | ax=0.30 ay=0.48 az=0.78 | gx=-2.6 gy=2.1 gz=-0.1[0m
+[0;32mI (158795) WATCH: A=0.95g | G=2.8dps | ax=0.28 ay=0.48 az=0.77 | gx=-1.7 gy=2.2 gz=0.1[0m
+[0;32mI (159295) WATCH: A=0.97g | G=2.7dps | ax=0.30 ay=0.48 az=0.79 | gx=-1.6 gy=2.2 gz=-0.2[0m
+[0;32mI (159795) WATCH: A=0.97g | G=2.6dps | ax=0.31 ay=0.48 az=0.79 | gx=-1.5 gy=2.1 gz=0.2[0m
+[0;32mI (160295) WATCH: A=0.98g | G=8.1dps | ax=0.31 ay=0.48 az=0.80 | gx=-8.0 gy=1.1 gz=-0.3[0m
+[0;32mI (160795) WATCH: A=0.96g | G=4.5dps | ax=0.30 ay=0.47 az=0.78 | gx=-4.1 gy=1.8 gz=-0.1[0m
+[0;32mI (161295) WATCH: A=0.99g | G=2.4dps | ax=0.32 ay=0.49 az=0.79 | gx=-0.9 gy=2.1 gz=-0.7[0m
+[0;32mI (161795) WATCH: A=0.96g | G=3.4dps | ax=0.31 ay=0.48 az=0.77 | gx=-2.7 gy=2.0 gz=-0.1[0m
+[0;32mI (162295) WATCH: A=0.97g | G=3.5dps | ax=0.31 ay=0.48 az=0.78 | gx=-2.8 gy=2.1 gz=0.1[0m
+[0;32mI (162795) WATCH: A=0.97g | G=2.7dps | ax=0.30 ay=0.48 az=0.79 | gx=-1.3 gy=2.3 gz=-0.2[0m
+[0;32mI (163295) WATCH: A=0.97g | G=2.9dps | ax=0.31 ay=0.47 az=0.79 | gx=-2.1 gy=2.0 gz=-0.2[0m
+[0;32mI (163795) WATCH: A=0.98g | G=2.7dps | ax=0.33 ay=0.48 az=0.79 | gx=-1.9 gy=2.0 gz=0.0[0m
+[0;32mI (164295) WATCH: A=0.94g | G=3.9dps | ax=0.27 ay=0.48 az=0.76 | gx=-3.3 gy=2.1 gz=-0.2[0m
+[0;32mI (164795) WATCH: A=0.94g | G=3.7dps | ax=0.28 ay=0.46 az=0.78 | gx=-3.1 gy=2.0 gz=-0.3[0m
+[0;32mI (165295) WATCH: A=0.96g | G=3.8dps | ax=0.30 ay=0.46 az=0.79 | gx=-3.3 gy=1.8 gz=-0.1[0m
+[0;32mI (165795) WATCH: A=0.95g | G=3.1dps | ax=0.28 ay=0.48 az=0.77 | gx=-2.0 gy=2.4 gz=-0.2[0m
+[0;32mI (166295) WATCH: A=0.97g | G=2.7dps | ax=0.29 ay=0.48 az=0.79 | gx=-1.6 gy=2.2 gz=-0.2[0m
+[0;32mI (166795) WATCH: A=0.98g | G=2.8dps | ax=0.30 ay=0.48 az=0.80 | gx=-1.9 gy=2.1 gz=-0.3[0m
+[0;32mI (167295) WATCH: A=0.96g | G=3.9dps | ax=0.28 ay=0.48 az=0.78 | gx=-3.4 gy=2.0 gz=-0.2[0m
+[0;32mI (167795) WATCH: A=0.97g | G=4.1dps | ax=0.30 ay=0.47 az=0.80 | gx=-3.7 gy=1.8 gz=-0.2[0m
+[0;32mI (168295) WATCH: A=0.95g | G=3.4dps | ax=0.27 ay=0.47 az=0.78 | gx=-2.6 gy=2.2 gz=-0.1[0m
+[0;32mI (168795) WATCH: A=0.96g | G=3.3dps | ax=0.31 ay=0.46 az=0.78 | gx=-2.6 gy=2.0 gz=0.1[0m
+[0;32mI (169295) WATCH: A=0.94g | G=4.3dps | ax=0.27 ay=0.46 az=0.77 | gx=-3.9 gy=1.9 gz=0.3[0m
+[0;32mI (169795) WATCH: A=0.98g | G=5.8dps | ax=0.30 ay=0.47 az=0.80 | gx=-5.6 gy=1.6 gz=0.1[0m
+[0;32mI (170295) WATCH: A=0.94g | G=2.9dps | ax=0.27 ay=0.48 az=0.77 | gx=-1.3 gy=2.5 gz=-0.1[0m
+[0;32mI (170795) WATCH: A=0.94g | G=2.8dps | ax=0.29 ay=0.48 az=0.75 | gx=1.0 gy=2.6 gz=-0.5[0m
+[0;32mI (171295) WATCH: A=0.96g | G=3.1dps | ax=0.30 ay=0.47 az=0.78 | gx=-2.4 gy=2.0 gz=-0.3[0m
+[0;32mI (171795) WATCH: A=0.96g | G=4.4dps | ax=0.31 ay=0.46 az=0.79 | gx=-3.9 gy=1.9 gz=0.0[0m
+[0;32mI (172295) WATCH: A=0.96g | G=4.2dps | ax=0.31 ay=0.48 az=0.77 | gx=3.2 gy=2.8 gz=-0.4[0m
+[0;32mI (172795) WATCH: A=0.96g | G=3.2dps | ax=0.30 ay=0.48 az=0.77 | gx=-2.4 gy=2.1 gz=0.5[0m
+[0;32mI (173295) WATCH: A=0.92g | G=3.3dps | ax=0.25 ay=0.47 az=0.76 | gx=-1.6 gy=2.6 gz=-1.3[0m
+[0;32mI (173795) WATCH: A=0.90g | G=27.0dps | ax=0.26 ay=0.44 az=0.75 | gx=26.4 gy=3.9 gz=-4.2[0m
+[0;32mI (174295) WATCH: A=0.96g | G=3.2dps | ax=0.31 ay=0.45 az=0.79 | gx=-2.6 gy=1.8 gz=-0.3[0m
+[0;32mI (174795) WATCH: A=0.96g | G=4.3dps | ax=0.29 ay=0.47 az=0.78 | gx=-3.8 gy=2.0 gz=0.2[0m
+[0;32mI (175295) WATCH: A=0.97g | G=4.2dps | ax=0.28 ay=0.45 az=0.81 | gx=-3.6 gy=2.0 gz=-0.2[0m
+[0;32mI (175795) WATCH: A=0.95g | G=3.9dps | ax=0.27 ay=0.44 az=0.80 | gx=-3.3 gy=2.0 gz=-0.2[0m
+[0;32mI (176295) WATCH: A=0.97g | G=3.7dps | ax=0.27 ay=0.46 az=0.80 | gx=-3.1 gy=2.0 gz=-0.2[0m
+[0;32mI (176795) WATCH: A=0.96g | G=2.9dps | ax=0.27 ay=0.44 az=0.80 | gx=-2.2 gy=1.9 gz=-0.1[0m
+[0;32mI (177295) WATCH: A=0.97g | G=2.6dps | ax=0.29 ay=0.46 az=0.80 | gx=-1.6 gy=2.0 gz=-0.1[0m
+[0;32mI (177795) WATCH: A=0.96g | G=2.7dps | ax=0.28 ay=0.46 az=0.79 | gx=-1.6 gy=2.1 gz=-0.3[0m
+[0;32mI (178295) WATCH: A=0.97g | G=2.9dps | ax=0.28 ay=0.46 az=0.81 | gx=-2.0 gy=2.1 gz=-0.2[0m
+[0;32mI (178795) WATCH: A=0.97g | G=3.2dps | ax=0.29 ay=0.46 az=0.80 | gx=-2.3 gy=2.2 gz=-0.1[0m
+[0;32mI (179295) WATCH: A=0.97g | G=3.3dps | ax=0.28 ay=0.46 az=0.81 | gx=-2.5 gy=2.0 gz=-0.1[0m
+[0;32mI (179795) WATCH: A=0.95g | G=4.2dps | ax=0.27 ay=0.45 az=0.79 | gx=-3.7 gy=1.8 gz=-0.2[0m
+[0;32mI (180295) WATCH: A=0.97g | G=3.2dps | ax=0.29 ay=0.46 az=0.80 | gx=-2.5 gy=2.0 gz=-0.1[0m
+[0;32mI (180795) WATCH: A=0.96g | G=2.3dps | ax=0.29 ay=0.46 az=0.79 | gx=-0.2 gy=2.3 gz=-0.0[0m
+[0;32mI (181295) WATCH: A=0.97g | G=3.0dps | ax=0.28 ay=0.46 az=0.81 | gx=-2.1 gy=2.2 gz=-0.2[0m
+[0;32mI (181795) WATCH: A=0.95g | G=3.6dps | ax=0.27 ay=0.45 az=0.79 | gx=-2.9 gy=2.1 gz=-0.2[0m
+[0;32mI (182295) WATCH: A=0.97g | G=3.4dps | ax=0.29 ay=0.46 az=0.81 | gx=-2.6 gy=2.1 gz=-0.2[0m
+[0;32mI (182795) WATCH: A=0.96g | G=3.6dps | ax=0.28 ay=0.44 az=0.81 | gx=-2.9 gy=2.0 gz=-0.2[0m
+[0;32mI (183295) WATCH: A=0.97g | G=3.6dps | ax=0.28 ay=0.46 az=0.80 | gx=-3.0 gy=2.0 gz=-0.3[0m
+[0;32mI (183795) WATCH: A=0.97g | G=3.0dps | ax=0.28 ay=0.45 az=0.81 | gx=-2.3 gy=2.0 gz=-0.2[0m
+[0;32mI (184295) WATCH: A=0.96g | G=2.5dps | ax=0.28 ay=0.46 az=0.80 | gx=-1.6 gy=2.0 gz=-0.1[0m
+[0;32mI (184795) WATCH: A=0.95g | G=8.5dps | ax=0.26 ay=0.46 az=0.79 | gx=-0.8 gy=8.4 gz=-0.7[0m
+[0;32mI (185295) WATCH: A=0.95g | G=3.5dps | ax=0.26 ay=0.44 az=0.80 | gx=-2.7 gy=2.1 gz=-0.3[0m
+[0;32mI (185795) WATCH: A=0.97g | G=3.2dps | ax=0.27 ay=0.46 az=0.81 | gx=-2.4 gy=2.1 gz=-0.2[0m
+[0;32mI (186295) WATCH: A=0.97g | G=3.2dps | ax=0.27 ay=0.46 az=0.81 | gx=-2.5 gy=2.0 gz=-0.1[0m
+[0;32mI (186795) WATCH: A=0.98g | G=3.5dps | ax=0.28 ay=0.47 az=0.81 | gx=-2.9 gy=2.0 gz=-0.2[0m
+[0;32mI (187295) WATCH: A=0.96g | G=2.8dps | ax=0.27 ay=0.46 az=0.80 | gx=-1.7 gy=2.2 gz=-0.2[0m
+[0;32mI (187795) WATCH: A=0.95g | G=5.0dps | ax=0.26 ay=0.44 az=0.81 | gx=-4.6 gy=1.9 gz=-0.2[0m
+[0;32mI (188295) WATCH: A=0.97g | G=3.6dps | ax=0.27 ay=0.46 az=0.81 | gx=-3.0 gy=2.0 gz=-0.1[0m
+[0;32mI (188795) WATCH: A=0.96g | G=3.2dps | ax=0.27 ay=0.46 az=0.80 | gx=-2.3 gy=2.2 gz=-0.2[0m
+[0;32mI (189295) WATCH: A=0.96g | G=2.1dps | ax=0.28 ay=0.47 az=0.78 | gx=0.6 gy=2.0 gz=0.1[0m
+[0;32mI (189795) WATCH: A=0.96g | G=3.2dps | ax=0.26 ay=0.46 az=0.80 | gx=-2.4 gy=2.1 gz=-0.1[0m
+[0;32mI (190295) WATCH: A=0.97g | G=3.6dps | ax=0.27 ay=0.46 az=0.81 | gx=-3.0 gy=2.0 gz=-0.2[0m
+[0;32mI (190795) WATCH: A=1.00g | G=4.0dps | ax=0.30 ay=0.48 az=0.83 | gx=-3.5 gy=1.9 gz=-0.2[0m
+[0;32mI (191295) WATCH: A=0.97g | G=3.6dps | ax=0.27 ay=0.46 az=0.81 | gx=-3.0 gy=2.0 gz=-0.2[0m
+[0;32mI (191795) WATCH: A=0.97g | G=2.7dps | ax=0.28 ay=0.47 az=0.80 | gx=-1.6 gy=2.1 gz=-0.2[0m
+[0;32mI (192295) WATCH: A=0.97g | G=3.2dps | ax=0.27 ay=0.46 az=0.80 | gx=-2.4 gy=2.1 gz=-0.2[0m
+[0;32mI (192795) WATCH: A=0.97g | G=2.6dps | ax=0.27 ay=0.47 az=0.80 | gx=-1.6 gy=2.1 gz=-0.2[0m
+[0;32mI (193295) WATCH: A=0.97g | G=3.6dps | ax=0.27 ay=0.46 az=0.81 | gx=-3.0 gy=2.0 gz=-0.2[0m
+[0;32mI (193795) WATCH: A=0.96g | G=2.9dps | ax=0.27 ay=0.47 az=0.80 | gx=-1.9 gy=2.1 gz=-0.2[0m
+[0;32mI (194295) WATCH: A=0.96g | G=2.8dps | ax=0.27 ay=0.46 az=0.80 | gx=-1.9 gy=2.1 gz=-0.2[0m
+[0;32mI (194795) WATCH: A=0.97g | G=3.2dps | ax=0.27 ay=0.47 az=0.80 | gx=-2.4 gy=2.1 gz=-0.2[0m
+[0;32mI (195295) WATCH: A=0.98g | G=3.1dps | ax=0.29 ay=0.47 az=0.81 | gx=-2.3 gy=2.0 gz=-0.2[0m
+[0;32mI (195795) WATCH: A=0.97g | G=3.3dps | ax=0.27 ay=0.46 az=0.81 | gx=-2.6 gy=2.0 gz=-0.2[0m
+[0;32mI (196295) WATCH: A=0.96g | G=2.8dps | ax=0.27 ay=0.47 az=0.79 | gx=-2.0 gy=2.0 gz=-0.2[0m
+[0;32mI (196795) WATCH: A=0.97g | G=3.1dps | ax=0.27 ay=0.46 az=0.81 | gx=-2.4 gy=2.1 gz=-0.2[0m
+[0;32mI (197295) WATCH: A=0.96g | G=3.1dps | ax=0.27 ay=0.47 az=0.80 | gx=-2.2 gy=2.1 gz=-0.2[0m
+[0;32mI (197795) WATCH: A=0.97g | G=3.6dps | ax=0.27 ay=0.46 az=0.81 | gx=-3.0 gy=2.0 gz=-0.2[0m
+[0;32mI (198295) WATCH: A=0.99g | G=4.0dps | ax=0.26 ay=0.49 az=0.82 | gx=-3.4 gy=2.1 gz=-0.2[0m
+[0;32mI (198795) WATCH: A=0.97g | G=3.0dps | ax=0.27 ay=0.47 az=0.80 | gx=-2.0 gy=2.2 gz=-0.2[0m
+[0;32mI (199295) WATCH: A=0.96g | G=2.7dps | ax=0.26 ay=0.46 az=0.80 | gx=-1.9 gy=2.0 gz=-0.1[0m
+[0;32mI (199795) WATCH: A=0.97g | G=3.5dps | ax=0.26 ay=0.46 az=0.81 | gx=-2.8 gy=2.1 gz=-0.2[0m
+[0;32mI (200295) WATCH: A=0.97g | G=3.1dps | ax=0.27 ay=0.46 az=0.81 | gx=-2.3 gy=2.0 gz=-0.1[0m
+[0;32mI (200795) WATCH: A=0.97g | G=3.0dps | ax=0.28 ay=0.47 az=0.81 | gx=-2.1 gy=2.1 gz=-0.2[0m
+[0;32mI (201295) WATCH: A=0.97g | G=3.1dps | ax=0.27 ay=0.46 az=0.81 | gx=-2.3 gy=2.0 gz=-0.2[0m
+[0;32mI (201795) WATCH: A=0.98g | G=3.1dps | ax=0.28 ay=0.46 az=0.81 | gx=-2.3 gy=2.0 gz=-0.2[0m
+[0;32mI (202295) WATCH: A=0.96g | G=3.1dps | ax=0.26 ay=0.45 az=0.80 | gx=-2.4 gy=2.1 gz=-0.1[0m
+[0;32mI (202795) WATCH: A=0.95g | G=2.6dps | ax=0.26 ay=0.46 az=0.79 | gx=-1.5 gy=2.1 gz=-0.2[0m
+[0;32mI (203295) WATCH: A=0.96g | G=2.9dps | ax=0.25 ay=0.46 az=0.80 | gx=-2.0 gy=2.1 gz=-0.2[0m
+[0;32mI (203795) WATCH: A=0.98g | G=3.8dps | ax=0.27 ay=0.47 az=0.81 | gx=-3.2 gy=2.0 gz=-0.2[0m
+[0;33mW (204115) WATCH: Nghi ngo roi tu do: A=0.30g[0m
+[0;32mI (204295) WATCH: A=0.73g | G=149.6dps | ax=-0.07 ay=-0.25 az=0.68 | gx=-19.5 gy=99.5 gz=-110.0[0m
+[0;32mI (204795) WATCH: A=0.46g | G=106.5dps | ax=-0.32 ay=-0.14 az=0.29 | gx=-87.7 gy=-4.9 gz=60.2[0m
+[0;32mI (205135) WATCH: Huy trang thai roi tu do[0m
+[0;32mI (205295) WATCH: A=1.25g | G=120.6dps | ax=-0.21 ay=-1.13 az=0.49 | gx=-79.3 gy=-83.8 gz=-35.0[0m
+[0;32mI (205795) WATCH: A=0.97g | G=51.9dps | ax=-0.21 ay=-0.77 az=0.55 | gx=21.5 gy=-36.1 gz=-30.4[0m
+[0;32mI (206295) WATCH: A=1.52g | G=610.1dps | ax=0.04 ay=-1.46 az=0.40 | gx=445.8 gy=415.7 gz=27.2[0m
+[0;33mW (206435) WATCH: Va cham manh truc tiep: A=3.25g, G=604.6dps[0m
+[0;33mW (206775) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (206795) WATCH: A=0.89g | G=14.6dps | ax=-0.20 ay=0.86 az=-0.08 | gx=1.5 gy=0.2 gz=-14.5[0m
+[0;33mW (206895) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (206935) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (206995) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (207235) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (207295) WATCH: A=1.00g | G=9.8dps | ax=-0.18 ay=0.98 az=0.00 | gx=-8.9 gy=-3.8 gz=-1.5[0m
+[0;32mI (207795) WATCH: A=1.00g | G=5.4dps | ax=-0.18 ay=0.98 az=0.01 | gx=-4.9 gy=2.0 gz=-1.3[0m
+[0;32mI (208295) WATCH: A=1.00g | G=3.6dps | ax=-0.20 ay=0.98 az=0.00 | gx=-1.2 gy=3.2 gz=-1.0[0m
+[0;32mI (208795) WATCH: A=1.01g | G=2.8dps | ax=-0.20 ay=0.99 az=0.02 | gx=-2.2 gy=1.6 gz=-0.5[0m
+[0;32mI (209295) WATCH: A=1.00g | G=2.0dps | ax=-0.20 ay=0.97 az=0.01 | gx=-1.4 gy=1.3 gz=-0.5[0m
+[0;31mE (209735) WATCH: CANH BAO: PHAT HIEN TE NGA![0m
+[0;31mE (209735) WATCH: ====================================[0m
+[0;31mE (209735) WATCH: YEU CAU GOI HO TRO![0m
+[0;31mE (209735) WATCH: LY DO: FALL_DETECTED[0m
+[0;31mE (209745) WATCH: ====================================[0m
+[0;32mI (209805) WATCH: A=0.98g | G=11.0dps | ax=-0.20 ay=0.96 az=0.03 | gx=-4.3 gy=-9.0 gz=-4.5[0m
+[0;32mI (210305) WATCH: A=1.00g | G=5.5dps | ax=-0.21 ay=0.98 az=0.01 | gx=-3.0 gy=3.2 gz=-3.3[0m
+[0;32mI (210805) WATCH: A=0.88g | G=127.4dps | ax=-0.18 ay=0.85 az=0.11 | gx=-121.7 gy=-28.3 gz=24.8[0m
+[0;32mI (211305) WATCH: A=0.49g | G=119.0dps | ax=-0.45 ay=0.16 az=-0.04 | gx=-74.4 gy=86.1 gz=-34.9[0m
+[0;32mI (211805) WATCH: A=1.14g | G=435.8dps | ax=-0.70 ay=-0.20 az=0.88 | gx=369.6 gy=-180.2 gz=-144.3[0m
+[0;32mI (212305) WATCH: A=1.02g | G=123.6dps | ax=-0.37 ay=0.30 az=0.90 | gx=82.5 gy=19.0 gz=-90.1[0m
+[0;32mI (212805) WATCH: A=0.63g | G=139.5dps | ax=-0.21 ay=-0.23 az=0.54 | gx=92.2 gy=39.0 gz=-97.2[0m
+[0;32mI (213305) WATCH: A=0.92g | G=33.7dps | ax=-0.27 ay=0.13 az=0.87 | gx=16.0 gy=-12.3 gz=-26.9[0m
+[0;32mI (213805) WATCH: A=1.01g | G=18.3dps | ax=-0.23 ay=-0.02 az=0.99 | gx=-14.3 gy=-4.1 gz=-10.7[0m
+[0;32mI (214305) WATCH: A=0.81g | G=64.2dps | ax=-0.25 ay=0.21 az=0.75 | gx=58.4 gy=4.3 gz=-26.3[0m
+[0;32mI (214765) WATCH: Ket thuc canh bao te nga, vao cooldown[0m
+[0;32mI (214805) WATCH: A=0.88g | G=41.0dps | ax=-0.36 ay=0.43 az=0.68 | gx=7.0 gy=39.8 gz=-6.8[0m

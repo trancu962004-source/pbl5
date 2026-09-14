@@ -1,0 +1,309 @@
+{
+  "cleared_at": 1778785460.0141695,
+  "cleared_by": "tr",
+  "shift": "Ca sáng",
+  "reason": "Sang ngày mới / bàn giao ca trực",
+  "deleted_count": 8,
+  "records": [
+    {
+      "patient_key": "B-R001-B002-P003",
+      "wing": "B",
+      "room": 1,
+      "bed": 2,
+      "patient": 3,
+      "handled_at": 1778783983.7174175,
+      "handled_by": "Bác sĩ/nhân viên",
+      "note": "Đã kiểm tra và xử lý xong",
+      "alert_signature": "SOS_BUTTON",
+      "alerts": [
+        {
+          "level": "critical",
+          "code": "SOS_BUTTON",
+          "message": "Bệnh nhân bấm nút SOS/cầu cứu",
+          "value": 1,
+          "timestamp": 1778783982.9959795
+        }
+      ],
+      "priority": {
+        "score": 170,
+        "level": "Rất cao",
+        "reasons": [
+          "Bệnh nhân bấm nút SOS/cầu cứu",
+          "SOS"
+        ]
+      },
+      "vital": {
+        "hr": 0,
+        "spo2": 0,
+        "temp": 36.5,
+        "battery": 100,
+        "seq": 119,
+        "status": 16,
+        "updated_at": 1778783982.9959795
+      },
+      "loadcell": null
+    },
+    {
+      "patient_key": "B-R001-B002-P003",
+      "wing": "B",
+      "room": 1,
+      "bed": 2,
+      "patient": 3,
+      "handled_at": 1778784015.1835048,
+      "handled_by": "Bác sĩ/nhân viên",
+      "note": "Đã kiểm tra và xử lý xong",
+      "alert_signature": "SPO2_WARNING",
+      "alerts": [
+        {
+          "level": "warning",
+          "code": "SPO2_WARNING",
+          "message": "SpO2 thấp",
+          "value": 93,
+          "timestamp": 1778784011.817055
+        }
+      ],
+      "priority": {
+        "score": 0,
+        "level": "Thấp",
+        "reasons": []
+      },
+      "vital": {
+        "hr": 0,
+        "spo2": 0,
+        "temp": 36.5,
+        "battery": 100,
+        "seq": 150,
+        "status": 0,
+        "updated_at": 1778784014.9324844
+      },
+      "loadcell": null
+    },
+    {
+      "patient_key": "B-R001-B002-P003",
+      "wing": "B",
+      "room": 1,
+      "bed": 2,
+      "patient": 3,
+      "handled_at": 1778784130.7322187,
+      "handled_by": "Bác sĩ/nhân viên",
+      "note": "Đã kiểm tra và xử lý xong",
+      "alert_signature": "SPO2_WARNING",
+      "alerts": [
+        {
+          "level": "warning",
+          "code": "SPO2_WARNING",
+          "message": "SpO2 thấp",
+          "value": 93,
+          "timestamp": 1778784121.0348265
+        }
+      ],
+      "priority": {
+        "score": 0,
+        "level": "Thấp",
+        "reasons": []
+      },
+      "vital": {
+        "hr": 0,
+        "spo2": 0,
+        "temp": 36.5,
+        "battery": 100,
+        "seq": 106,
+        "status": 0,
+        "updated_at": 1778784130.482833
+      },
+      "loadcell": null
+    },
+    {
+      "patient_key": "B-R001-B002-P003",
+      "wing": "B",
+      "room": 1,
+      "bed": 2,
+      "patient": 3,
+      "handled_at": 1778784241.0626144,
+      "handled_by": "Bác sĩ/nhân viên",
+      "note": "Đã kiểm tra và xử lý xong",
+      "alert_signature": "FALL_DETECTED",
+      "alerts": [
+        {
+          "level": "critical",
+          "code": "FALL_DETECTED",
+          "message": "Phát hiện té ngã",
+          "value": 1,
+          "timestamp": 1778784240.7196047
+        }
+      ],
+      "priority": {
+        "score": 157,
+        "level": "Rất cao",
+        "reasons": [
+          "Phát hiện té ngã",
+          "Té ngã"
+        ]
+      },
+      "vital": {
+        "hr": 0,
+        "spo2": 0,
+        "temp": 36.5,
+        "battery": 100,
+        "seq": 213,
+        "status": 8,
+        "updated_at": 1778784240.7196047
+      },
+      "loadcell": null
+    },
+    {
+      "patient_key": "B-R001-B002-P003",
+      "wing": "B",
+      "room": 1,
+      "bed": 2,
+      "patient": 3,
+      "handled_at": 1778784271.6661184,
+      "handled_by": "Bác sĩ/nhân viên",
+      "note": "Đã kiểm tra và xử lý xong",
+      "alert_signature": "INFUSION_EMPTY_CRITICAL",
+      "alerts": [
+        {
+          "level": "critical",
+          "code": "INFUSION_EMPTY_CRITICAL",
+          "message": "Dịch truyền gần cạn",
+          "value": 0,
+          "timestamp": 1778784271.4557056
+        }
+      ],
+      "priority": {
+        "score": 80,
+        "level": "Cao",
+        "reasons": [
+          "Dịch truyền gần cạn"
+        ]
+      },
+      "vital": {
+        "hr": 0,
+        "spo2": 0,
+        "temp": 36.5,
+        "battery": 100,
+        "seq": 242,
+        "status": 0,
+        "updated_at": 1778784270.4414902
+      },
+      "loadcell": {
+        "volume_ml": 0,
+        "drops_per_min": 0,
+        "seq": 137,
+        "status": 0,
+        "updated_at": 1778784266.1767516
+      }
+    },
+    {
+      "patient_key": "B-R001-B002-P003",
+      "wing": "B",
+      "room": 1,
+      "bed": 2,
+      "patient": 3,
+      "handled_at": 1778784600.26955,
+      "handled_by": "Trần Văn Hạnh",
+      "shift": "sáng 14/5",
+      "note": "Đã kiểm tra và xử lý xong",
+      "alert_signature": "SOS_BUTTON",
+      "alerts": [
+        {
+          "level": "critical",
+          "code": "SOS_BUTTON",
+          "message": "Bệnh nhân bấm nút SOS/cầu cứu",
+          "value": 1,
+          "timestamp": 1778784600.2566514
+        }
+      ],
+      "priority": {
+        "score": 170,
+        "level": "Rất cao",
+        "reasons": [
+          "Bệnh nhân bấm nút SOS/cầu cứu",
+          "SOS"
+        ]
+      },
+      "vital": {
+        "hr": 0,
+        "spo2": 0,
+        "temp": 36.5,
+        "battery": 100,
+        "seq": 249,
+        "status": 16,
+        "updated_at": 1778784599.2548623
+      },
+      "loadcell": null
+    },
+    {
+      "patient_key": "B-R001-B002-P003",
+      "wing": "B",
+      "room": 1,
+      "bed": 2,
+      "patient": 3,
+      "handled_at": 1778784683.6688595,
+      "handled_by": "Trần Văn Hạnh",
+      "shift": "sáng 14/5",
+      "note": "Đã kiểm tra và xử lý xong",
+      "alert_signature": "HR_LOW_WARNING",
+      "alerts": [
+        {
+          "level": "warning",
+          "code": "HR_LOW_WARNING",
+          "message": "Nhịp tim thấp",
+          "value": 47,
+          "timestamp": 1778784661.9125092
+        }
+      ],
+      "priority": {
+        "score": 0,
+        "level": "Thấp",
+        "reasons": []
+      },
+      "vital": {
+        "hr": 0,
+        "spo2": 0,
+        "temp": 36.5,
+        "battery": 100,
+        "seq": 174,
+        "status": 0,
+        "updated_at": 1778784683.1580691
+      },
+      "loadcell": null
+    },
+    {
+      "patient_key": "B-R001-B002-P003",
+      "wing": "B",
+      "room": 1,
+      "bed": 2,
+      "patient": 3,
+      "handled_at": 1778784763.3261094,
+      "handled_by": "Trần Văn Hạnh",
+      "shift": "sáng 14/5",
+      "note": "Đã kiểm tra và xử lý xong",
+      "alert_signature": "HR_HIGH_WARNING",
+      "alerts": [
+        {
+          "level": "warning",
+          "code": "HR_HIGH_WARNING",
+          "message": "Nhịp tim cao",
+          "value": 111,
+          "timestamp": 1778784701.0760117
+        }
+      ],
+      "priority": {
+        "score": 0,
+        "level": "Thấp",
+        "reasons": []
+      },
+      "vital": {
+        "hr": 0,
+        "spo2": 0,
+        "temp": 36.5,
+        "battery": 100,
+        "seq": 252,
+        "status": 0,
+        "updated_at": 1778784762.9018915
+      },
+      "loadcell": null
+    }
+  ]
+}

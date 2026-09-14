@@ -1,0 +1,173 @@
+#include "main.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdarg.h>
+
+CAN_HandleTypeDef hcan;
+UART_HandleTypeDef huart1; // debug
+UART_HandleTypeDef huart2; // ESP1
+UART_HandleTypeDef huart3; // ESP2
+
+#define BUF_SIZE 256
+
+uint8_t rx2;
+uint8_t rx3;
+
+char buf2[BUF_SIZE];
+char buf3[BUF_SIZE];
+
+uint16_t idx2 = 0;
+uint16_t idx3 = 0;
+
+/* ================= UART PRINT ================= */
+void UART1_Print(char *s)
+{
+    HAL_UART_Transmit(&huart1, (uint8_t*)s, strlen(s), 100);
+}
+
+/* ================= CAN SEND ================= */
+void CAN_Send(uint16_t id, uint8_t *data)
+{
+    CAN_TxHeaderTypeDef tx;
+    uint32_t mailbox;
+
+    tx.StdId = id;
+    tx.IDE = CAN_ID_STD;
+    tx.RTR = CAN_RTR_DATA;
+    tx.DLC = 8;
+
+    HAL_CAN_AddTxMessage(&hcan, &tx, data, &mailbox);
+}
+
+/* ================= PARSE ================= */
+
+int get_val(char *str, char *key)
+{
+    char *p = strstr(str, key);
+    if (!p) return 0;
+    return atoi(p + strlen(key));
+}
+
+void parse_vital(char *line)
+{
+    uint8_t data[8];
+
+    int room = get_val(line, "R=");
+    int bed  = get_val(line, "B=");
+    int hr   = get_val(line, "HR=");
+    int spo2 = get_val(line, "SPO2=");
+    int temp = (int)(atof(strstr(line,"T=")+2)*100);
+    int bat  = get_val(line, "BAT=");
+    int seq  = get_val(line, "SEQ=");
+
+    data[0] = room;
+    data[1] = bed;
+    data[2] = hr;
+    data[3] = spo2;
+    data[4] = temp & 0xFF;
+    data[5] = temp >> 8;
+    data[6] = bat;
+    data[7] = seq;
+
+    CAN_Send(0x10A, data);
+
+    UART1_Print("CAN TX VITAL\r\n");
+}
+
+void parse_loadcell(char *line)
+{
+    uint8_t data[8];
+
+    int room = get_val(line, "R=");
+    int bed  = get_val(line, "B=");
+    int ml   = get_val(line, "ML=");
+    int dpm  = get_val(line, "DPM=");
+    int pat  = get_val(line, "P=");
+    int seq  = get_val(line, "SEQ=");
+
+    data[0] = room;
+    data[1] = bed;
+    data[2] = ml & 0xFF;
+    data[3] = ml >> 8;
+    data[4] = dpm & 0xFF;
+    data[5] = dpm >> 8;
+    data[6] = pat;
+    data[7] = seq;
+
+    CAN_Send(0x20A, data);
+
+    UART1_Print("CAN TX LOADCELL\r\n");
+}
+
+void process_line(char *line)
+{
+    if (strstr(line, "TYPE=VITAL"))
+        parse_vital(line);
+
+    else if (strstr(line, "TYPE=LOADCELL"))
+        parse_loadcell(line);
+}
+
+/* ================= UART IRQ ================= */
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART2)
+    {
+        if (rx2 == '\n')
+        {
+            buf2[idx2] = 0;
+            process_line(buf2);
+            idx2 = 0;
+        }
+        else
+        {
+            buf2[idx2++] = rx2;
+        }
+
+        HAL_UART_Receive_IT(&huart2, &rx2, 1);
+    }
+
+    if (huart->Instance == USART3)
+    {
+        if (rx3 == '\n')
+        {
+            buf3[idx3] = 0;
+            process_line(buf3);
+            idx3 = 0;
+        }
+        else
+        {
+            buf3[idx3++] = rx3;
+        }
+
+        HAL_UART_Receive_IT(&huart3, &rx3, 1);
+    }
+}
+
+/* ================= MAIN ================= */
+
+int main(void)
+{
+    HAL_Init();
+    SystemClock_Config();
+
+    MX_GPIO_Init();
+    MX_CAN_Init();
+    MX_USART1_UART_Init();
+    MX_USART2_UART_Init();
+    MX_USART3_UART_Init();
+
+    HAL_CAN_Start(&hcan);
+
+    HAL_UART_Receive_IT(&huart2, &rx2, 1);
+    HAL_UART_Receive_IT(&huart3, &rx3, 1);
+
+    UART1_Print("SYSTEM READY\r\n");
+
+    while (1)
+    {
+        HAL_Delay(10);
+    }
+}

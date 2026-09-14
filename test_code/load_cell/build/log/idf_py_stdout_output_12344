@@ -1,0 +1,158 @@
+[0;32mI (111) esp_image: segment 1: paddr=000237cc vaddr=3fc936ESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0xf (SPI_FAST_FLASH_BOOT)
+Saved PC:0x403899a0
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fcd5820,len:0x1820
+load:0x403cc710,len:0xbcc
+load:0x403ce710,len:0x2f5c
+entry 0x403cc71a
+[0;32mI (24) boot: ESP-IDF v5.3.3-dirty 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time Apr 16 2026 01:31:14[0m
+[0;32mI (25) boot: chip revision: v0.4[0m
+[0;32mI (28) boot: efuse block revision: v1.3[0m
+[0;32mI (32) boot.esp32c3: SPI Speed      : 80MHz[0m
+[0;32mI (37) boot.esp32c3: SPI Mode       : DIO[0m
+[0;32mI (42) boot.esp32c3: SPI Flash Size : 2MB[0m
+[0;32mI (47) boot: Enabling RNG early entropy source...[0m
+[0;32mI (52) boot: Partition Table:[0m
+[0;32mI (56) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (63) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (70) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (78) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (85) boot: End of partition table[0m
+[0;32mI (89) esp_image: segment 0: paddr=00010020 vaddr=3c060020 size=137a4h ( 79780) map[0m
+[0;32mI (111) esp_image: segment 1: paddr=000237cc vaddr=3fc93600 size=026f0h (  9968) load[0m
+[0;32mI (113) esp_image: segment 2: paddr=00025ec4 vaddr=40380000 size=0a154h ( 41300) load[0m
+[0;32mI (124) esp_image: segment 3: paddr=00030020 vaddr=42000020 size=5e8f8h (387320) map[0m
+[0;32mI (188) esp_image: segment 4: paddr=0008e920 vaddr=4038a154 size=09304h ( 37636) load[0m
+[0;32mI (201) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (201) boot: Disabling RNG early entropy source...[0m
+[0;32mI (213) cpu_start: Unicore app[0m
+[0;32mI (221) cpu_start: Pro cpu start user code[0m
+[0;32mI (221) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (221) app_init: Application information:[0m
+[0;32mI (224) app_init: Project name:     load_cell[0m
+[0;32mI (229) app_init: App version:      236785b[0m
+[0;32mI (234) app_init: Compile time:     Apr 16 2026 01:31:01[0m
+[0;32mI (240) app_init: ELF file SHA256:  79966a217...[0m
+[0;32mI (245) app_init: ESP-IDF:          v5.3.3-dirty[0m
+[0;32mI (251) efuse_init: Min chip rev:     v0.3[0m
+[0;32mI (255) efuse_init: Max chip rev:     v1.99 [0m
+[0;32mI (260) efuse_init: Chip rev:         v0.4[0m
+[0;32mI (265) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (272) heap_init: At 3FC986E0 len 00027920 (158 KiB): RAM[0m
+[0;32mI (278) heap_init: At 3FCC0000 len 0001C710 (113 KiB): Retention RAM[0m
+[0;32mI (285) heap_init: At 3FCDC710 len 00002950 (10 KiB): Retention RAM[0m
+[0;32mI (292) heap_init: At 50000000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (300) spi_flash: detected chip: generic[0m
+[0;32mI (303) spi_flash: flash io: dio[0m
+[0;33mW (307) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (321) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (327) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (334) coexist: coex firmware version: 85a8de8[0m
+[0;32mI (340) coexist: coexist rom version 9387209[0m
+[0;32mI (345) main_task: Started on CPU0[0m
+[0;32mI (345) main_task: Calling app_main()[0m
+[0;32mI (355) gpio: GPIO[1]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (355) gpio: GPIO[0]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (365) gpio: GPIO[10]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:2 [0m
+[0;32mI (2215) LOADCELL_TX: Tare done, offset=151141[0m
+[0;32mI (2215) BLE_INIT: BT controller compile version [86a4da5][0m
+[0;32mI (2215) BLE_INIT: Bluetooth MAC: ac:a7:04:bb:32:e2[0m
+[0;32mI (2215) phy_init: phy_version 1200,2b7123f9,Feb 18 2025,15:22:21[0m
+[0;32mI (2255) NimBLE: GAP procedure initiated: stop advertising.
+[0m
+[0;32mI (2265) NimBLE: Failed to restore IRKs from store; status=8
+[0m
+[0;32mI (2265) LOADCELL_TX: BLE synced[0m
+[0;32mI (2265) NimBLE: GAP procedure initiated: stop advertising.
+[0m
+[0;32mI (2275) NimBLE: GAP procedure initiated: advertise; [0m
+[0;32mI (2275) NimBLE: disc_mode=2[0m
+[0;32mI (2285) NimBLE:  adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=0 adv_itvl_max=0[0m
+[0;32mI (2295) NimBLE: 
+[0m
+[0;32mI (2295) LOADCELL_TX: ADV LOADCELL | W=B R=1 B=3 P=2 | ML=0 DPM=0 Seq=100[0m
+[0;32mI (3225) NimBLE: GAP procedure initiated: stop advertising.
+[0m
+[0;32mI (3225) NimBLE: GAP procedure initiated: advertise; [0m
+[0;32mI (3225) NimBLE: disc_mode=2[0m
+[0;32mI (3225) NimBLE:  adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=0 adv_itvl_max=0[0m
+[0;32mI (3235) NimBLE: 
+[0m
+[0;32mI (3235) LOADCELL_TX: ADV LOADCELL | W=B R=1 B=3 P=2 | ML=0 DPM=0 Seq=100[0m
+[0;32mI (5145) NimBLE: GAP procedure initiated: stop advertising.
+[0m
+[0;32mI (5145) NimBLE: GAP procedure initiated: advertise; [0m
+[0;32mI (5145) NimBLE: disc_mode=2[0m
+[0;32mI (5145) NimBLE:  adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=0 adv_itvl_max=0[0m
+[0;32mI (5155) NimBLE: 
+[0m
+[0;32mI (5155) LOADCELL_TX: ADV LOADCELL | W=B R=1 B=3 P=2 | ML=1 DPM=0 Seq=101[0m
+[0;32mI (7065) NimBLE: GAP procedure initiated: stop advertising.
+[0m
+[0;32mI (7065) NimBLE: GAP procedure initiated: advertise; [0m
+[0;32mI (7065) NimBLE: disc_mode=2[0m
+[0;32mI (7065) NimBLE:  adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=0 adv_itvl_max=0[0m
+[0;32mI (7075) NimBLE: 
+[0m
+[0;32mI (7075) LOADCELL_TX: ADV LOADCELL | W=B R=1 B=3 P=2 | ML=0 DPM=0 Seq=102[0m
+[0;32mI (8985) NimBLE: GAP procedure initiated: stop advertising.
+[0m
+[0;32mI (8985) NimBLE: GAP procedure initiated: advertise; [0m
+[0;32mI (8985) NimBLE: disc_mode=2[0m
+[0;32mI (8985) NimBLE:  adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=0 adv_itvl_max=0[0m
+[0;32mI (8995) NimBLE: 
+[0m
+[0;32mI (8995) LOADCELL_TX: ADV LOADCELL | W=B R=1 B=3 P=2 | ML=0 DPM=0 Seq=103[0m
+[0;32mI (10895) LOADCELL_TX: DROP | 10s_count=30 dpm=180 total=30[0m
+[0;32mI (10895) NimBLE: GAP procedure initiated: stop advertising.
+[0m
+[0;32mI (10895) NimBLE: GAP procedure initiated: advertise; [0m
+[0;32mI (10895) NimBLE: disc_mode=2[0m
+[0;32mI (10905) NimBLE:  adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=0 adv_itvl_max=0[0m
+[0;32mI (10915) NimBLE: 
+[0m
+[0;32mI (10915) LOADCELL_TX: ADV LOADCELL | W=B R=1 B=3 P=2 | ML=0 DPM=180 Seq=104[0m
+[0;32mI (12815) NimBLE: GAP procedure initiated: stop advertising.
+[0m
+[0;32mI (12815) NimBLE: GAP procedure initiated: advertise; [0m
+[0;32mI (12815) NimBLE: disc_mode=2[0m
+[0;32mI (12815) NimBLE:  adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=0 adv_itvl_max=0[0m
+[0;32mI (12825) NimBLE: 
+[0m
+[0;32mI (12825) LOADCELL_TX: ADV LOADCELL | W=B R=1 B=3 P=2 | ML=1 DPM=180 Seq=105[0m
+[0;32mI (14735) NimBLE: GAP procedure initiated: stop advertising.
+[0m
+[0;32mI (14735) NimBLE: GAP procedure initiated: advertise; [0m
+[0;32mI (14735) NimBLE: disc_mode=2[0m
+[0;32mI (14735) NimBLE:  adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=0 adv_itvl_max=0[0m
+[0;32mI (14745) NimBLE: 
+[0m
+[0;32mI (14745) LOADCELL_TX: ADV LOADCELL | W=B R=1 B=3 P=2 | ML=1 DPM=180 Seq=106[0m
+[0;32mI (16655) NimBLE: GAP procedure initiated: stop advertising.
+[0m
+[0;32mI (16655) NimBLE: GAP procedure initiated: advertise; [0m
+[0;32mI (16655) NimBLE: disc_mode=2[0m
+[0;32mI (16655) NimBLE:  adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=0 adv_itvl_max=0[0m
+[0;32mI (16665) NimBLE: 
+[0m
+[0;32mI (16665) LOADCELL_TX: ADV LOADCELL | W=B R=1 B=3 P=2 | ML=0 DPM=180 Seq=107[0m
+[0;32mI (18565) NimBLE: GAP procedure initiated: stop advertising.
+[0m
+[0;32mI (18565) NimBLE: GAP procedure initiated: advertise; [0m
+[0;32mI (18565) NimBLE: disc_mode=2[0m
+[0;32mI (18565) NimBLE:  adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=0 adv_itvl_max=0[0m
+[0;32mI (18575) NimBLE: 
+[0m
+[0;32mI (18575) LOADCELL_TX: ADV LOADCELL | W=B R=1 B=3 P=2 | ML=1 DPM=180 Seq=108[0m
+[0;32mI (20485) NimBLE: GAP procedure initiated: stop advertising.
+[0m
+[0;32mI (20485) NimBLE: GAP procedure initiated: advertise; [0m
+[0;32mI (20485) NimBLE: disc_mode=2[0m
+[0;32mI (20485) NimBLE:  adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=0 adv_itvl_max=0[0m
+[0;32mI (20495) NimBLE: 
+[0m
+[0;32mI (20495) LOADCELL_TX: ADV LOADCELL | W=B R=1 B=3 P=2 | ML=1 DPM=180 Seq=109[0m

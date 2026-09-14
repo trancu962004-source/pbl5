@@ -1,0 +1,313 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : STM32F103 UART2/UART3 RX echo to UART1 only
+  *
+  * Mục đích:
+  *   - Chỉ kiểm tra STM32 có nhận được dữ liệu từ UART2/UART3 không.
+  *   - Nhận byte nào từ UART2 hoặc UART3 thì in ngay byte đó ra UART1.
+  *   - Không dùng CAN.
+  *   - Không parse dữ liệu.
+  *
+  * Kết nối:
+  *   UART1 debug:
+  *     STM32 PA9  TX -> RX USB-TTL debug
+  *     STM32 GND     -> GND USB-TTL debug
+  *
+  *   Test UART2:
+  *     ESP/USB-TTL TX -> STM32 PA3  USART2_RX
+  *     GND chung
+  *
+  *   Test UART3:
+  *     ESP/USB-TTL TX -> STM32 PB11 USART3_RX
+  *     GND chung
+  *
+  * Baudrate:
+  *   USART1 = 115200
+  *   USART2 = 115200
+  *   USART3 = 115200
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+
+#include "main.h"
+#include <string.h>
+#include <stdio.h>
+
+/* Private variables ---------------------------------------------------------*/
+CAN_HandleTypeDef hcan;
+
+UART_HandleTypeDef huart1;
+UART_HandleTypeDef huart2;
+UART_HandleTypeDef huart3;
+
+/* RX byte buffers */
+static uint8_t uart2_rx_byte;
+static uint8_t uart3_rx_byte;
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_USART1_UART_Init(void);
+static void MX_USART2_UART_Init(void);
+static void MX_USART3_UART_Init(void);
+
+static void UART1_Print(const char *msg);
+static void UART2_StartReceiveIT(void);
+static void UART3_StartReceiveIT(void);
+
+/* USER CODE BEGIN 0 */
+
+static void UART1_Print(const char *msg)
+{
+    HAL_UART_Transmit(&huart1, (uint8_t *)msg, strlen(msg), HAL_MAX_DELAY);
+}
+
+static void UART2_StartReceiveIT(void)
+{
+    if (HAL_UART_Receive_IT(&huart2, &uart2_rx_byte, 1) != HAL_OK)
+    {
+        UART1_Print("\r\nUART2 RX interrupt start failed\r\n");
+    }
+}
+
+static void UART3_StartReceiveIT(void)
+{
+    if (HAL_UART_Receive_IT(&huart3, &uart3_rx_byte, 1) != HAL_OK)
+    {
+        UART1_Print("\r\nUART3 RX interrupt start failed\r\n");
+    }
+}
+
+/*
+  Callback này sẽ chạy mỗi khi UART2 hoặc UART3 nhận được 1 byte.
+  Nhận byte nào thì in ngay byte đó ra UART1.
+*/
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART2)
+    {
+        static uint8_t new_line = 1;
+
+        if (new_line)
+        {
+            UART1_Print("\r\n[UART2 RX] ");
+            new_line = 0;
+        }
+
+        HAL_UART_Transmit(&huart1, &uart2_rx_byte, 1, 10);
+
+        if (uart2_rx_byte == '\n')
+        {
+            new_line = 1;
+        }
+
+        UART2_StartReceiveIT();
+    }
+    else if (huart->Instance == USART3)
+    {
+        static uint8_t new_line = 1;
+
+        if (new_line)
+        {
+            UART1_Print("\r\n[UART3 RX] ");
+            new_line = 0;
+        }
+
+        HAL_UART_Transmit(&huart1, &uart3_rx_byte, 1, 10);
+
+        if (uart3_rx_byte == '\n')
+        {
+            new_line = 1;
+        }
+
+        UART3_StartReceiveIT();
+    }
+}
+
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART2)
+    {
+        UART1_Print("\r\nUART2 ERROR -> restart RX\r\n");
+        UART2_StartReceiveIT();
+    }
+    else if (huart->Instance == USART3)
+    {
+        UART1_Print("\r\nUART3 ERROR -> restart RX\r\n");
+        UART3_StartReceiveIT();
+    }
+}
+
+/* USER CODE END 0 */
+
+int main(void)
+{
+    HAL_Init();
+    SystemClock_Config();
+
+    MX_GPIO_Init();
+    MX_USART1_UART_Init();
+    MX_USART2_UART_Init();
+    MX_USART3_UART_Init();
+
+    UART1_Print("\r\n========================================\r\n");
+    UART1_Print("STM32 UART2/UART3 RX ECHO TEST\r\n");
+    UART1_Print("No CAN, no parse, only echo RX data to UART1\r\n");
+    UART1_Print("USART1 debug TX = PA9, baud 115200\r\n");
+    UART1_Print("USART2 RX = PA3, baud 115200\r\n");
+    UART1_Print("USART3 RX = PB11, baud 115200\r\n");
+    UART1_Print("Send data to PA3 or PB11 now...\r\n");
+    UART1_Print("========================================\r\n");
+
+    UART2_StartReceiveIT();
+    UART3_StartReceiveIT();
+
+    while (1)
+    {
+        /*
+          Heartbeat để biết STM32 vẫn đang chạy dù chưa nhận UART2/UART3.
+        */
+        static uint32_t last = 0;
+
+        if (HAL_GetTick() - last >= 3000)
+        {
+            last = HAL_GetTick();
+            UART1_Print("\r\nHeartbeat: waiting UART2/UART3 data...\r\n");
+        }
+    }
+}
+
+/**
+  * @brief System Clock Configuration
+  *
+  * Cấu hình cho STM32F103C8T6 dùng HSE 8 MHz:
+  * SYSCLK = 72 MHz.
+  *
+  * Nếu project của bạn đã có SystemClock_Config chạy ổn,
+  * có thể giữ lại bản CubeMX sinh ra của bạn.
+  */
+void SystemClock_Config(void)
+{
+    RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+    RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+    RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+    RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+    RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+    RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+    RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+
+    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+    {
+        Error_Handler();
+    }
+
+    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK |
+                                  RCC_CLOCKTYPE_SYSCLK |
+                                  RCC_CLOCKTYPE_PCLK1 |
+                                  RCC_CLOCKTYPE_PCLK2;
+
+    RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+    RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+    RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+    RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief USART1 Initialization Function
+  * Debug UART: PA9 TX, PA10 RX
+  */
+static void MX_USART1_UART_Init(void)
+{
+    huart1.Instance = USART1;
+    huart1.Init.BaudRate = 115200;
+    huart1.Init.WordLength = UART_WORDLENGTH_8B;
+    huart1.Init.StopBits = UART_STOPBITS_1;
+    huart1.Init.Parity = UART_PARITY_NONE;
+    huart1.Init.Mode = UART_MODE_TX_RX;
+    huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+
+    if (HAL_UART_Init(&huart1) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief USART2 Initialization Function
+  * USART2 RX: PA3
+  */
+static void MX_USART2_UART_Init(void)
+{
+    huart2.Instance = USART2;
+    huart2.Init.BaudRate = 115200;
+    huart2.Init.WordLength = UART_WORDLENGTH_8B;
+    huart2.Init.StopBits = UART_STOPBITS_1;
+    huart2.Init.Parity = UART_PARITY_NONE;
+    huart2.Init.Mode = UART_MODE_TX_RX;
+    huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+
+    if (HAL_UART_Init(&huart2) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief USART3 Initialization Function
+  * USART3 RX: PB11
+  */
+static void MX_USART3_UART_Init(void)
+{
+    huart3.Instance = USART3;
+    huart3.Init.BaudRate = 115200;
+    huart3.Init.WordLength = UART_WORDLENGTH_8B;
+    huart3.Init.StopBits = UART_STOPBITS_1;
+    huart3.Init.Parity = UART_PARITY_NONE;
+    huart3.Init.Mode = UART_MODE_TX_RX;
+    huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart3.Init.OverSampling = UART_OVERSAMPLING_16;
+
+    if (HAL_UART_Init(&huart3) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief GPIO Initialization Function
+  */
+static void MX_GPIO_Init(void)
+{
+    __HAL_RCC_GPIOD_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+}
+
+void Error_Handler(void)
+{
+    __disable_irq();
+
+    while (1)
+    {
+    }
+}
+
+#ifdef USE_FULL_ASSERT
+void assert_failed(uint8_t *file, uint32_t line)
+{
+    (void)file;
+    (void)line;
+}
+#endif

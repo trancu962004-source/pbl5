@@ -1,0 +1,11 @@
+../Core/Src/main.c:20:5:main	3
+../Core/Src/main.c:59:6:SystemClock_Config	3
+../Core/Src/main.c:89:13:MX_CAN_Init	2
+../Core/Src/main.c:114:13:MX_USART1_UART_Init	2
+../Core/Src/main.c:131:13:MX_GPIO_Init	1
+../Core/Src/main.c:137:13:UART1_Print	1
+../Core/Src/main.c:142:13:UART1_Printf	1
+../Core/Src/main.c:152:13:CAN_Filter_Config_AllPass	2
+../Core/Src/main.c:173:16:CAN_Send_Frame_Std	7
+../Core/Src/main.c:217:13:CAN_Print_Status	1
+../Core/Src/main.c:225:6:Error_Handler	1

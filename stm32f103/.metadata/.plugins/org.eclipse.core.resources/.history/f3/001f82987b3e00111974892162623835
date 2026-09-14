@@ -1,0 +1,631 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : UART2 + UART3 -> Parse VITAL -> CAN transmit + UART1 debug
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+
+#include "main.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+/* Private variables ---------------------------------------------------------*/
+CAN_HandleTypeDef hcan;
+UART_HandleTypeDef huart1;
+UART_HandleTypeDef huart2;
+UART_HandleTypeDef huart3;
+
+/* ===================== USER CONFIG ===================== */
+#define UART_LINE_MAX_LEN    160U
+#define CAN_TX_PERIOD_MS     1000U
+
+/* ===================== UART2 - ESP1 ===================== */
+static uint8_t uart2_rx_byte;
+static char uart2_rx_line[UART_LINE_MAX_LEN];
+static char uart2_line_copy[UART_LINE_MAX_LEN];
+static volatile uint16_t uart2_rx_index = 0;
+static volatile uint8_t uart2_line_ready = 0;
+
+/* ===================== UART3 - ESP2 ===================== */
+static uint8_t uart3_rx_byte;
+static char uart3_rx_line[UART_LINE_MAX_LEN];
+static char uart3_line_copy[UART_LINE_MAX_LEN];
+static volatile uint16_t uart3_rx_index = 0;
+static volatile uint8_t uart3_line_ready = 0;
+
+/* ===================== DATA STRUCT ===================== */
+typedef struct
+{
+    uint8_t room;
+    uint8_t bed;
+    uint8_t patient;
+    uint8_t hr;
+    uint8_t spo2;
+    int16_t temp_x10;
+    uint8_t battery;
+    uint8_t seq;
+    uint8_t valid;
+} PatientData_t;
+
+static PatientData_t g_patient_esp1 = {0};
+static PatientData_t g_patient_esp2 = {0};
+
+static uint32_t g_last_can_tx_esp1 = 0;
+static uint32_t g_last_can_tx_esp2 = 0;
+
+static uint32_t g_tx_period_ms = CAN_TX_PERIOD_MS;
+static uint32_t g_tx_offset_ms_esp1 = 0;
+static uint32_t g_tx_offset_ms_esp2 = 10;
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_CAN_Init(void);
+static void MX_USART1_UART_Init(void);
+static void MX_USART2_UART_Init(void);
+static void MX_USART3_UART_Init(void);
+
+/* USER CODE BEGIN PFP */
+static void UART1_Print(const char *msg);
+static void UART2_StartReceiveIT(void);
+static void UART3_StartReceiveIT(void);
+
+static uint8_t Extract_Int_Field(const char *line, const char *key, int *value);
+static uint8_t Extract_Float_Field(const char *line, const char *key, float *value);
+static uint8_t Parse_UART_Line(const char *line, PatientData_t *p);
+
+static uint16_t Make_CAN_ID(uint8_t source, uint8_t room, uint8_t bed);
+static void Pack_Vitals_DLC8(const PatientData_t *p, uint8_t data[8]);
+
+static uint8_t CAN_Filter_Config_AllPass(void);
+static uint8_t CAN_Send_Vitals(uint8_t source, const PatientData_t *p);
+static void CAN_Task_One(uint8_t source,
+                         const PatientData_t *p,
+                         uint32_t *last_tx,
+                         uint32_t tx_offset_ms);
+/* USER CODE END PFP */
+
+/* USER CODE BEGIN 0 */
+
+static void UART1_Print(const char *msg)
+{
+    HAL_UART_Transmit(&huart1, (uint8_t *)msg, strlen(msg), HAL_MAX_DELAY);
+}
+
+static void UART2_StartReceiveIT(void)
+{
+    HAL_UART_Receive_IT(&huart2, &uart2_rx_byte, 1);
+}
+
+static void UART3_StartReceiveIT(void)
+{
+    HAL_UART_Receive_IT(&huart3, &uart3_rx_byte, 1);
+}
+
+static uint8_t Extract_Int_Field(const char *line, const char *key, int *value)
+{
+    const char *p;
+    char *endptr;
+    long v;
+
+    if (line == NULL || key == NULL || value == NULL)
+        return 0;
+
+    p = strstr(line, key);
+    if (p == NULL)
+        return 0;
+
+    p += strlen(key);
+    v = strtol(p, &endptr, 10);
+
+    if (endptr == p)
+        return 0;
+
+    *value = (int)v;
+    return 1;
+}
+
+static uint8_t Extract_Float_Field(const char *line, const char *key, float *value)
+{
+    const char *p;
+
+    if (line == NULL || key == NULL || value == NULL)
+        return 0;
+
+    p = strstr(line, key);
+    if (p == NULL)
+        return 0;
+
+    p += strlen(key);
+    *value = (float)atof(p);
+    return 1;
+}
+
+/*
+  Chỉ parse line VITAL:
+  TYPE=VITAL,W=B,R=1,B=2,P=1,HR=88,SPO2=97,T=36.8,BAT=90,SEQ=10
+*/
+static uint8_t Parse_UART_Line(const char *line, PatientData_t *p)
+{
+    int room, bed, patient, hr, spo2, battery, seq;
+    float temp_c;
+
+    if (line == NULL || p == NULL)
+        return 0;
+
+    /* bỏ qua line không phải vital */
+    if (strstr(line, "TYPE=VITAL") == NULL)
+        return 0;
+
+    if (!Extract_Int_Field(line, "R=", &room)) return 0;
+    if (!Extract_Int_Field(line, "B=", &bed)) return 0;
+    if (!Extract_Int_Field(line, "P=", &patient)) return 0;
+    if (!Extract_Int_Field(line, "HR=", &hr)) return 0;
+    if (!Extract_Int_Field(line, "SPO2=", &spo2)) return 0;
+    if (!Extract_Float_Field(line, "T=", &temp_c)) return 0;
+    if (!Extract_Int_Field(line, "BAT=", &battery)) battery = 0;
+    if (!Extract_Int_Field(line, "SEQ=", &seq)) seq = 0;
+
+    if (room < 0 || room > 31) return 0;
+    if (bed < 0 || bed > 7) return 0;
+    if (patient < 0 || patient > 255) return 0;
+    if (hr < 0 || hr > 255) return 0;
+    if (spo2 < 0 || spo2 > 100) return 0;
+    if (temp_c < 20.0f || temp_c > 45.0f) return 0;
+    if (battery < 0 || battery > 100) battery = 0;
+    if (seq < 0 || seq > 255) seq = 0;
+
+    p->room = (uint8_t)room;
+    p->bed = (uint8_t)bed;
+    p->patient = (uint8_t)patient;
+    p->hr = (uint8_t)hr;
+    p->spo2 = (uint8_t)spo2;
+    p->temp_x10 = (int16_t)(temp_c * 10.0f + 0.5f);
+    p->battery = (uint8_t)battery;
+    p->seq = (uint8_t)seq;
+    p->valid = 1;
+
+    return 1;
+}
+
+/* source 1 -> 0x100, source 2 -> 0x200 */
+static uint16_t Make_CAN_ID(uint8_t source, uint8_t room, uint8_t bed)
+{
+    uint16_t base = (source == 1U) ? 0x100U : 0x200U;
+    return (uint16_t)(base | ((room & 0x1FU) << 3) | (bed & 0x07U));
+}
+
+/*
+  DLC = 8:
+  [0] patient
+  [1] hr
+  [2] spo2
+  [3] temp_x10 low
+  [4] temp_x10 high
+  [5] battery
+  [6] seq
+  [7] source
+*/
+static void Pack_Vitals_DLC8(const PatientData_t *p, uint8_t data[8])
+{
+    data[0] = p->patient;
+    data[1] = p->hr;
+    data[2] = p->spo2;
+    data[3] = (uint8_t)(p->temp_x10 & 0xFF);
+    data[4] = (uint8_t)((p->temp_x10 >> 8) & 0xFF);
+    data[5] = p->battery;
+    data[6] = p->seq;
+    data[7] = 0;
+}
+
+static uint8_t CAN_Filter_Config_AllPass(void)
+{
+    CAN_FilterTypeDef filter = {0};
+
+    filter.FilterActivation = ENABLE;
+    filter.FilterBank = 0;
+    filter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+    filter.FilterIdHigh = 0x0000;
+    filter.FilterIdLow = 0x0000;
+    filter.FilterMaskIdHigh = 0x0000;
+    filter.FilterMaskIdLow = 0x0000;
+    filter.FilterMode = CAN_FILTERMODE_IDMASK;
+    filter.FilterScale = CAN_FILTERSCALE_32BIT;
+    filter.SlaveStartFilterBank = 14;
+
+    if (HAL_CAN_ConfigFilter(&hcan, &filter) != HAL_OK)
+        return 0;
+
+    return 1;
+}
+
+static uint8_t CAN_Send_Vitals(uint8_t source, const PatientData_t *p)
+{
+    CAN_TxHeaderTypeDef txHeader;
+    uint8_t data[8];
+    uint32_t txMailbox;
+
+    if (p == NULL || p->valid == 0U)
+        return 0;
+
+    memset(&txHeader, 0, sizeof(txHeader));
+    memset(data, 0, sizeof(data));
+
+    txHeader.StdId = Make_CAN_ID(source, p->room, p->bed);
+    txHeader.ExtId = 0;
+    txHeader.IDE = CAN_ID_STD;
+    txHeader.RTR = CAN_RTR_DATA;
+    txHeader.DLC = 8;
+    txHeader.TransmitGlobalTime = DISABLE;
+
+    Pack_Vitals_DLC8(p, data);
+    data[7] = source;
+
+    if (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0U)
+        return 0;
+
+    if (HAL_CAN_AddTxMessage(&hcan, &txHeader, data, &txMailbox) != HAL_OK)
+        return 0;
+
+    return 1;
+}
+
+static void CAN_Task_One(uint8_t source,
+                         const PatientData_t *p,
+                         uint32_t *last_tx,
+                         uint32_t tx_offset_ms)
+{
+    uint32_t now;
+    char logbuf[200];
+
+    if ((p == NULL) || (last_tx == NULL) || (p->valid == 0U))
+        return;
+
+    now = HAL_GetTick();
+
+    if (now < tx_offset_ms)
+        return;
+
+    if ((now - *last_tx) >= g_tx_period_ms)
+    {
+        *last_tx = now;
+
+        if (CAN_Send_Vitals(source, p))
+        {
+            snprintf(logbuf, sizeof(logbuf),
+                     "CAN TX | SRC=%u ID=0x%03X P=%u HR=%u SpO2=%u Temp_x10=%d BAT=%u SEQ=%u\r\n",
+                     source,
+                     Make_CAN_ID(source, p->room, p->bed),
+                     p->patient,
+                     p->hr,
+                     p->spo2,
+                     p->temp_x10,
+                     p->battery,
+                     p->seq);
+        }
+        else
+        {
+            snprintf(logbuf, sizeof(logbuf),
+                     "CAN TX ERROR | SRC=%u ID=0x%03X\r\n",
+                     source,
+                     Make_CAN_ID(source, p->room, p->bed));
+        }
+
+        UART1_Print(logbuf);
+    }
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART2)
+    {
+        if (uart2_rx_byte == '\n')
+        {
+            uart2_rx_line[uart2_rx_index] = '\0';
+            strncpy(uart2_line_copy, uart2_rx_line, sizeof(uart2_line_copy) - 1U);
+            uart2_line_copy[sizeof(uart2_line_copy) - 1U] = '\0';
+
+            uart2_rx_index = 0;
+            uart2_line_ready = 1;
+        }
+        else if (uart2_rx_byte != '\r')
+        {
+            if (uart2_rx_index < (sizeof(uart2_rx_line) - 1U))
+            {
+                uart2_rx_line[uart2_rx_index++] = (char)uart2_rx_byte;
+            }
+            else
+            {
+                uart2_rx_index = 0;
+            }
+        }
+
+        UART2_StartReceiveIT();
+    }
+    else if (huart->Instance == USART3)
+    {
+        if (uart3_rx_byte == '\n')
+        {
+            uart3_rx_line[uart3_rx_index] = '\0';
+            strncpy(uart3_line_copy, uart3_rx_line, sizeof(uart3_line_copy) - 1U);
+            uart3_line_copy[sizeof(uart3_line_copy) - 1U] = '\0';
+
+            uart3_rx_index = 0;
+            uart3_line_ready = 1;
+        }
+        else if (uart3_rx_byte != '\r')
+        {
+            if (uart3_rx_index < (sizeof(uart3_rx_line) - 1U))
+            {
+                uart3_rx_line[uart3_rx_index++] = (char)uart3_rx_byte;
+            }
+            else
+            {
+                uart3_rx_index = 0;
+            }
+        }
+
+        UART3_StartReceiveIT();
+    }
+}
+
+/* USER CODE END 0 */
+
+int main(void)
+{
+    HAL_Init();
+    SystemClock_Config();
+
+    MX_GPIO_Init();
+    MX_CAN_Init();
+    MX_USART1_UART_Init();
+    MX_USART2_UART_Init();
+    MX_USART3_UART_Init();
+
+    UART1_Print("STM32 start\r\n");
+    UART1_Print("UART1 -> debug log\r\n");
+    UART1_Print("UART2 -> RX from ESP1\r\n");
+    UART1_Print("UART3 -> RX from ESP2\r\n");
+
+    if (!CAN_Filter_Config_AllPass())
+    {
+        UART1_Print("CAN filter config failed\r\n");
+        Error_Handler();
+    }
+
+    if (HAL_CAN_Start(&hcan) != HAL_OK)
+    {
+        UART1_Print("CAN start failed\r\n");
+        Error_Handler();
+    }
+
+    UART1_Print("CAN started\r\n");
+
+    UART2_StartReceiveIT();
+    UART3_StartReceiveIT();
+
+    UART1_Print("UART2 RX interrupt started\r\n");
+    UART1_Print("UART3 RX interrupt started\r\n");
+
+    while (1)
+    {
+        if (uart2_line_ready)
+        {
+            char logbuf[220];
+            uart2_line_ready = 0;
+
+            snprintf(logbuf, sizeof(logbuf), "RAW UART2 | [%s]\r\n", uart2_line_copy);
+            UART1_Print(logbuf);
+
+            if (Parse_UART_Line(uart2_line_copy, &g_patient_esp1))
+            {
+                g_tx_offset_ms_esp1 =
+                    ((g_patient_esp1.room * 8U) + g_patient_esp1.bed) * 20U;
+
+                snprintf(logbuf, sizeof(logbuf),
+                         "PARSED UART2 | Room=%u Bed=%u P=%u HR=%u SpO2=%u Temp_x10=%d BAT=%u SEQ=%u ID=0x%03X Offset=%lu\r\n",
+                         g_patient_esp1.room,
+                         g_patient_esp1.bed,
+                         g_patient_esp1.patient,
+                         g_patient_esp1.hr,
+                         g_patient_esp1.spo2,
+                         g_patient_esp1.temp_x10,
+                         g_patient_esp1.battery,
+                         g_patient_esp1.seq,
+                         Make_CAN_ID(1, g_patient_esp1.room, g_patient_esp1.bed),
+                         (unsigned long)g_tx_offset_ms_esp1);
+            }
+            else
+            {
+                snprintf(logbuf, sizeof(logbuf),
+                         "PARSE SKIP/ERROR UART2 | RAW=[%s]\r\n", uart2_line_copy);
+            }
+
+            UART1_Print(logbuf);
+        }
+
+        if (uart3_line_ready)
+        {
+            char logbuf[220];
+            uart3_line_ready = 0;
+
+            snprintf(logbuf, sizeof(logbuf), "RAW UART3 | [%s]\r\n", uart3_line_copy);
+            UART1_Print(logbuf);
+
+            if (Parse_UART_Line(uart3_line_copy, &g_patient_esp2))
+            {
+                g_tx_offset_ms_esp2 =
+                    ((g_patient_esp2.room * 8U) + g_patient_esp2.bed) * 20U + 10U;
+
+                snprintf(logbuf, sizeof(logbuf),
+                         "PARSED UART3 | Room=%u Bed=%u P=%u HR=%u SpO2=%u Temp_x10=%d BAT=%u SEQ=%u ID=0x%03X Offset=%lu\r\n",
+                         g_patient_esp2.room,
+                         g_patient_esp2.bed,
+                         g_patient_esp2.patient,
+                         g_patient_esp2.hr,
+                         g_patient_esp2.spo2,
+                         g_patient_esp2.temp_x10,
+                         g_patient_esp2.battery,
+                         g_patient_esp2.seq,
+                         Make_CAN_ID(2, g_patient_esp2.room, g_patient_esp2.bed),
+                         (unsigned long)g_tx_offset_ms_esp2);
+            }
+            else
+            {
+                snprintf(logbuf, sizeof(logbuf),
+                         "PARSE SKIP/ERROR UART3 | RAW=[%s]\r\n", uart3_line_copy);
+            }
+
+            UART1_Print(logbuf);
+        }
+
+        CAN_Task_One(1, &g_patient_esp1, &g_last_can_tx_esp1, g_tx_offset_ms_esp1);
+        CAN_Task_One(2, &g_patient_esp2, &g_last_can_tx_esp2, g_tx_offset_ms_esp2);
+    }
+}
+
+/**
+  * @brief System Clock Configuration
+  */
+void SystemClock_Config(void)
+{
+    RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+    RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+    RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+    RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+    RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+    RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+    RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+    {
+        Error_Handler();
+    }
+
+    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
+                                | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+    RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+    RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+    RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+    RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief CAN Initialization Function
+  */
+static void MX_CAN_Init(void)
+{
+    hcan.Instance = CAN1;
+
+    /* 125 kbps @ APB1 = 36 MHz */
+    hcan.Init.Prescaler = 18;
+    hcan.Init.Mode = CAN_MODE_NORMAL;
+    hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
+    hcan.Init.TimeSeg1 = CAN_BS1_13TQ;
+    hcan.Init.TimeSeg2 = CAN_BS2_2TQ;
+    hcan.Init.TimeTriggeredMode = DISABLE;
+    hcan.Init.AutoBusOff = DISABLE;
+    hcan.Init.AutoWakeUp = DISABLE;
+    hcan.Init.AutoRetransmission = ENABLE;
+    hcan.Init.ReceiveFifoLocked = DISABLE;
+    hcan.Init.TransmitFifoPriority = DISABLE;
+
+    if (HAL_CAN_Init(&hcan) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief USART1 Initialization Function
+  */
+static void MX_USART1_UART_Init(void)
+{
+    huart1.Instance = USART1;
+    huart1.Init.BaudRate = 115200;
+    huart1.Init.WordLength = UART_WORDLENGTH_8B;
+    huart1.Init.StopBits = UART_STOPBITS_1;
+    huart1.Init.Parity = UART_PARITY_NONE;
+    huart1.Init.Mode = UART_MODE_TX_RX;
+    huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+
+    if (HAL_UART_Init(&huart1) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief USART2 Initialization Function
+  */
+static void MX_USART2_UART_Init(void)
+{
+    huart2.Instance = USART2;
+    huart2.Init.BaudRate = 115200;
+    huart2.Init.WordLength = UART_WORDLENGTH_8B;
+    huart2.Init.StopBits = UART_STOPBITS_1;
+    huart2.Init.Parity = UART_PARITY_NONE;
+    huart2.Init.Mode = UART_MODE_TX_RX;
+    huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+
+    if (HAL_UART_Init(&huart2) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief USART3 Initialization Function
+  */
+static void MX_USART3_UART_Init(void)
+{
+    huart3.Instance = USART3;
+    huart3.Init.BaudRate = 115200;
+    huart3.Init.WordLength = UART_WORDLENGTH_8B;
+    huart3.Init.StopBits = UART_STOPBITS_1;
+    huart3.Init.Parity = UART_PARITY_NONE;
+    huart3.Init.Mode = UART_MODE_TX_RX;
+    huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart3.Init.OverSampling = UART_OVERSAMPLING_16;
+
+    if (HAL_UART_Init(&huart3) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief GPIO Initialization Function
+  */
+static void MX_GPIO_Init(void)
+{
+    __HAL_RCC_GPIOD_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+}
+
+void Error_Handler(void)
+{
+    __disable_irq();
+    while (1)
+    {
+    }
+}
+
+#ifdef USE_FULL_ASSERT
+void assert_failed(uint8_t *file, uint32_t line)
+{
+}
+#endif

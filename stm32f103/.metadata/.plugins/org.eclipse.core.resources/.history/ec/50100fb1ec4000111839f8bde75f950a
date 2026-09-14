@@ -1,0 +1,1113 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : STM32F103 UART2/UART3 RX echo to UART1 + CAN EXT Gateway
+  *
+  * Mục tiêu debug:
+  *   1. USART1 luôn in log debug.
+  *   2. Mỗi byte nhận từ USART2/USART3 sẽ được echo ngay sang USART1:
+  *        [UART2 RX] ...
+  *        [UART3 RX] ...
+  *      Nhờ vậy biết chắc STM32 có nhận dữ liệu từ ESP hay không.
+  *   3. Khi nhận đủ một dòng kết thúc bằng '\n', STM32 parse:
+  *        TYPE=VITAL,...
+  *        TYPE=LOADCELL,...
+  *   4. Nếu parse đúng, STM32 đóng gói CAN Extended ID và gửi lên CAN bus.
+  *   5. UART1 in TX OK / TX FAIL sau khi kiểm tra mailbox TXOK.
+  *
+  * UART input từ ESP32:
+  *   TYPE=VITAL,W=B,R=1,B=2,P=3,HR=88,SPO2=97,T=36.8,BAT=90,SEQ=10\r\n
+  *   TYPE=LOADCELL,W=B,R=1,B=2,P=3,ML=450,DPM=25,SEQ=101\r\n
+  *
+  * CAN Extended ID 29-bit:
+  *   bit 28..26 : msg_type   1=VITAL, 2=LOADCELL
+  *   bit 25..24 : wing       0=A, 1=B
+  *   bit 23..16 : room       0..255
+  *   bit 15..8  : bed        0..255
+  *   bit 7..0   : patient    0..255
+  *
+  * CAN bitrate:
+  *   125 kbps @ APB1 = 36 MHz
+  *
+  * UART:
+  *   USART1 debug : 115200, TX=PA9
+  *   USART2 ESP1  : 115200, RX=PA3
+  *   USART3 ESP2  : 115200, RX=PB11
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+
+#include "main.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdint.h>
+
+/* Private variables ---------------------------------------------------------*/
+CAN_HandleTypeDef hcan;
+UART_HandleTypeDef huart1;
+UART_HandleTypeDef huart2;
+UART_HandleTypeDef huart3;
+
+/* ===================== CONFIG ===================== */
+#define UART_LINE_MAX_LEN          180U
+
+#define MSG_TYPE_VITAL             1U
+#define MSG_TYPE_LOADCELL          2U
+
+#define WING_A                     0U
+#define WING_B                     1U
+
+/*
+  Bật echo từng byte UART2/UART3 sang UART1.
+  Khi chạy ổn định có thể đổi về 0 để giảm log.
+*/
+#define ENABLE_UART_BYTE_ECHO      1
+
+/*
+  Bật fake test không cần ESP:
+  - Tự gọi Process_UART_Line với 1 dòng VITAL và 1 dòng LOADCELL.
+  - Dùng để test parser + CAN.
+  Khi nối ESP thật thì đổi về 0.
+*/
+#define ENABLE_FAKE_UART_TEST      0
+
+/*
+  Bật CAN test thuần:
+  - Tự gửi gói VITAL Extended ID 0x05010203 mỗi 1 giây.
+  Khi test UART thì để 0.
+*/
+#define ENABLE_CAN_EXT_TEST        0
+
+#define CAN_TX_TIMEOUT_MS          50U
+
+/* ===================== UART2 RX ===================== */
+static uint8_t uart2_rx_byte;
+static char uart2_rx_line[UART_LINE_MAX_LEN];
+static char uart2_line_copy[UART_LINE_MAX_LEN];
+static volatile uint16_t uart2_rx_index = 0;
+static volatile uint8_t uart2_line_ready = 0;
+
+/* ===================== UART3 RX ===================== */
+static uint8_t uart3_rx_byte;
+static char uart3_rx_line[UART_LINE_MAX_LEN];
+static char uart3_line_copy[UART_LINE_MAX_LEN];
+static volatile uint16_t uart3_rx_index = 0;
+static volatile uint8_t uart3_line_ready = 0;
+
+/* ===================== DATA STRUCT ===================== */
+typedef struct
+{
+    uint8_t wing;
+    uint8_t room;
+    uint8_t bed;
+    uint8_t patient;
+
+    uint16_t hr;
+    uint8_t spo2;
+    int16_t temp_x10;
+    uint8_t battery;
+    uint8_t seq;
+    uint8_t status;
+    uint8_t valid;
+} VitalData_t;
+
+typedef struct
+{
+    uint8_t wing;
+    uint8_t room;
+    uint8_t bed;
+    uint8_t patient;
+
+    uint16_t volume_ml;
+    uint16_t drops_per_min;
+    uint8_t seq;
+    uint8_t status;
+    uint8_t valid;
+} LoadcellData_t;
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+
+static void MX_GPIO_Init(void);
+static void MX_CAN_Init(void);
+static void MX_USART1_UART_Init(void);
+static void MX_USART2_UART_Init(void);
+static void MX_USART3_UART_Init(void);
+
+static void UART1_Print(const char *msg);
+static void UART1_Echo_Byte_From_Port(uint8_t port, uint8_t ch);
+
+static void CAN_Print_Error(const char *prefix);
+
+static void UART2_StartReceiveIT(void);
+static void UART3_StartReceiveIT(void);
+
+static const char *Find_Field(const char *line, const char *key);
+static uint8_t Extract_Int_Field(const char *line, const char *key, int *value);
+static uint8_t Extract_Float_Field(const char *line, const char *key, float *value);
+static uint8_t Extract_Wing_Field(const char *line, uint8_t *wing);
+
+static uint32_t CAN_MakeExtId(uint8_t msg_type,
+                              uint8_t wing,
+                              uint8_t room,
+                              uint8_t bed,
+                              uint8_t patient);
+
+static uint8_t CAN_Filter_Config_AllPass(void);
+
+static void CAN_PackVital(const VitalData_t *p, uint8_t data[8]);
+static void CAN_PackLoadcell(const LoadcellData_t *p, uint8_t data[8]);
+
+static uint8_t CAN_TxOk_FromMailbox(uint32_t mailbox);
+static uint8_t CAN_SendRawWait(uint8_t msg_type,
+                               uint8_t wing,
+                               uint8_t room,
+                               uint8_t bed,
+                               uint8_t patient,
+                               const uint8_t data[8],
+                               uint32_t *out_id);
+
+static uint8_t CAN_SendVital(const VitalData_t *p, uint32_t *out_id);
+static uint8_t CAN_SendLoadcell(const LoadcellData_t *p, uint32_t *out_id);
+
+static uint8_t Parse_Vital_Line(const char *line, VitalData_t *p);
+static uint8_t Parse_Loadcell_Line(const char *line, LoadcellData_t *p);
+static void Process_UART_Line(const char *line, const char *port_name);
+
+static void Heartbeat_Task(void);
+static void Fake_UART_Test_Once(void);
+static void CAN_Ext_Test_Task(void);
+
+/* USER CODE BEGIN 0 */
+
+static void UART1_Print(const char *msg)
+{
+    HAL_UART_Transmit(&huart1, (uint8_t *)msg, strlen(msg), HAL_MAX_DELAY);
+}
+
+/*
+  Echo từng byte nhận từ UART2/UART3 sang UART1.
+
+  Port:
+    2 = USART2
+    3 = USART3
+
+  Nếu thấy UART1 in:
+    [UART2 RX] TYPE=...
+  nghĩa là STM32 đã nhận được dữ liệu ở PA3.
+
+  Nếu chỉ thấy [UART2 RX] nhưng không thấy "UART2 RAW",
+  nghĩa là dòng nhận chưa có ký tự '\n' kết thúc.
+*/
+static void UART1_Echo_Byte_From_Port(uint8_t port, uint8_t ch)
+{
+#if ENABLE_UART_BYTE_ECHO
+    static uint8_t uart2_new_line = 1;
+    static uint8_t uart3_new_line = 1;
+
+    if (port == 2U)
+    {
+        if (uart2_new_line)
+        {
+            UART1_Print("\r\n[UART2 RX] ");
+            uart2_new_line = 0;
+        }
+
+        HAL_UART_Transmit(&huart1, &ch, 1, 10);
+
+        if (ch == '\n')
+        {
+            uart2_new_line = 1;
+        }
+    }
+    else if (port == 3U)
+    {
+        if (uart3_new_line)
+        {
+            UART1_Print("\r\n[UART3 RX] ");
+            uart3_new_line = 0;
+        }
+
+        HAL_UART_Transmit(&huart1, &ch, 1, 10);
+
+        if (ch == '\n')
+        {
+            uart3_new_line = 1;
+        }
+    }
+#else
+    (void)port;
+    (void)ch;
+#endif
+}
+
+static void CAN_Print_Error(const char *prefix)
+{
+    char buf[220];
+
+    snprintf(buf, sizeof(buf),
+             "%s | HAL_ERR=0x%08lX | ESR=0x%08lX | MSR=0x%08lX | TSR=0x%08lX\r\n",
+             prefix,
+             (unsigned long)HAL_CAN_GetError(&hcan),
+             (unsigned long)CAN1->ESR,
+             (unsigned long)CAN1->MSR,
+             (unsigned long)CAN1->TSR);
+
+    UART1_Print(buf);
+}
+
+static void UART2_StartReceiveIT(void)
+{
+    if (HAL_UART_Receive_IT(&huart2, &uart2_rx_byte, 1) != HAL_OK)
+    {
+        UART1_Print("UART2 RX IT start failed\r\n");
+    }
+}
+
+static void UART3_StartReceiveIT(void)
+{
+    if (HAL_UART_Receive_IT(&huart3, &uart3_rx_byte, 1) != HAL_OK)
+    {
+        UART1_Print("UART3 RX IT start failed\r\n");
+    }
+}
+
+/*
+  Tìm field an toàn theo key.
+  Ví dụ "B=" có thể là Bed hoặc Battery nếu tìm bừa.
+  Hàm này chỉ match khi key ở đầu dòng hoặc ngay sau dấu phẩy.
+*/
+static const char *Find_Field(const char *line, const char *key)
+{
+    const char *p;
+    size_t key_len;
+
+    if (line == NULL || key == NULL)
+        return NULL;
+
+    key_len = strlen(key);
+    p = line;
+
+    while ((p = strstr(p, key)) != NULL)
+    {
+        if (p == line || *(p - 1) == ',')
+        {
+            return p + key_len;
+        }
+
+        p += key_len;
+    }
+
+    return NULL;
+}
+
+static uint8_t Extract_Int_Field(const char *line, const char *key, int *value)
+{
+    const char *p;
+    char *endptr;
+    long v;
+
+    if (value == NULL)
+        return 0;
+
+    p = Find_Field(line, key);
+    if (p == NULL)
+        return 0;
+
+    v = strtol(p, &endptr, 10);
+    if (endptr == p)
+        return 0;
+
+    *value = (int)v;
+    return 1;
+}
+
+static uint8_t Extract_Float_Field(const char *line, const char *key, float *value)
+{
+    const char *p;
+
+    if (value == NULL)
+        return 0;
+
+    p = Find_Field(line, key);
+    if (p == NULL)
+        return 0;
+
+    *value = (float)atof(p);
+    return 1;
+}
+
+static uint8_t Extract_Wing_Field(const char *line, uint8_t *wing)
+{
+    const char *p;
+
+    if (wing == NULL)
+        return 0;
+
+    p = Find_Field(line, "W=");
+    if (p == NULL)
+        return 0;
+
+    if (*p == 'B' || *p == 'b')
+        *wing = WING_B;
+    else
+        *wing = WING_A;
+
+    return 1;
+}
+
+static uint32_t CAN_MakeExtId(uint8_t msg_type,
+                              uint8_t wing,
+                              uint8_t room,
+                              uint8_t bed,
+                              uint8_t patient)
+{
+    return (((uint32_t)(msg_type & 0x07U)) << 26) |
+           (((uint32_t)(wing & 0x03U)) << 24) |
+           (((uint32_t)room) << 16) |
+           (((uint32_t)bed) << 8) |
+           ((uint32_t)patient);
+}
+
+static uint8_t CAN_Filter_Config_AllPass(void)
+{
+    CAN_FilterTypeDef filter;
+
+    memset(&filter, 0, sizeof(filter));
+
+    filter.FilterBank = 0;
+    filter.FilterMode = CAN_FILTERMODE_IDMASK;
+    filter.FilterScale = CAN_FILTERSCALE_32BIT;
+
+    filter.FilterIdHigh = 0x0000;
+    filter.FilterIdLow = 0x0000;
+    filter.FilterMaskIdHigh = 0x0000;
+    filter.FilterMaskIdLow = 0x0000;
+
+    filter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+    filter.FilterActivation = ENABLE;
+    filter.SlaveStartFilterBank = 14;
+
+    if (HAL_CAN_ConfigFilter(&hcan, &filter) != HAL_OK)
+    {
+        return 0;
+    }
+
+    return 1;
+}
+
+static void CAN_PackVital(const VitalData_t *p, uint8_t data[8])
+{
+    data[0] = (uint8_t)(p->hr & 0xFFU);
+    data[1] = (uint8_t)((p->hr >> 8) & 0xFFU);
+    data[2] = p->spo2;
+    data[3] = (uint8_t)(p->temp_x10 & 0xFF);
+    data[4] = (uint8_t)((p->temp_x10 >> 8) & 0xFF);
+    data[5] = p->battery;
+    data[6] = p->seq;
+    data[7] = p->status;
+}
+
+static void CAN_PackLoadcell(const LoadcellData_t *p, uint8_t data[8])
+{
+    data[0] = (uint8_t)(p->volume_ml & 0xFFU);
+    data[1] = (uint8_t)((p->volume_ml >> 8) & 0xFFU);
+    data[2] = (uint8_t)(p->drops_per_min & 0xFFU);
+    data[3] = (uint8_t)((p->drops_per_min >> 8) & 0xFFU);
+    data[4] = p->seq;
+    data[5] = p->status;
+    data[6] = 0;
+    data[7] = 0;
+}
+
+static uint8_t CAN_TxOk_FromMailbox(uint32_t mailbox)
+{
+    uint32_t tsr = CAN1->TSR;
+
+    if (mailbox == CAN_TX_MAILBOX0)
+    {
+        return (tsr & CAN_TSR_TXOK0) ? 1U : 0U;
+    }
+    else if (mailbox == CAN_TX_MAILBOX1)
+    {
+        return (tsr & CAN_TSR_TXOK1) ? 1U : 0U;
+    }
+    else if (mailbox == CAN_TX_MAILBOX2)
+    {
+        return (tsr & CAN_TSR_TXOK2) ? 1U : 0U;
+    }
+
+    return 0U;
+}
+
+/*
+  Gửi CAN và chờ kết quả thực tế.
+
+  Trả về:
+    1 = gửi xong và TXOK = 1
+    0 = lỗi, timeout, no ACK, không có mailbox
+
+  AutoRetransmission đang DISABLE để debug không bị kẹt mailbox.
+*/
+static uint8_t CAN_SendRawWait(uint8_t msg_type,
+                               uint8_t wing,
+                               uint8_t room,
+                               uint8_t bed,
+                               uint8_t patient,
+                               const uint8_t data[8],
+                               uint32_t *out_id)
+{
+    CAN_TxHeaderTypeDef txHeader;
+    uint32_t txMailbox;
+    uint32_t start_tick;
+    uint32_t id;
+
+    if (data == NULL)
+        return 0;
+
+    id = CAN_MakeExtId(msg_type, wing, room, bed, patient);
+
+    if (out_id != NULL)
+        *out_id = id;
+
+    memset(&txHeader, 0, sizeof(txHeader));
+
+    txHeader.ExtId = id;
+    txHeader.StdId = 0;
+    txHeader.IDE = CAN_ID_EXT;
+    txHeader.RTR = CAN_RTR_DATA;
+    txHeader.DLC = 8;
+    txHeader.TransmitGlobalTime = DISABLE;
+
+    if (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0U)
+    {
+        UART1_Print("CAN TX mailbox full -> abort pending TX\r\n");
+
+        HAL_CAN_AbortTxRequest(&hcan,
+                               CAN_TX_MAILBOX0 |
+                               CAN_TX_MAILBOX1 |
+                               CAN_TX_MAILBOX2);
+
+        CAN_Print_Error("CAN TX mailbox full detail");
+        return 0;
+    }
+
+    if (HAL_CAN_AddTxMessage(&hcan, &txHeader, (uint8_t *)data, &txMailbox) != HAL_OK)
+    {
+        CAN_Print_Error("CAN AddTxMessage failed");
+        return 0;
+    }
+
+    start_tick = HAL_GetTick();
+
+    while (HAL_CAN_IsTxMessagePending(&hcan, txMailbox))
+    {
+        if ((HAL_GetTick() - start_tick) > CAN_TX_TIMEOUT_MS)
+        {
+            UART1_Print("CAN TX timeout -> abort TX\r\n");
+            HAL_CAN_AbortTxRequest(&hcan, txMailbox);
+            CAN_Print_Error("CAN TX timeout detail");
+            return 0;
+        }
+    }
+
+    if (!CAN_TxOk_FromMailbox(txMailbox))
+    {
+        CAN_Print_Error("CAN TX finished but TXOK=0, maybe no ACK");
+        return 0;
+    }
+
+    return 1;
+}
+
+static uint8_t CAN_SendVital(const VitalData_t *p, uint32_t *out_id)
+{
+    uint8_t data[8];
+
+    if (p == NULL || p->valid == 0U)
+        return 0;
+
+    CAN_PackVital(p, data);
+
+    return CAN_SendRawWait(MSG_TYPE_VITAL,
+                           p->wing,
+                           p->room,
+                           p->bed,
+                           p->patient,
+                           data,
+                           out_id);
+}
+
+static uint8_t CAN_SendLoadcell(const LoadcellData_t *p, uint32_t *out_id)
+{
+    uint8_t data[8];
+
+    if (p == NULL || p->valid == 0U)
+        return 0;
+
+    CAN_PackLoadcell(p, data);
+
+    return CAN_SendRawWait(MSG_TYPE_LOADCELL,
+                           p->wing,
+                           p->room,
+                           p->bed,
+                           p->patient,
+                           data,
+                           out_id);
+}
+
+static uint8_t Parse_Vital_Line(const char *line, VitalData_t *p)
+{
+    int room, bed, patient, hr, spo2, battery, seq;
+    float temp_c;
+    uint8_t wing;
+
+    if (line == NULL || p == NULL)
+        return 0;
+
+    if (strstr(line, "TYPE=VITAL") == NULL)
+        return 0;
+
+    if (!Extract_Wing_Field(line, &wing)) return 0;
+    if (!Extract_Int_Field(line, "R=", &room)) return 0;
+    if (!Extract_Int_Field(line, "B=", &bed)) return 0;
+    if (!Extract_Int_Field(line, "P=", &patient)) return 0;
+    if (!Extract_Int_Field(line, "HR=", &hr)) return 0;
+    if (!Extract_Int_Field(line, "SPO2=", &spo2)) return 0;
+    if (!Extract_Float_Field(line, "T=", &temp_c)) return 0;
+    if (!Extract_Int_Field(line, "BAT=", &battery)) battery = 0;
+    if (!Extract_Int_Field(line, "SEQ=", &seq)) seq = 0;
+
+    if (room < 0 || room > 255) return 0;
+    if (bed < 0 || bed > 255) return 0;
+    if (patient < 0 || patient > 255) return 0;
+    if (hr < 0 || hr > 300) return 0;
+    if (spo2 < 0 || spo2 > 100) return 0;
+    if (temp_c < 20.0f || temp_c > 45.0f) return 0;
+    if (battery < 0 || battery > 100) battery = 0;
+    if (seq < 0 || seq > 255) seq = 0;
+
+    memset(p, 0, sizeof(*p));
+
+    p->wing = wing;
+    p->room = (uint8_t)room;
+    p->bed = (uint8_t)bed;
+    p->patient = (uint8_t)patient;
+    p->hr = (uint16_t)hr;
+    p->spo2 = (uint8_t)spo2;
+    p->temp_x10 = (int16_t)(temp_c * 10.0f + 0.5f);
+    p->battery = (uint8_t)battery;
+    p->seq = (uint8_t)seq;
+    p->status = 0;
+    p->valid = 1;
+
+    return 1;
+}
+
+static uint8_t Parse_Loadcell_Line(const char *line, LoadcellData_t *p)
+{
+    int room, bed, patient, ml, dpm, seq;
+    uint8_t wing;
+
+    if (line == NULL || p == NULL)
+        return 0;
+
+    if (strstr(line, "TYPE=LOADCELL") == NULL)
+        return 0;
+
+    if (!Extract_Wing_Field(line, &wing)) return 0;
+    if (!Extract_Int_Field(line, "R=", &room)) return 0;
+    if (!Extract_Int_Field(line, "B=", &bed)) return 0;
+    if (!Extract_Int_Field(line, "P=", &patient)) return 0;
+    if (!Extract_Int_Field(line, "ML=", &ml)) return 0;
+    if (!Extract_Int_Field(line, "DPM=", &dpm)) return 0;
+    if (!Extract_Int_Field(line, "SEQ=", &seq)) seq = 0;
+
+    if (room < 0 || room > 255) return 0;
+    if (bed < 0 || bed > 255) return 0;
+    if (patient < 0 || patient > 255) return 0;
+    if (ml < 0 || ml > 65535) return 0;
+    if (dpm < 0 || dpm > 65535) return 0;
+    if (seq < 0 || seq > 255) seq = 0;
+
+    memset(p, 0, sizeof(*p));
+
+    p->wing = wing;
+    p->room = (uint8_t)room;
+    p->bed = (uint8_t)bed;
+    p->patient = (uint8_t)patient;
+    p->volume_ml = (uint16_t)ml;
+    p->drops_per_min = (uint16_t)dpm;
+    p->seq = (uint8_t)seq;
+    p->status = 0;
+    p->valid = 1;
+
+    return 1;
+}
+
+static void Process_UART_Line(const char *line, const char *port_name)
+{
+    VitalData_t vital;
+    LoadcellData_t loadcell;
+    char logbuf[300];
+    uint32_t id = 0;
+
+    if (line == NULL)
+        return;
+
+    snprintf(logbuf, sizeof(logbuf), "%s RAW LINE | %s\r\n", port_name, line);
+    UART1_Print(logbuf);
+
+    if (Parse_Vital_Line(line, &vital))
+    {
+        if (CAN_SendVital(&vital, &id))
+        {
+            snprintf(logbuf, sizeof(logbuf),
+                     "%s -> CAN VITAL TX OK | ID=0x%08lX W=%c R=%u B=%u P=%u HR=%u SPO2=%u T=%d BAT=%u SEQ=%u\r\n",
+                     port_name,
+                     (unsigned long)id,
+                     vital.wing == WING_B ? 'B' : 'A',
+                     vital.room,
+                     vital.bed,
+                     vital.patient,
+                     vital.hr,
+                     vital.spo2,
+                     vital.temp_x10,
+                     vital.battery,
+                     vital.seq);
+        }
+        else
+        {
+            snprintf(logbuf, sizeof(logbuf),
+                     "%s -> CAN VITAL TX FAIL | ID=0x%08lX\r\n",
+                     port_name,
+                     (unsigned long)id);
+        }
+
+        UART1_Print(logbuf);
+        return;
+    }
+
+    if (Parse_Loadcell_Line(line, &loadcell))
+    {
+        if (CAN_SendLoadcell(&loadcell, &id))
+        {
+            snprintf(logbuf, sizeof(logbuf),
+                     "%s -> CAN LOADCELL TX OK | ID=0x%08lX W=%c R=%u B=%u P=%u ML=%u DPM=%u SEQ=%u\r\n",
+                     port_name,
+                     (unsigned long)id,
+                     loadcell.wing == WING_B ? 'B' : 'A',
+                     loadcell.room,
+                     loadcell.bed,
+                     loadcell.patient,
+                     loadcell.volume_ml,
+                     loadcell.drops_per_min,
+                     loadcell.seq);
+        }
+        else
+        {
+            snprintf(logbuf, sizeof(logbuf),
+                     "%s -> CAN LOADCELL TX FAIL | ID=0x%08lX\r\n",
+                     port_name,
+                     (unsigned long)id);
+        }
+
+        UART1_Print(logbuf);
+        return;
+    }
+
+    UART1_Print("PARSE SKIP: line is not VITAL or LOADCELL, or missing fields\r\n");
+}
+
+static void Heartbeat_Task(void)
+{
+    static uint32_t last = 0;
+
+    if ((HAL_GetTick() - last) >= 3000U)
+    {
+        last = HAL_GetTick();
+        UART1_Print("Heartbeat: STM32 alive, waiting UART2/UART3 lines...\r\n");
+    }
+}
+
+static void Fake_UART_Test_Once(void)
+{
+#if ENABLE_FAKE_UART_TEST
+    static uint8_t done = 0;
+
+    if (done)
+        return;
+
+    done = 1;
+
+    UART1_Print("FAKE UART TEST START\r\n");
+
+    Process_UART_Line(
+        "TYPE=VITAL,W=B,R=1,B=2,P=3,HR=88,SPO2=97,T=36.8,BAT=90,SEQ=10",
+        "FAKE"
+    );
+
+    HAL_Delay(20);
+
+    Process_UART_Line(
+        "TYPE=LOADCELL,W=B,R=1,B=2,P=3,ML=450,DPM=25,SEQ=101",
+        "FAKE"
+    );
+
+    UART1_Print("FAKE UART TEST END\r\n");
+#endif
+}
+
+static void CAN_Ext_Test_Task(void)
+{
+#if ENABLE_CAN_EXT_TEST
+    static uint32_t last = 0;
+    uint8_t data[8];
+    uint32_t id = 0;
+
+    if ((HAL_GetTick() - last) < 1000U)
+        return;
+
+    last = HAL_GetTick();
+
+    data[0] = 88;
+    data[1] = 0;
+    data[2] = 97;
+    data[3] = 0x70;
+    data[4] = 0x01;
+    data[5] = 90;
+    data[6] = 10;
+    data[7] = 0;
+
+    if (CAN_SendRawWait(MSG_TYPE_VITAL, WING_B, 1, 2, 3, data, &id))
+    {
+        UART1_Print("CAN EXT TEST TX OK | ID=0x05010203\r\n");
+    }
+    else
+    {
+        UART1_Print("CAN EXT TEST TX FAIL | ID=0x05010203\r\n");
+    }
+#endif
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART2)
+    {
+        UART1_Echo_Byte_From_Port(2, uart2_rx_byte);
+
+        if (uart2_rx_byte == '\n')
+        {
+            uart2_rx_line[uart2_rx_index] = '\0';
+            strncpy(uart2_line_copy, uart2_rx_line, sizeof(uart2_line_copy) - 1U);
+            uart2_line_copy[sizeof(uart2_line_copy) - 1U] = '\0';
+
+            uart2_rx_index = 0;
+            uart2_line_ready = 1;
+        }
+        else if (uart2_rx_byte != '\r')
+        {
+            if (uart2_rx_index < (sizeof(uart2_rx_line) - 1U))
+            {
+                uart2_rx_line[uart2_rx_index++] = (char)uart2_rx_byte;
+            }
+            else
+            {
+                uart2_rx_index = 0;
+                UART1_Print("\r\nUART2 line buffer overflow, reset index\r\n");
+            }
+        }
+
+        UART2_StartReceiveIT();
+    }
+    else if (huart->Instance == USART3)
+    {
+        UART1_Echo_Byte_From_Port(3, uart3_rx_byte);
+
+        if (uart3_rx_byte == '\n')
+        {
+            uart3_rx_line[uart3_rx_index] = '\0';
+            strncpy(uart3_line_copy, uart3_rx_line, sizeof(uart3_line_copy) - 1U);
+            uart3_line_copy[sizeof(uart3_line_copy) - 1U] = '\0';
+
+            uart3_rx_index = 0;
+            uart3_line_ready = 1;
+        }
+        else if (uart3_rx_byte != '\r')
+        {
+            if (uart3_rx_index < (sizeof(uart3_rx_line) - 1U))
+            {
+                uart3_rx_line[uart3_rx_index++] = (char)uart3_rx_byte;
+            }
+            else
+            {
+                uart3_rx_index = 0;
+                UART1_Print("\r\nUART3 line buffer overflow, reset index\r\n");
+            }
+        }
+
+        UART3_StartReceiveIT();
+    }
+}
+
+void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan_ptr)
+{
+    (void)hcan_ptr;
+    CAN_Print_Error("CAN ERROR CALLBACK");
+}
+
+/* USER CODE END 0 */
+
+int main(void)
+{
+    HAL_Init();
+    SystemClock_Config();
+
+    MX_GPIO_Init();
+    MX_CAN_Init();
+    MX_USART1_UART_Init();
+    MX_USART2_UART_Init();
+    MX_USART3_UART_Init();
+
+    UART1_Print("\r\n========================================\r\n");
+    UART1_Print("STM32 UART2/UART3 RX ECHO -> CAN EXT GATEWAY START\r\n");
+    UART1_Print("CAN bitrate: 125 kbps\r\n");
+    UART1_Print("USART1 debug: 115200, TX=PA9\r\n");
+    UART1_Print("USART2 ESP1 : 115200, RX=PA3\r\n");
+    UART1_Print("USART3 ESP2 : 115200, RX=PB11\r\n");
+#if ENABLE_UART_BYTE_ECHO
+    UART1_Print("ENABLE_UART_BYTE_ECHO = 1\r\n");
+#else
+    UART1_Print("ENABLE_UART_BYTE_ECHO = 0\r\n");
+#endif
+#if ENABLE_FAKE_UART_TEST
+    UART1_Print("ENABLE_FAKE_UART_TEST = 1\r\n");
+#else
+    UART1_Print("ENABLE_FAKE_UART_TEST = 0\r\n");
+#endif
+#if ENABLE_CAN_EXT_TEST
+    UART1_Print("ENABLE_CAN_EXT_TEST = 1\r\n");
+#else
+    UART1_Print("ENABLE_CAN_EXT_TEST = 0\r\n");
+#endif
+    UART1_Print("========================================\r\n");
+
+    if (!CAN_Filter_Config_AllPass())
+    {
+        UART1_Print("CAN filter config failed\r\n");
+        Error_Handler();
+    }
+
+    if (HAL_CAN_Start(&hcan) != HAL_OK)
+    {
+        CAN_Print_Error("CAN start failed");
+        Error_Handler();
+    }
+
+    UART1_Print("CAN started\r\n");
+
+    if (HAL_CAN_ActivateNotification(&hcan,
+                                     CAN_IT_ERROR |
+                                     CAN_IT_BUSOFF |
+                                     CAN_IT_LAST_ERROR_CODE) != HAL_OK)
+    {
+        CAN_Print_Error("CAN notification failed");
+        Error_Handler();
+    }
+
+    UART2_StartReceiveIT();
+    UART3_StartReceiveIT();
+
+    UART1_Print("UART2/UART3 RX interrupt started\r\n");
+    UART1_Print("Send text to PA3 or PB11, line must end with LF '\\n'\r\n");
+
+    while (1)
+    {
+        Fake_UART_Test_Once();
+        CAN_Ext_Test_Task();
+
+        if (uart2_line_ready)
+        {
+            uart2_line_ready = 0;
+            Process_UART_Line(uart2_line_copy, "UART2");
+        }
+
+        if (uart3_line_ready)
+        {
+            uart3_line_ready = 0;
+            Process_UART_Line(uart3_line_copy, "UART3");
+        }
+
+        Heartbeat_Task();
+    }
+}
+
+/**
+  * @brief System Clock Configuration
+  *
+  * STM32F103C8T6 Blue Pill thường dùng HSE 8 MHz:
+  *   SYSCLK = 72 MHz
+  *   APB1   = 36 MHz
+  *
+  * Nếu board bạn không có thạch anh HSE 8 MHz, dùng lại SystemClock_Config
+  * do CubeMX sinh ra ở project đã test CAN 0x123 thành công.
+  */
+void SystemClock_Config(void)
+{
+    RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+    RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+    RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+    RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+    RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+    RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+    RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+
+    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+    {
+        Error_Handler();
+    }
+
+    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK |
+                                  RCC_CLOCKTYPE_SYSCLK |
+                                  RCC_CLOCKTYPE_PCLK1 |
+                                  RCC_CLOCKTYPE_PCLK2;
+
+    RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+    RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+    RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+    RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief CAN Initialization Function
+  *
+  * 125 kbps @ APB1 = 36 MHz:
+  *   Bitrate = 36 MHz / 72 / (1 + 2 + 1)
+  *           = 125000 bit/s
+  *
+  * AutoRetransmission = DISABLE để debug:
+  *   - Nếu bus không ACK thì không kẹt mailbox mãi.
+  *   - Khi chạy ổn có thể đổi thành ENABLE.
+  */
+static void MX_CAN_Init(void)
+{
+    hcan.Instance = CAN1;
+
+    hcan.Init.Prescaler = 72;
+    hcan.Init.Mode = CAN_MODE_NORMAL;
+    hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
+    hcan.Init.TimeSeg1 = CAN_BS1_2TQ;
+    hcan.Init.TimeSeg2 = CAN_BS2_1TQ;
+
+    hcan.Init.TimeTriggeredMode = DISABLE;
+    hcan.Init.AutoBusOff = ENABLE;
+    hcan.Init.AutoWakeUp = DISABLE;
+    hcan.Init.AutoRetransmission = DISABLE;
+    hcan.Init.ReceiveFifoLocked = DISABLE;
+    hcan.Init.TransmitFifoPriority = DISABLE;
+
+    if (HAL_CAN_Init(&hcan) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief USART1 Initialization Function
+  * Debug log: PA9 TX, PA10 RX, 115200
+  */
+static void MX_USART1_UART_Init(void)
+{
+    huart1.Instance = USART1;
+    huart1.Init.BaudRate = 115200;
+    huart1.Init.WordLength = UART_WORDLENGTH_8B;
+    huart1.Init.StopBits = UART_STOPBITS_1;
+    huart1.Init.Parity = UART_PARITY_NONE;
+    huart1.Init.Mode = UART_MODE_TX_RX;
+    huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+
+    if (HAL_UART_Init(&huart1) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief USART2 Initialization Function
+  * ESP32 #1: PA2 TX, PA3 RX, 115200
+  */
+static void MX_USART2_UART_Init(void)
+{
+    huart2.Instance = USART2;
+    huart2.Init.BaudRate = 115200;
+    huart2.Init.WordLength = UART_WORDLENGTH_8B;
+    huart2.Init.StopBits = UART_STOPBITS_1;
+    huart2.Init.Parity = UART_PARITY_NONE;
+    huart2.Init.Mode = UART_MODE_TX_RX;
+    huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+
+    if (HAL_UART_Init(&huart2) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief USART3 Initialization Function
+  * ESP32 #2: PB10 TX, PB11 RX, 115200
+  */
+static void MX_USART3_UART_Init(void)
+{
+    huart3.Instance = USART3;
+    huart3.Init.BaudRate = 115200;
+    huart3.Init.WordLength = UART_WORDLENGTH_8B;
+    huart3.Init.StopBits = UART_STOPBITS_1;
+    huart3.Init.Parity = UART_PARITY_NONE;
+    huart3.Init.Mode = UART_MODE_TX_RX;
+    huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart3.Init.OverSampling = UART_OVERSAMPLING_16;
+
+    if (HAL_UART_Init(&huart3) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief GPIO Initialization Function
+  */
+static void MX_GPIO_Init(void)
+{
+    __HAL_RCC_GPIOD_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+}
+
+void Error_Handler(void)
+{
+    __disable_irq();
+
+    while (1)
+    {
+    }
+}
+
+#ifdef USE_FULL_ASSERT
+void assert_failed(uint8_t *file, uint32_t line)
+{
+    (void)file;
+    (void)line;
+}
+#endif

@@ -1,0 +1,143 @@
+[0;32mI (105) esp_image: segment 1: paddr=0001aacc vaddr=3fc8beESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0xf (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40382a1e
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fcd5820,len:0x1820
+load:0x403cc710,len:0xbcc
+load:0x403ce710,len:0x2f5c
+entry 0x403cc71a
+[0;32mI (24) boot: ESP-IDF v5.3.3-dirty 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time May 14 2026 13:54:44[0m
+[0;32mI (25) boot: chip revision: v0.4[0m
+[0;32mI (28) boot: efuse block revision: v1.3[0m
+[0;32mI (32) boot.esp32c3: SPI Speed      : 80MHz[0m
+[0;32mI (37) boot.esp32c3: SPI Mode       : DIO[0m
+[0;32mI (42) boot.esp32c3: SPI Flash Size : 2MB[0m
+[0;32mI (47) boot: Enabling RNG early entropy source...[0m
+[0;32mI (52) boot: Partition Table:[0m
+[0;32mI (56) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (63) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (70) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (78) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (85) boot: End of partition table[0m
+[0;32mI (89) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=0aaa4h ( 43684) map[0m
+[0;32mI (105) esp_image: segment 1: paddr=0001aacc vaddr=3fc8be00 size=01334h (  4916) load[0m
+[0;32mI (107) esp_image: segment 2: paddr=0001be08 vaddr=40380000 size=04210h ( 16912) load[0m
+[0;32mI (118) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=1a94ch (108876) map[0m
+[0;32mI (141) esp_image: segment 4: paddr=0003a974 vaddr=40384210 size=07aa4h ( 31396) load[0m
+[0;32mI (150) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (151) boot: Disabling RNG early entropy source...[0m
+[0;32mI (162) cpu_start: Unicore app[0m
+[0;32mI (171) cpu_start: Pro cpu start user code[0m
+[0;32mI (171) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (171) app_init: Application information:[0m
+[0;32mI (174) app_init: Project name:     mpu[0m
+[0;32mI (178) app_init: App version:      59b0a3b-dirty[0m
+[0;32mI (183) app_init: Compile time:     May 14 2026 13:54:31[0m
+[0;32mI (189) app_init: ELF file SHA256:  53de1805c...[0m
+[0;32mI (195) app_init: ESP-IDF:          v5.3.3-dirty[0m
+[0;32mI (200) efuse_init: Min chip rev:     v0.3[0m
+[0;32mI (205) efuse_init: Max chip rev:     v1.99 [0m
+[0;32mI (210) efuse_init: Chip rev:         v0.4[0m
+[0;32mI (215) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (222) heap_init: At 3FC8E050 len 00031FB0 (199 KiB): RAM[0m
+[0;32mI (228) heap_init: At 3FCC0000 len 0001C710 (113 KiB): Retention RAM[0m
+[0;32mI (235) heap_init: At 3FCDC710 len 00002950 (10 KiB): Retention RAM[0m
+[0;32mI (242) heap_init: At 50000000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (249) spi_flash: detected chip: generic[0m
+[0;32mI (253) spi_flash: flash io: dio[0m
+[0;33mW (257) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (270) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (277) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (284) main_task: Started on CPU0[0m
+[0;32mI (284) main_task: Calling app_main()[0m
+[0;32mI (284) gpio: GPIO[2]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (294) gpio: GPIO[0]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (304) gpio: GPIO[4]| InputEn: 1| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (314) gpio: GPIO[3]| InputEn: 1| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (324) WATCH: Dang quet I2C...[0m
+[0;32mI (334) WATCH: Tim thay thiet bi I2C tai dia chi 0x48[0m
+[0;32mI (344) WATCH: Tim thay thiet bi I2C tai dia chi 0x57[0m
+[0;32mI (344) WATCH: Tim thay thiet bi I2C tai dia chi 0x68[0m
+[0;32mI (344) WATCH: MPU6050 dang o dia chi 0x68[0m
+[0;32mI (354) WATCH: MPU6050 WHO_AM_I = 0x68[0m
+[0;32mI (454) WATCH: MPU6050 init thanh cong[0m
+[0;32mI (454) WATCH: ====================================[0m
+[0;32mI (454) WATCH: BAT DAU DONG HO PHAT HIEN TE NGA[0m
+[0;32mI (454) WATCH: SDA GPIO4, SCL GPIO3[0m
+[0;32mI (454) WATCH: ALERT GPIO2[0m
+[0;32mI (464) WATCH: SOS BUTTON GPIO0[0m
+[0;32mI (464) WATCH: ====================================[0m
+[0;32mI (754) WATCH: A=0.87g | G=9.6dps | ax=-0.02 ay=0.15 az=0.85 | gx=8.3 gy=2.2 gz=4.2[0m
+[0;32mI (1254) WATCH: A=0.87g | G=8.2dps | ax=-0.02 ay=0.14 az=0.86 | gx=6.8 gy=2.1 gz=4.1[0m
+[0;32mI (1754) WATCH: A=0.88g | G=9.7dps | ax=-0.02 ay=0.15 az=0.86 | gx=8.5 gy=2.2 gz=4.2[0m
+[0;32mI (2254) WATCH: A=0.87g | G=7.8dps | ax=-0.02 ay=0.15 az=0.86 | gx=6.4 gy=2.0 gz=4.1[0m
+[0;32mI (2754) WATCH: A=0.88g | G=16.1dps | ax=-0.04 ay=0.05 az=0.88 | gx=-11.9 gy=1.0 gz=10.7[0m
+[0;32mI (3254) WATCH: A=0.86g | G=21.0dps | ax=-0.04 ay=0.03 az=0.86 | gx=19.2 gy=-3.7 gz=7.8[0m
+[0;32mI (3754) WATCH: A=0.93g | G=28.5dps | ax=0.02 ay=0.29 az=0.88 | gx=23.9 gy=3.8 gz=-15.1[0m
+[0;32mI (4254) WATCH: A=0.92g | G=21.5dps | ax=-0.04 ay=0.29 az=0.88 | gx=1.2 gy=-10.9 gz=18.5[0m
+[0;32mI (4754) WATCH: A=0.91g | G=10.0dps | ax=-0.05 ay=-0.05 az=0.91 | gx=4.4 gy=-8.4 gz=3.3[0m
+[0;32mI (5254) WATCH: A=0.85g | G=37.5dps | ax=-0.11 ay=0.00 az=0.84 | gx=29.3 gy=22.1 gz=7.6[0m
+[0;32mI (5754) WATCH: A=0.89g | G=34.8dps | ax=-0.01 ay=-0.04 az=0.89 | gx=-33.9 gy=6.0 gz=5.0[0m
+[0;32mI (6254) WATCH: A=0.95g | G=24.3dps | ax=0.03 ay=-0.39 az=0.86 | gx=23.1 gy=-6.6 gz=3.6[0m
+[0;32mI (6754) WATCH: A=1.00g | G=50.5dps | ax=0.05 ay=-0.09 az=1.00 | gx=48.0 gy=-0.8 gz=15.9[0m
+[0;32mI (7254) WATCH: A=0.88g | G=4.5dps | ax=-0.03 ay=-0.27 az=0.84 | gx=-2.0 gy=2.6 gz=3.1[0m
+[0;32mI (7754) WATCH: A=0.89g | G=9.7dps | ax=-0.03 ay=-0.31 az=0.83 | gx=9.0 gy=0.9 gz=3.4[0m
+[0;32mI (8254) WATCH: A=0.88g | G=9.0dps | ax=-0.03 ay=-0.30 az=0.82 | gx=7.8 gy=1.9 gz=4.1[0m
+[0;32mI (8754) WATCH: A=0.88g | G=11.3dps | ax=-0.02 ay=-0.31 az=0.83 | gx=11.1 gy=-0.4 gz=2.4[0m
+[0;32mI (9254) WATCH: A=0.88g | G=6.4dps | ax=-0.02 ay=-0.29 az=0.83 | gx=4.9 gy=1.9 gz=3.7[0m
+[0;32mI (9754) WATCH: A=0.89g | G=10.8dps | ax=-0.01 ay=-0.30 az=0.83 | gx=9.7 gy=2.2 gz=4.2[0m
+[0;32mI (10254) WATCH: A=0.89g | G=8.5dps | ax=-0.01 ay=-0.31 az=0.84 | gx=6.6 gy=1.8 gz=5.1[0m
+[0;32mI (10754) WATCH: A=0.88g | G=7.3dps | ax=-0.01 ay=-0.31 az=0.82 | gx=6.2 gy=2.2 gz=3.0[0m
+[0;32mI (11254) WATCH: A=0.88g | G=8.6dps | ax=-0.02 ay=-0.30 az=0.82 | gx=7.5 gy=1.9 gz=3.9[0m
+[0;32mI (11754) WATCH: A=0.88g | G=11.5dps | ax=-0.01 ay=-0.29 az=0.83 | gx=10.5 gy=1.9 gz=4.3[0m
+[0;32mI (12254) WATCH: A=0.88g | G=7.5dps | ax=-0.01 ay=-0.29 az=0.83 | gx=5.9 gy=2.2 gz=4.1[0m
+[0;32mI (12754) WATCH: A=0.88g | G=9.2dps | ax=-0.01 ay=-0.29 az=0.83 | gx=8.2 gy=2.0 gz=3.8[0m
+[0;32mI (13254) WATCH: A=0.88g | G=7.3dps | ax=-0.01 ay=-0.28 az=0.84 | gx=5.7 gy=2.1 gz=4.1[0m
+[0;32mI (13754) WATCH: A=0.88g | G=8.7dps | ax=-0.01 ay=-0.29 az=0.83 | gx=7.1 gy=1.8 gz=4.6[0m
+[0;32mI (14254) WATCH: A=0.88g | G=7.4dps | ax=-0.01 ay=-0.29 az=0.83 | gx=5.9 gy=2.3 gz=4.0[0m
+[0;32mI (14754) WATCH: A=0.89g | G=8.0dps | ax=-0.01 ay=-0.29 az=0.84 | gx=7.1 gy=1.4 gz=3.5[0m
+[0;32mI (15254) WATCH: A=0.89g | G=10.4dps | ax=-0.02 ay=-0.29 az=0.84 | gx=9.4 gy=2.0 gz=4.0[0m
+[0;32mI (15754) WATCH: A=0.87g | G=5.9dps | ax=-0.02 ay=-0.29 az=0.83 | gx=4.7 gy=2.3 gz=2.8[0m
+[0;32mI (16254) WATCH: A=0.85g | G=54.9dps | ax=-0.05 ay=-0.18 az=0.83 | gx=-54.4 gy=6.8 gz=0.7[0m
+[0;32mI (16754) WATCH: A=0.89g | G=10.1dps | ax=-0.04 ay=-0.21 az=0.86 | gx=9.4 gy=1.5 gz=3.4[0m
+[0;32mI (17254) WATCH: A=0.88g | G=12.0dps | ax=-0.04 ay=-0.23 az=0.85 | gx=11.0 gy=1.9 gz=4.5[0m
+[0;33mW (17614) WATCH: Nghi ngo roi tu do: A=0.46g[0m
+[0;32mI (17754) WATCH: A=0.87g | G=7.1dps | ax=-0.03 ay=-0.29 az=0.82 | gx=1.1 gy=6.5 gz=2.6[0m
+[0;32mI (18254) WATCH: A=0.88g | G=5.5dps | ax=-0.03 ay=-0.28 az=0.83 | gx=3.9 gy=1.3 gz=3.7[0m
+[0;32mI (18634) WATCH: Huy trang thai roi tu do[0m
+[0;32mI (18754) WATCH: A=0.89g | G=11.2dps | ax=-0.02 ay=-0.27 az=0.85 | gx=10.2 gy=2.7 gz=3.8[0m
+[0;32mI (19254) WATCH: A=0.89g | G=8.6dps | ax=-0.02 ay=-0.26 az=0.85 | gx=7.3 gy=2.0 gz=4.1[0m
+[0;32mI (19754) WATCH: A=0.88g | G=9.4dps | ax=-0.03 ay=-0.26 az=0.84 | gx=8.0 gy=2.5 gz=4.1[0m
+[0;32mI (20254) WATCH: A=0.87g | G=5.8dps | ax=-0.03 ay=-0.26 az=0.83 | gx=3.7 gy=2.1 gz=4.0[0m
+[0;32mI (20754) WATCH: A=0.94g | G=48.2dps | ax=-0.02 ay=-0.15 az=0.93 | gx=-48.2 gy=-1.9 gz=0.4[0m
+[0;33mW (20834) WATCH: Nghi ngo roi tu do: A=0.44g[0m
+[0;32mI (21254) WATCH: A=0.88g | G=9.5dps | ax=-0.04 ay=-0.32 az=0.82 | gx=7.4 gy=6.0 gz=0.5[0m
+[0;32mI (21754) WATCH: A=0.87g | G=13.9dps | ax=-0.04 ay=-0.32 az=0.81 | gx=12.7 gy=0.7 gz=5.6[0m
+[0;32mI (21854) WATCH: Huy trang thai roi tu do[0m
+[0;32mI (22254) WATCH: A=0.87g | G=52.4dps | ax=-0.05 ay=-0.29 az=0.82 | gx=-51.4 gy=7.8 gz=6.6[0m
+[0;33mW (22574) WATCH: Nghi ngo roi tu do: A=0.42g[0m
+[0;32mI (22754) WATCH: A=0.88g | G=18.7dps | ax=-0.05 ay=-0.31 az=0.83 | gx=18.0 gy=2.3 gz=4.8[0m
+[0;32mI (23254) WATCH: A=0.89g | G=7.7dps | ax=-0.04 ay=-0.31 az=0.84 | gx=6.3 gy=-1.3 gz=4.3[0m
+[0;32mI (23594) WATCH: Huy trang thai roi tu do[0m
+[0;32mI (23754) WATCH: A=0.77g | G=129.6dps | ax=-0.39 ay=-0.63 az=0.18 | gx=-121.1 gy=12.6 gz=44.4[0m
+[0;32mI (24254) WATCH: A=0.90g | G=100.9dps | ax=-0.29 ay=-0.71 az=0.48 | gx=75.2 gy=-56.5 gz=36.6[0m
+[0;32mI (24754) WATCH: A=0.89g | G=46.0dps | ax=-0.09 ay=-0.65 az=0.60 | gx=-25.0 gy=-38.6 gz=0.8[0m
+[0;32mI (25254) WATCH: A=0.91g | G=120.0dps | ax=-0.07 ay=-0.66 az=0.62 | gx=119.4 gy=7.4 gz=9.3[0m
+[0;32mI (25754) WATCH: A=0.73g | G=27.0dps | ax=-0.12 ay=-0.57 az=0.45 | gx=21.6 gy=-4.6 gz=15.5[0m
+[0;32mI (26254) WATCH: A=0.96g | G=27.4dps | ax=-0.02 ay=-0.69 az=0.66 | gx=25.8 gy=-2.1 gz=8.9[0m
+[0;32mI (26754) WATCH: A=0.92g | G=16.7dps | ax=-0.04 ay=-0.65 az=0.64 | gx=14.3 gy=-4.0 gz=7.7[0m
+[0;32mI (27254) WATCH: A=0.95g | G=14.2dps | ax=-0.05 ay=-0.63 az=0.71 | gx=-13.2 gy=1.3 gz=4.9[0m
+[0;32mI (27754) WATCH: A=0.86g | G=78.0dps | ax=-0.07 ay=-0.59 az=0.62 | gx=-76.3 gy=2.5 gz=15.8[0m
+[0;32mI (28254) WATCH: A=0.89g | G=34.7dps | ax=-0.04 ay=-0.60 az=0.66 | gx=-23.9 gy=-6.7 gz=24.2[0m
+[0;33mW (28334) WATCH: Nghi ngo roi tu do: A=0.54g[0m
+[0;32mI (28754) WATCH: A=0.94g | G=62.2dps | ax=-0.07 ay=-0.68 az=0.64 | gx=59.9 gy=-12.7 gz=10.9[0m
+[0;32mI (29254) WATCH: A=0.85g | G=133.8dps | ax=-0.03 ay=-0.22 az=0.83 | gx=133.4 gy=-1.9 gz=-10.4[0m
+[0;32mI (29354) WATCH: Huy trang thai roi tu do[0m
+[0;32mI (29754) WATCH: A=0.91g | G=71.6dps | ax=-0.01 ay=0.09 az=0.90 | gx=71.1 gy=7.2 gz=4.3[0m
+[0;32mI (30254) WATCH: A=0.85g | G=38.6dps | ax=-0.02 ay=0.10 az=0.84 | gx=26.5 gy=-28.0 gz=1.9[0m
+[0;32mI (30754) WATCH: A=0.83g | G=76.6dps | ax=0.00 ay=0.15 az=0.81 | gx=54.6 gy=45.0 gz=29.4[0m
+[0;32mI (31254) WATCH: A=0.94g | G=18.3dps | ax=-0.10 ay=0.18 az=0.92 | gx=8.9 gy=-0.0 gz=-16.0[0m
+[0;32mI (31754) WATCH: A=0.89g | G=11.6dps | ax=-0.01 ay=-0.05 az=0.89 | gx=4.3 gy=-7.7 gz=7.5[0m

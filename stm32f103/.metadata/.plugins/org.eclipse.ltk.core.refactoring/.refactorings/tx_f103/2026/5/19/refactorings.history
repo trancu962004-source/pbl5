@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;tx_f103/Core/Inc/debug_uart&apos; to &apos;debug_uart.h&apos;" description="Rename resource &apos;debug_uart&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/debug_uart" name="debug_uart.h" stamp="1777979501420" updateReferences="true"/>
+</session>

@@ -1,0 +1,184 @@
+[0;32mI (105) esp_image: segment 1: paddr=0001aacc vaddr=3fc8beESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0xf (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40382a1e
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fcd5820,len:0x1820
+load:0x403cc710,len:0xbcc
+load:0x403ce710,len:0x2f5c
+entry 0x403cc71a
+[0;32mI (24) boot: ESP-IDF v5.3.3-dirty 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time May 14 2026 13:54:44[0m
+[0;32mI (25) boot: chip revision: v0.4[0m
+[0;32mI (28) boot: efuse block revision: v1.3[0m
+[0;32mI (32) boot.esp32c3: SPI Speed      : 80MHz[0m
+[0;32mI (37) boot.esp32c3: SPI Mode       : DIO[0m
+[0;32mI (42) boot.esp32c3: SPI Flash Size : 2MB[0m
+[0;32mI (47) boot: Enabling RNG early entropy source...[0m
+[0;32mI (52) boot: Partition Table:[0m
+[0;32mI (56) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (63) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (70) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (78) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (85) boot: End of partition table[0m
+[0;32mI (89) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=0aaa4h ( 43684) map[0m
+[0;32mI (105) esp_image: segment 1: paddr=0001aacc vaddr=3fc8be00 size=01334h (  4916) load[0m
+[0;32mI (107) esp_image: segment 2: paddr=0001be08 vaddr=40380000 size=04210h ( 16912) load[0m
+[0;32mI (118) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=1a94ch (108876) map[0m
+[0;32mI (141) esp_image: segment 4: paddr=0003a974 vaddr=40384210 size=07aa4h ( 31396) load[0m
+[0;32mI (150) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (151) boot: Disabling RNG early entropy source...[0m
+[0;32mI (162) cpu_start: Unicore app[0m
+[0;32mI (171) cpu_start: Pro cpu start user code[0m
+[0;32mI (171) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (171) app_init: Application information:[0m
+[0;32mI (174) app_init: Project name:     mpu[0m
+[0;32mI (178) app_init: App version:      59b0a3b-dirty[0m
+[0;32mI (183) app_init: Compile time:     May 14 2026 13:54:31[0m
+[0;32mI (189) app_init: ELF file SHA256:  7dc0f44b0...[0m
+[0;32mI (195) app_init: ESP-IDF:          v5.3.3-dirty[0m
+[0;32mI (200) efuse_init: Min chip rev:     v0.3[0m
+[0;32mI (205) efuse_init: Max chip rev:     v1.99 [0m
+[0;32mI (210) efuse_init: Chip rev:         v0.4[0m
+[0;32mI (215) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (222) heap_init: At 3FC8E050 len 00031FB0 (199 KiB): RAM[0m
+[0;32mI (228) heap_init: At 3FCC0000 len 0001C710 (113 KiB): Retention RAM[0m
+[0;32mI (235) heap_init: At 3FCDC710 len 00002950 (10 KiB): Retention RAM[0m
+[0;32mI (242) heap_init: At 50000000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (249) spi_flash: detected chip: generic[0m
+[0;32mI (253) spi_flash: flash io: dio[0m
+[0;33mW (257) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (270) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (277) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (284) main_task: Started on CPU0[0m
+[0;32mI (284) main_task: Calling app_main()[0m
+[0;32mI (284) gpio: GPIO[3]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (294) gpio: GPIO[6]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (304) gpio: GPIO[4]| InputEn: 1| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (314) gpio: GPIO[3]| InputEn: 1| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (324) WATCH: Dang quet I2C...[0m
+[0;32mI (334) WATCH: Tim thay thiet bi I2C tai dia chi 0x48[0m
+[0;32mI (344) WATCH: Tim thay thiet bi I2C tai dia chi 0x57[0m
+[0;32mI (344) WATCH: Tim thay thiet bi I2C tai dia chi 0x68[0m
+[0;32mI (344) WATCH: MPU6050 dang o dia chi 0x68[0m
+[0;32mI (354) WATCH: MPU6050 WHO_AM_I = 0x68[0m
+[0;32mI (454) WATCH: MPU6050 init thanh cong[0m
+[0;32mI (454) WATCH: ====================================[0m
+[0;32mI (454) WATCH: BAT DAU DONG HO PHAT HIEN TE NGA[0m
+[0;32mI (454) WATCH: SDA GPIO4, SCL GPIO3[0m
+[0;32mI (454) WATCH: ALERT GPIO3[0m
+[0;32mI (464) WATCH: SOS BUTTON GPIO6[0m
+[0;32mI (464) WATCH: ====================================[0m
+[0;32mI (754) WATCH: A=0.89g | G=8.9dps | ax=-0.05 ay=0.53 az=0.71 | gx=7.6 gy=2.1 gz=4.1[0m
+[0;32mI (1254) WATCH: A=0.89g | G=8.9dps | ax=-0.05 ay=0.53 az=0.71 | gx=7.6 gy=2.1 gz=4.1[0m
+[0;32mI (1754) WATCH: A=0.89g | G=8.9dps | ax=-0.05 ay=0.53 az=0.71 | gx=7.6 gy=2.1 gz=4.2[0m
+[0;32mI (2254) WATCH: A=0.88g | G=8.9dps | ax=-0.05 ay=0.52 az=0.71 | gx=7.6 gy=2.0 gz=4.1[0m
+[0;32mI (2754) WATCH: A=0.89g | G=8.9dps | ax=-0.05 ay=0.53 az=0.71 | gx=7.6 gy=2.1 gz=4.1[0m
+[0;32mI (3254) WATCH: A=0.89g | G=9.0dps | ax=-0.05 ay=0.53 az=0.71 | gx=7.7 gy=2.2 gz=4.1[0m
+[0;32mI (3754) WATCH: A=0.89g | G=8.9dps | ax=-0.05 ay=0.53 az=0.71 | gx=7.6 gy=2.1 gz=4.2[0m
+[0;32mI (4254) WATCH: A=0.89g | G=8.8dps | ax=-0.05 ay=0.53 az=0.71 | gx=7.6 gy=2.1 gz=4.0[0m
+[0;32mI (4754) WATCH: A=0.89g | G=8.8dps | ax=-0.05 ay=0.53 az=0.71 | gx=7.5 gy=2.1 gz=4.1[0m
+[0;32mI (5254) WATCH: A=0.89g | G=8.6dps | ax=-0.05 ay=0.53 az=0.72 | gx=7.3 gy=2.0 gz=4.2[0m
+[0;32mI (5754) WATCH: A=0.92g | G=174.5dps | ax=0.22 ay=0.10 az=0.89 | gx=-144.3 gy=36.0 gz=91.3[0m
+[0;32mI (6254) WATCH: A=1.04g | G=42.9dps | ax=0.10 ay=-0.59 az=0.86 | gx=-26.2 gy=-15.5 gz=30.3[0m
+[0;32mI (6754) WATCH: A=0.88g | G=24.0dps | ax=0.02 ay=-0.59 az=0.65 | gx=-17.3 gy=4.0 gz=16.2[0m
+[0;32mI (7254) WATCH: A=0.92g | G=43.3dps | ax=0.02 ay=-0.84 az=0.39 | gx=-43.0 gy=-4.7 gz=2.2[0m
+[0;32mI (7754) WATCH: A=0.90g | G=36.2dps | ax=0.06 ay=-0.84 az=0.30 | gx=31.7 gy=12.5 gz=12.2[0m
+[0;31mE (8134) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (8134) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (8134) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (8144) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;32mI (8264) WATCH: A=0.96g | G=6.1dps | ax=0.07 ay=-0.85 az=0.46 | gx=0.9 gy=2.8 gz=5.3[0m
+[0;32mI (8764) WATCH: A=0.93g | G=10.8dps | ax=0.06 ay=-0.82 az=0.43 | gx=9.1 gy=1.9 gz=5.4[0m
+[0;32mI (9264) WATCH: A=0.92g | G=12.4dps | ax=0.04 ay=-0.78 az=0.48 | gx=11.7 gy=2.1 gz=3.7[0m
+[0;32mI (9764) WATCH: A=0.92g | G=17.8dps | ax=0.08 ay=-0.77 az=0.49 | gx=15.1 gy=5.5 gz=-7.8[0m
+[0;32mI (10264) WATCH: A=0.93g | G=12.7dps | ax=0.12 ay=-0.76 az=0.52 | gx=10.9 gy=-2.9 gz=5.9[0m
+[0;32mI (10764) WATCH: A=0.95g | G=9.0dps | ax=0.13 ay=-0.78 az=0.52 | gx=-3.8 gy=7.4 gz=3.3[0m
+[0;32mI (11264) WATCH: A=0.95g | G=9.2dps | ax=0.13 ay=-0.80 az=0.50 | gx=8.4 gy=0.9 gz=3.6[0m
+[0;32mI (11764) WATCH: A=0.93g | G=8.7dps | ax=0.14 ay=-0.78 az=0.49 | gx=7.7 gy=1.3 gz=3.8[0m
+[0;32mI (12264) WATCH: A=0.80g | G=78.0dps | ax=0.13 ay=-0.63 az=0.49 | gx=76.3 gy=16.1 gz=-3.4[0m
+[0;32mI (12764) WATCH: A=0.94g | G=9.7dps | ax=0.14 ay=-0.75 az=0.54 | gx=8.4 gy=-0.7 gz=4.9[0m
+[0;32mI (13264) WATCH: A=0.98g | G=54.2dps | ax=0.17 ay=-0.73 az=0.62 | gx=53.1 gy=8.5 gz=-6.3[0m
+[0;32mI (13764) WATCH: A=0.94g | G=11.2dps | ax=0.22 ay=-0.81 az=0.43 | gx=-3.6 gy=-1.6 gz=10.5[0m
+[0;32mI (14264) WATCH: A=0.94g | G=14.0dps | ax=0.18 ay=-0.73 az=0.55 | gx=11.2 gy=2.9 gz=8.0[0m
+[0;32mI (14764) WATCH: A=1.03g | G=17.6dps | ax=0.23 ay=-0.84 az=0.55 | gx=14.4 gy=6.1 gz=8.2[0m
+[0;32mI (15264) WATCH: A=0.91g | G=9.9dps | ax=0.15 ay=-0.73 az=0.53 | gx=7.7 gy=2.3 gz=5.8[0m
+[0;32mI (15764) WATCH: A=0.95g | G=6.9dps | ax=0.14 ay=-0.77 az=0.54 | gx=3.5 gy=2.4 gz=5.4[0m
+[0;32mI (16264) WATCH: A=0.94g | G=10.2dps | ax=0.12 ay=-0.76 az=0.54 | gx=7.4 gy=4.8 gz=5.2[0m
+[0;32mI (16764) WATCH: A=0.94g | G=5.9dps | ax=0.13 ay=-0.76 az=0.53 | gx=4.2 gy=1.3 gz=3.9[0m
+[0;32mI (17264) WATCH: A=0.93g | G=8.4dps | ax=0.12 ay=-0.77 az=0.51 | gx=7.4 gy=1.7 gz=3.6[0m
+[0;32mI (17764) WATCH: A=0.94g | G=7.5dps | ax=0.12 ay=-0.78 az=0.51 | gx=4.4 gy=3.2 gz=5.3[0m
+[0;32mI (18264) WATCH: A=0.95g | G=9.0dps | ax=0.12 ay=-0.79 az=0.51 | gx=7.7 gy=0.5 gz=4.6[0m
+[0;32mI (18764) WATCH: A=0.94g | G=8.4dps | ax=0.11 ay=-0.79 az=0.49 | gx=6.9 gy=1.4 gz=4.6[0m
+[0;32mI (19264) WATCH: A=0.94g | G=8.6dps | ax=0.12 ay=-0.79 az=0.49 | gx=7.0 gy=2.4 gz=4.4[0m
+[0;32mI (19764) WATCH: A=0.93g | G=9.0dps | ax=0.11 ay=-0.79 az=0.48 | gx=8.2 gy=2.2 gz=3.1[0m
+[0;32mI (20264) WATCH: A=0.94g | G=8.4dps | ax=0.11 ay=-0.80 az=0.48 | gx=5.8 gy=3.9 gz=4.7[0m
+[0;32mI (20764) WATCH: A=0.94g | G=8.5dps | ax=0.10 ay=-0.79 az=0.49 | gx=6.6 gy=3.2 gz=4.3[0m
+[0;32mI (21264) WATCH: A=0.94g | G=9.0dps | ax=0.11 ay=-0.80 az=0.48 | gx=7.6 gy=1.6 gz=4.5[0m
+[0;32mI (21764) WATCH: A=0.95g | G=7.6dps | ax=0.09 ay=-0.81 az=0.48 | gx=5.8 gy=2.5 gz=4.2[0m
+[0;32mI (22264) WATCH: A=0.98g | G=29.8dps | ax=0.03 ay=-0.84 az=0.50 | gx=-16.9 gy=23.1 gz=8.1[0m
+[0;32mI (22764) WATCH: A=0.95g | G=8.7dps | ax=0.06 ay=-0.82 az=0.47 | gx=7.6 gy=2.0 gz=3.6[0m
+[0;32mI (23264) WATCH: A=0.94g | G=7.8dps | ax=0.08 ay=-0.83 az=0.44 | gx=6.4 gy=2.1 gz=3.9[0m
+[0;32mI (23764) WATCH: A=0.95g | G=8.7dps | ax=0.07 ay=-0.82 az=0.46 | gx=7.3 gy=2.2 gz=4.1[0m
+[0;32mI (24264) WATCH: A=0.94g | G=9.7dps | ax=0.07 ay=-0.82 az=0.47 | gx=8.6 gy=1.9 gz=4.1[0m
+[0;32mI (24764) WATCH: A=0.94g | G=8.6dps | ax=0.07 ay=-0.82 az=0.46 | gx=7.1 gy=2.2 gz=4.4[0m
+[0;32mI (25264) WATCH: A=0.95g | G=11.3dps | ax=0.06 ay=-0.82 az=0.47 | gx=10.0 gy=2.7 gz=4.5[0m
+[0;32mI (25764) WATCH: A=0.94g | G=12.0dps | ax=0.06 ay=-0.81 az=0.47 | gx=11.1 gy=1.9 gz=4.2[0m
+[0;32mI (26264) WATCH: A=0.94g | G=7.8dps | ax=0.06 ay=-0.82 az=0.46 | gx=6.2 gy=2.6 gz=3.8[0m
+[0;32mI (26764) WATCH: A=0.94g | G=8.0dps | ax=0.05 ay=-0.82 az=0.46 | gx=6.8 gy=2.6 gz=3.4[0m
+[0;32mI (27264) WATCH: A=0.94g | G=7.1dps | ax=0.05 ay=-0.81 az=0.47 | gx=4.7 gy=2.0 gz=4.9[0m
+[0;32mI (27764) WATCH: A=0.94g | G=7.5dps | ax=0.05 ay=-0.81 az=0.47 | gx=5.4 gy=2.6 gz=4.4[0m
+[0;32mI (28264) WATCH: A=0.95g | G=11.1dps | ax=0.05 ay=-0.83 az=0.46 | gx=10.0 gy=1.6 gz=4.4[0m
+[0;32mI (28764) WATCH: A=0.94g | G=8.2dps | ax=0.05 ay=-0.82 az=0.46 | gx=6.8 gy=2.3 gz=4.0[0m
+[0;32mI (29264) WATCH: A=0.94g | G=7.8dps | ax=0.05 ay=-0.83 az=0.45 | gx=5.8 gy=2.6 gz=4.6[0m
+[0;32mI (29764) WATCH: A=0.95g | G=8.0dps | ax=0.04 ay=-0.83 az=0.45 | gx=1.3 gy=1.0 gz=7.8[0m
+[0;32mI (30264) WATCH: A=0.94g | G=5.0dps | ax=0.04 ay=-0.82 az=0.45 | gx=1.7 gy=3.1 gz=3.6[0m
+[0;32mI (30764) WATCH: A=0.94g | G=5.8dps | ax=0.05 ay=-0.83 az=0.44 | gx=5.5 gy=0.3 gz=2.0[0m
+[0;32mI (31264) WATCH: A=0.95g | G=5.9dps | ax=0.05 ay=-0.83 az=0.46 | gx=2.7 gy=3.1 gz=4.2[0m
+[0;32mI (31764) WATCH: A=0.91g | G=43.8dps | ax=0.03 ay=-0.72 az=0.56 | gx=33.2 gy=23.5 gz=16.3[0m
+[0;32mI (32264) WATCH: A=1.06g | G=39.3dps | ax=0.19 ay=-0.19 az=1.02 | gx=13.4 gy=-23.5 gz=-28.4[0m
+[0;33mW (32464) WATCH: Nghi ngo roi tu do: A=0.49g[0m
+[0;32mI (32764) WATCH: A=0.88g | G=9.2dps | ax=0.08 ay=-0.01 az=0.87 | gx=7.8 gy=2.4 gz=4.3[0m
+[0;32mI (33264) WATCH: A=0.86g | G=30.9dps | ax=0.00 ay=0.02 az=0.86 | gx=27.0 gy=14.6 gz=-4.1[0m
+[0;32mI (33484) WATCH: Huy trang thai roi tu do[0m
+[0;32mI (33764) WATCH: A=0.87g | G=8.7dps | ax=-0.00 ay=0.04 az=0.87 | gx=7.4 gy=2.0 gz=4.1[0m
+[0;32mI (34264) WATCH: A=0.94g | G=75.8dps | ax=-0.06 ay=0.14 az=0.93 | gx=-43.8 gy=0.9 gz=61.8[0m
+[0;32mI (34764) WATCH: A=0.87g | G=7.9dps | ax=-0.01 ay=0.09 az=0.87 | gx=6.5 gy=1.9 gz=4.1[0m
+[0;32mI (35264) WATCH: A=0.87g | G=9.8dps | ax=-0.01 ay=0.09 az=0.87 | gx=8.6 gy=2.2 gz=4.2[0m
+[0;32mI (35764) WATCH: A=0.87g | G=6.9dps | ax=-0.01 ay=0.08 az=0.87 | gx=4.9 gy=1.7 gz=4.6[0m
+[0;31mE (36224) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (36224) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (36224) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (36234) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;32mI (36274) WATCH: A=0.88g | G=11.6dps | ax=-0.01 ay=0.09 az=0.87 | gx=10.7 gy=2.2 gz=3.9[0m
+[0;31mE (36374) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (36374) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (36374) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (36384) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;32mI (36784) WATCH: A=0.87g | G=30.6dps | ax=-0.02 ay=0.04 az=0.87 | gx=-28.0 gy=-2.5 gz=12.0[0m
+[0;32mI (37284) WATCH: A=0.86g | G=5.8dps | ax=-0.01 ay=0.04 az=0.86 | gx=3.9 gy=2.0 gz=3.9[0m
+[0;32mI (37784) WATCH: A=0.88g | G=8.3dps | ax=-0.00 ay=0.04 az=0.88 | gx=6.8 gy=2.1 gz=4.3[0m
+[0;32mI (38284) WATCH: A=0.89g | G=22.2dps | ax=-0.01 ay=0.05 az=0.89 | gx=20.5 gy=8.5 gz=-0.5[0m
+[0;32mI (38784) WATCH: A=0.87g | G=13.0dps | ax=-0.02 ay=0.09 az=0.86 | gx=11.9 gy=2.5 gz=4.6[0m
+[0;32mI (39284) WATCH: A=0.88g | G=6.7dps | ax=-0.00 ay=0.05 az=0.87 | gx=5.1 gy=1.8 gz=4.0[0m
+[0;32mI (39784) WATCH: A=0.87g | G=12.8dps | ax=-0.01 ay=0.07 az=0.87 | gx=11.6 gy=2.4 gz=4.8[0m
+[0;32mI (40284) WATCH: A=0.87g | G=8.0dps | ax=-0.01 ay=0.07 az=0.87 | gx=6.6 gy=2.0 gz=4.0[0m
+[0;32mI (40784) WATCH: A=0.87g | G=8.4dps | ax=-0.01 ay=0.06 az=0.87 | gx=7.2 gy=2.1 gz=3.8[0m
+[0;32mI (41284) WATCH: A=0.88g | G=10.9dps | ax=-0.01 ay=0.09 az=0.87 | gx=9.6 gy=2.3 gz=4.4[0m
+[0;32mI (41784) WATCH: A=0.88g | G=9.7dps | ax=-0.01 ay=0.08 az=0.87 | gx=8.5 gy=2.2 gz=4.2[0m
+[0;32mI (42284) WATCH: A=0.88g | G=7.1dps | ax=-0.01 ay=0.08 az=0.87 | gx=5.5 gy=2.0 gz=3.9[0m
+[0;32mI (42784) WATCH: A=0.87g | G=8.6dps | ax=-0.01 ay=0.09 az=0.87 | gx=7.3 gy=2.0 gz=4.1[0m
+[0;32mI (43284) WATCH: A=0.87g | G=9.2dps | ax=-0.01 ay=0.09 az=0.87 | gx=7.9 gy=2.1 gz=4.2[0m
+[0;32mI (43784) WATCH: A=0.87g | G=7.3dps | ax=-0.01 ay=0.09 az=0.87 | gx=5.7 gy=2.0 gz=4.0[0m
+[0;32mI (44284) WATCH: A=0.88g | G=9.4dps | ax=-0.01 ay=0.10 az=0.87 | gx=8.1 gy=2.2 gz=4.1[0m
+[0;32mI (44784) WATCH: A=0.87g | G=9.4dps | ax=-0.01 ay=0.08 az=0.87 | gx=8.2 gy=2.6 gz=3.7[0m
+[0;32mI (45284) WATCH: A=0.87g | G=6.3dps | ax=-0.02 ay=0.10 az=0.87 | gx=4.7 gy=1.8 gz=3.9[0m
+[0;32mI (45784) WATCH: A=0.87g | G=10.2dps | ax=-0.02 ay=0.10 az=0.87 | gx=9.0 gy=2.2 gz=4.2[0m
+[0;32mI (46284) WATCH: A=0.87g | G=8.3dps | ax=-0.02 ay=0.10 az=0.87 | gx=6.9 gy=2.0 gz=4.1[0m
+[0;32mI (46784) WATCH: A=0.87g | G=8.8dps | ax=-0.02 ay=0.10 az=0.87 | gx=7.5 gy=2.0 gz=4.1[0m
+[0;32mI (47284) WATCH: A=0.87g | G=9.3dps | ax=-0.02 ay=0.10 az=0.87 | gx=8.1 gy=2.1 gz=4.0[0m
+[0;32mI (47784) WATCH: A=0.88g | G=7.9dps | ax=-0.02 ay=0.10 az=0.87 | gx=6.5 gy=2.0 gz=4.0[0m
+[0;32mI (48284) WATCH: A=0.88g | G=9.5dps | ax=-0.02 ay=0.11 az=0.87 | gx=8.2 gy=2.2 gz=4.2[0m
+[0;32mI (48784) WATCH: A=0.87g | G=10.5dps | ax=-0.02 ay=0.11 az=0.86 | gx=9.3 gy=2.3 gz=4.4[0m
+[0;32mI (49284) WATCH: A=0.88g | G=5.3dps | ax=-0.02 ay=0.10 az=0.87 | gx=3.5 gy=1.7 gz=3.6[0m

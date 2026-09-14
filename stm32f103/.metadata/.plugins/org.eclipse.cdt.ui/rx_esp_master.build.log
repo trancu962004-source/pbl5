@@ -1,0 +1,10 @@
+00:58:51 **** Incremental Build of configuration Debug for project rx_esp_master ****
+make -j12 all 
+arm-none-eabi-size  rx_esp_master.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15576	     92	   2180	  17848	   45b8	rx_esp_master.elf
+Finished building: default.size.stdout
+ 
+
+00:58:51 Build Finished. 0 errors, 0 warnings. (took 289ms)
+

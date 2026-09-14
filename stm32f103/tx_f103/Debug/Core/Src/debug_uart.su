@@ -1,0 +1,2 @@
+../Core/Src/debug_uart.c:7:6:UART1_Print	16	static
+../Core/Src/debug_uart.c:12:6:UART1_EchoByte	16	static

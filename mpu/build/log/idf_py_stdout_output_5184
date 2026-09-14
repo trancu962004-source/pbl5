@@ -1,0 +1,262 @@
+ESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0xf (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40382a1e
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fcd5820,len:0x1820
+load:0x403cc710,len:0xbcc
+load:0x403ce710,len:0x2f5c
+entry 0x403cc71a
+[0;32mI (24) boot: ESP-IDF v5.3.3-dirty 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time May 14 2026 13:54:44[0m
+[0;32mI (25) boot: chip revision: v0.4[0m
+[0;32mI (28) boot: efuse block revision: v1.3[0m
+[0;32mI (32) boot.esp32c3: SPI Speed      : 80MHz[0m
+[0;32mI (37) boot.esp32c3: SPI Mode       : DIO[0m
+[0;32mI (42) boot.esp32c3: SPI Flash Size : 2MB[0m
+[0;32mI (47) boot: Enabling RNG early entropy source...[0m
+[0;32mI (52) boot: Partition Table:[0m
+[0;32mI (56) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (63) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (70) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (78) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (85) boot: End of partition table[0m
+[0;32mI (89) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=0a9ach ( 43436) map[0m
+[0;32mI (105) esp_image: segment 1: paddr=0001a9d4 vaddr=3fc8be00 size=01334h (  4916) load[0m
+[0;32mI (107) esp_image: segment 2: paddr=0001bd10 vaddr=40380000 size=04308h ( 17160) load[0m
+[0;32mI (118) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=1aed0h (110288) map[0m
+[0;32mI (141) esp_image: segment 4: paddr=0003aef8 vaddr=40384308 size=079ach ( 31148) load[0m
+[0;32mI (151) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (151) boot: Disabling RNG early entropy source...[0m
+[0;32mI (162) cpu_start: Unicore app[0m
+[0;32mI (172) cpu_start: Pro cpu start user code[0m
+[0;32mI (172) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (172) app_init: Application information:[0m
+[0;32mI (175) app_init: Project name:     mpu[0m
+[0;32mI (179) app_init: App version:      59b0a3b-dirty[0m
+[0;32mI (184) app_init: Compile time:     May 14 2026 13:54:31[0m
+[0;32mI (190) app_init: ELF file SHA256:  0a1fed25a...[0m
+[0;32mI (196) app_init: ESP-IDF:          v5.3.3-dirty[0m
+[0;32mI (201) efuse_init: Min chip rev:     v0.3[0m
+[0;32mI (206) efuse_init: Max chip rev:     v1.99 [0m
+[0;32mI (211) efuse_init: Chip rev:         v0.4[0m
+[0;32mI (216) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (223) heap_init: At 3FC8E060 len 00031FA0 (199 KiB): RAM[0m
+[0;32mI (229) heap_init: At 3FCC0000 len 0001C710 (113 KiB): Retention RAM[0m
+[0;32mI (236) heap_init: At 3FCDC710 len 00002950 (10 KiB): Retention RAM[0m
+[0;32mI (243) heap_init: At 50000000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (250) spi_flash: detected chip: generic[0m
+[0;32mI (254) spi_flash: flash io: dio[0m
+[0;33mW (258) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (271) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (278) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (285) main_task: Started on CPU0[0m
+[0;32mI (285) main_task: Calling app_main()[0m
+[0;32mI (285) gpio: GPIO[2]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (295) gpio: GPIO[3]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (305) gpio: GPIO[4]| InputEn: 1| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (315) gpio: GPIO[3]| InputEn: 1| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (325) FALL_DETECT: MPU6050 WHO_AM_I = 0x70[0m
+[0;33mW (325) FALL_DETECT: WHO_AM_I khong phai 0x68. Neu module van chay, co the la board clone.[0m
+[0;32mI (435) FALL_DETECT: MPU6050 init done[0m
+[0;32mI (435) FALL_DETECT: Bat dau doc MPU6050 va phat hien te nga...[0m
+[0;32mI (435) FALL_DETECT: SDA GPIO4, SCL GPIO3, ALERT GPIO3[0m
+[0;32mI (755) FALL_DETECT: A=0.99g | G=2.4dps | ax=-0.14 ay=-0.21 az=0.95 | gx=-1.5 gy=1.8 gz=-0.5[0m
+[0;32mI (1255) FALL_DETECT: A=1.00g | G=3.4dps | ax=-0.16 ay=-0.22 az=0.97 | gx=-2.1 gy=2.6 gz=-0.5[0m
+[0;32mI (1755) FALL_DETECT: A=0.90g | G=45.5dps | ax=-0.42 ay=-0.14 az=0.78 | gx=6.1 gy=28.6 gz=34.8[0m
+[0;32mI (2255) FALL_DETECT: A=1.02g | G=32.5dps | ax=-0.01 ay=0.09 az=1.02 | gx=-4.7 gy=-27.9 gz=-15.9[0m
+[0;32mI (2755) FALL_DETECT: A=1.04g | G=39.6dps | ax=-0.22 ay=0.06 az=1.01 | gx=-1.6 gy=27.6 gz=-28.4[0m
+[0;32mI (3255) FALL_DETECT: A=1.03g | G=14.9dps | ax=-0.13 ay=-0.07 az=1.02 | gx=-11.8 gy=-4.4 gz=-7.9[0m
+[0;32mI (3755) FALL_DETECT: A=0.96g | G=3.8dps | ax=-0.03 ay=-0.11 az=0.96 | gx=0.5 gy=3.8 gz=0.3[0m
+[0;32mI (4255) FALL_DETECT: A=1.05g | G=5.3dps | ax=0.00 ay=-0.14 az=1.04 | gx=-1.8 gy=-4.1 gz=-2.8[0m
+[0;33mW (4635) FALL_DETECT: Nghi ngo roi tu do: A=0.47g[0m
+[0;32mI (4755) FALL_DETECT: A=0.71g | G=99.3dps | ax=0.06 ay=-0.10 az=0.70 | gx=31.9 gy=-32.4 gz=-88.3[0m
+[0;32mI (5255) FALL_DETECT: A=1.04g | G=22.5dps | ax=0.21 ay=-0.11 az=1.01 | gx=21.1 gy=5.5 gz=5.5[0m
+[0;32mI (5655) FALL_DETECT: Huy trang thai roi tu do[0m
+[0;32mI (5755) FALL_DETECT: A=1.01g | G=4.1dps | ax=0.16 ay=-0.01 az=1.00 | gx=0.5 gy=-0.0 gz=-4.1[0m
+[0;32mI (6255) FALL_DETECT: A=0.98g | G=2.9dps | ax=0.17 ay=0.04 az=0.96 | gx=1.4 gy=1.1 gz=-2.2[0m
+[0;32mI (6755) FALL_DETECT: A=0.98g | G=5.5dps | ax=0.18 ay=0.01 az=0.96 | gx=2.4 gy=-4.0 gz=-2.9[0m
+[0;32mI (7255) FALL_DETECT: A=0.98g | G=1.6dps | ax=0.19 ay=0.07 az=0.96 | gx=-1.3 gy=0.6 gz=-0.8[0m
+[0;32mI (7755) FALL_DETECT: A=0.81g | G=65.2dps | ax=0.18 ay=0.19 az=0.77 | gx=-16.2 gy=-4.7 gz=-63.0[0m
+[0;33mW (7995) FALL_DETECT: Nghi ngo roi tu do: A=0.44g[0m
+[0;32mI (8255) FALL_DETECT: A=0.93g | G=247.7dps | ax=0.92 ay=-0.12 az=-0.10 | gx=-158.1 gy=-95.7 gz=-165.0[0m
+[0;32mI (8755) FALL_DETECT: A=1.01g | G=149.3dps | ax=0.99 ay=-0.18 az=-0.08 | gx=-74.6 gy=100.6 gz=81.3[0m
+[0;32mI (9015) FALL_DETECT: Huy trang thai roi tu do[0m
+[0;32mI (9255) FALL_DETECT: A=1.02g | G=71.2dps | ax=0.95 ay=-0.36 az=0.04 | gx=-56.8 gy=35.5 gz=24.2[0m
+[0;32mI (9755) FALL_DETECT: A=1.23g | G=130.5dps | ax=1.15 ay=-0.40 az=0.18 | gx=128.6 gy=-4.4 gz=-22.0[0m
+[0;32mI (10255) FALL_DETECT: A=0.95g | G=229.4dps | ax=0.60 ay=-0.03 az=0.73 | gx=-23.5 gy=215.9 gz=-73.9[0m
+[0;33mW (10375) FALL_DETECT: Nghi ngo roi tu do: A=0.41g[0m
+[0;32mI (10755) FALL_DETECT: A=0.95g | G=14.6dps | ax=-0.22 ay=-0.06 az=0.92 | gx=-10.1 gy=-3.5 gz=9.9[0m
+[0;32mI (11255) FALL_DETECT: A=1.02g | G=14.4dps | ax=-0.14 ay=-0.07 az=1.01 | gx=-11.4 gy=-0.5 gz=-8.8[0m
+[0;32mI (11395) FALL_DETECT: Huy trang thai roi tu do[0m
+[0;32mI (11755) FALL_DETECT: A=1.03g | G=15.5dps | ax=-0.14 ay=-0.16 az=1.01 | gx=-1.1 gy=-15.3 gz=2.5[0m
+[0;32mI (12255) FALL_DETECT: A=2.25g | G=409.6dps | ax=1.95 ay=-1.05 az=0.40 | gx=36.4 gy=173.8 gz=369.1[0m
+[0;33mW (12295) FALL_DETECT: Va cham manh truc tiep: A=4.04g, G=548.6dps[0m
+[0;33mW (12635) FALL_DETECT: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (12755) FALL_DETECT: A=1.15g | G=40.5dps | ax=0.36 ay=0.31 az=1.04 | gx=-23.0 gy=-13.9 gz=-30.4[0m
+[0;33mW (12835) FALL_DETECT: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (13255) FALL_DETECT: A=0.99g | G=8.7dps | ax=0.37 ay=0.30 az=0.87 | gx=-1.6 gy=0.3 gz=-8.6[0m
+[0;32mI (13755) FALL_DETECT: A=1.00g | G=9.3dps | ax=0.36 ay=0.35 az=0.87 | gx=6.8 gy=-3.8 gz=4.9[0m
+[0;32mI (14255) FALL_DETECT: A=0.94g | G=5.8dps | ax=0.37 ay=0.32 az=0.80 | gx=-5.3 gy=1.7 gz=-1.8[0m
+[0;32mI (14755) FALL_DETECT: A=0.97g | G=6.4dps | ax=0.38 ay=0.34 az=0.82 | gx=-4.3 gy=0.5 gz=-4.8[0m
+[0;32mI (15255) FALL_DETECT: A=0.99g | G=4.2dps | ax=0.38 ay=0.35 az=0.84 | gx=0.8 gy=2.0 gz=3.6[0m
+[0;31mE (15335) FALL_DETECT: CANH BAO: PHAT HIEN TE NGA![0m
+[0;32mI (15755) FALL_DETECT: A=0.96g | G=4.9dps | ax=0.39 ay=0.32 az=0.81 | gx=-4.0 gy=2.8 gz=-0.3[0m
+[0;32mI (16255) FALL_DETECT: A=0.98g | G=3.6dps | ax=0.39 ay=0.33 az=0.84 | gx=0.6 gy=-1.2 gz=-3.3[0m
+[0;32mI (16755) FALL_DETECT: A=0.94g | G=7.4dps | ax=0.40 ay=0.34 az=0.78 | gx=-4.1 gy=4.6 gz=-4.2[0m
+[0;32mI (17255) FALL_DETECT: A=1.06g | G=7.0dps | ax=0.47 ay=0.27 az=0.91 | gx=0.2 gy=-4.8 gz=-5.0[0m
+[0;32mI (17755) FALL_DETECT: A=1.95g | G=356.8dps | ax=0.77 ay=-1.66 az=0.66 | gx=104.1 gy=41.6 gz=-338.7[0m
+[0;32mI (18255) FALL_DETECT: A=1.01g | G=40.0dps | ax=-0.06 ay=-0.28 az=0.97 | gx=8.2 gy=-39.1 gz=1.8[0m
+[0;32mI (18755) FALL_DETECT: A=0.86g | G=148.7dps | ax=0.30 ay=0.27 az=0.76 | gx=27.3 gy=-66.4 gz=-130.2[0m
+[0;32mI (19255) FALL_DETECT: A=1.01g | G=37.6dps | ax=-0.09 ay=1.00 az=0.15 | gx=28.2 gy=-22.3 gz=-11.1[0m
+[0;32mI (19755) FALL_DETECT: A=0.99g | G=79.4dps | ax=0.09 ay=0.64 az=0.76 | gx=25.8 gy=65.9 gz=-36.1[0m
+[0;32mI (20255) FALL_DETECT: A=0.97g | G=39.2dps | ax=-0.00 ay=0.40 az=0.88 | gx=-31.0 gy=10.9 gz=21.5[0m
+[0;32mI (20355) FALL_DETECT: Tat canh bao, vao cooldown[0m
+[0;32mI (20755) FALL_DETECT: A=0.98g | G=4.0dps | ax=0.01 ay=0.35 az=0.92 | gx=-3.5 gy=2.0 gz=-0.4[0m
+[0;32mI (21255) FALL_DETECT: A=0.98g | G=2.4dps | ax=0.01 ay=0.35 az=0.92 | gx=-0.8 gy=2.2 gz=-0.6[0m
+[0;32mI (21755) FALL_DETECT: A=0.98g | G=2.4dps | ax=0.00 ay=0.34 az=0.92 | gx=-1.0 gy=2.1 gz=-0.6[0m
+[0;32mI (22255) FALL_DETECT: A=0.99g | G=3.2dps | ax=0.01 ay=0.35 az=0.92 | gx=-2.4 gy=2.0 gz=-0.4[0m
+[0;32mI (22755) FALL_DETECT: A=0.98g | G=3.3dps | ax=-0.00 ay=0.35 az=0.92 | gx=-2.5 gy=2.1 gz=-0.4[0m
+[0;32mI (23255) FALL_DETECT: A=0.98g | G=2.7dps | ax=0.00 ay=0.36 az=0.92 | gx=-1.6 gy=2.1 gz=-0.5[0m
+[0;32mI (23755) FALL_DETECT: A=0.98g | G=3.9dps | ax=0.01 ay=0.35 az=0.92 | gx=-3.5 gy=1.8 gz=-0.2[0m
+[0;32mI (24255) FALL_DETECT: A=0.99g | G=3.1dps | ax=-0.00 ay=0.35 az=0.92 | gx=-2.1 gy=2.2 gz=-0.5[0m
+[0;32mI (24755) FALL_DETECT: A=0.99g | G=2.3dps | ax=0.01 ay=0.36 az=0.92 | gx=-0.0 gy=2.2 gz=-0.6[0m
+[0;32mI (25255) FALL_DETECT: A=0.98g | G=7.7dps | ax=-0.02 ay=0.32 az=0.93 | gx=-7.5 gy=2.0 gz=-0.1[0m
+[0;32mI (25755) FALL_DETECT: A=0.99g | G=2.5dps | ax=0.00 ay=0.36 az=0.92 | gx=-1.1 gy=2.2 gz=-0.5[0m
+[0;32mI (26255) FALL_DETECT: A=0.99g | G=2.5dps | ax=-0.00 ay=0.37 az=0.92 | gx=-0.1 gy=2.4 gz=-0.7[0m
+[0;32mI (26755) FALL_DETECT: A=0.99g | G=7.1dps | ax=0.00 ay=0.35 az=0.92 | gx=-6.8 gy=1.8 gz=-0.1[0m
+[0;32mI (27255) FALL_DETECT: A=0.98g | G=2.3dps | ax=-0.00 ay=0.36 az=0.91 | gx=-0.2 gy=2.2 gz=-0.5[0m
+[0;32mI (27755) FALL_DETECT: A=0.99g | G=2.3dps | ax=-0.00 ay=0.36 az=0.93 | gx=-0.3 gy=2.2 gz=-0.6[0m
+[0;32mI (28255) FALL_DETECT: A=0.99g | G=5.1dps | ax=-0.01 ay=0.35 az=0.92 | gx=-4.8 gy=1.8 gz=-0.2[0m
+[0;32mI (28755) FALL_DETECT: A=0.98g | G=4.6dps | ax=0.00 ay=0.36 az=0.91 | gx=-4.2 gy=1.9 gz=-0.3[0m
+[0;32mI (29255) FALL_DETECT: A=0.99g | G=6.5dps | ax=-0.01 ay=0.36 az=0.92 | gx=-6.4 gy=1.5 gz=-0.0[0m
+[0;32mI (29755) FALL_DETECT: A=0.99g | G=3.4dps | ax=-0.00 ay=0.36 az=0.92 | gx=-2.7 gy=1.9 gz=-0.4[0m
+[0;32mI (30255) FALL_DETECT: A=0.98g | G=3.1dps | ax=-0.00 ay=0.37 az=0.91 | gx=-2.4 gy=1.9 gz=-0.3[0m
+[0;32mI (30375) FALL_DETECT: San sang phat hien lai[0m
+[0;32mI (30755) FALL_DETECT: A=0.99g | G=3.1dps | ax=0.00 ay=0.37 az=0.92 | gx=-2.2 gy=2.1 gz=-0.5[0m
+[0;32mI (31255) FALL_DETECT: A=0.99g | G=84.9dps | ax=0.01 ay=0.40 az=0.91 | gx=-81.3 gy=-20.0 gz=14.2[0m
+[0;32mI (31755) FALL_DETECT: A=0.98g | G=3.0dps | ax=-0.02 ay=0.40 az=0.90 | gx=-2.3 gy=2.0 gz=-0.3[0m
+[0;32mI (32255) FALL_DETECT: A=0.98g | G=4.4dps | ax=-0.02 ay=0.39 az=0.90 | gx=-3.7 gy=2.4 gz=-0.5[0m
+[0;32mI (32755) FALL_DETECT: A=1.23g | G=103.0dps | ax=-0.01 ay=0.73 az=0.99 | gx=-9.2 gy=102.5 gz=5.8[0m
+[0;32mI (33255) FALL_DETECT: A=1.17g | G=65.3dps | ax=0.02 ay=-0.27 az=1.14 | gx=23.3 gy=53.1 gz=30.0[0m
+[0;33mW (33275) FALL_DETECT: Nghi ngo roi tu do: A=0.45g[0m
+[0;32mI (33755) FALL_DETECT: A=1.06g | G=17.0dps | ax=-0.14 ay=-0.15 az=1.04 | gx=8.0 gy=9.3 gz=-11.8[0m
+[0;32mI (34255) FALL_DETECT: A=0.98g | G=32.3dps | ax=-0.01 ay=-0.13 az=0.98 | gx=17.5 gy=-2.6 gz=-27.0[0m
+[0;32mI (34295) FALL_DETECT: Huy trang thai roi tu do[0m
+[0;32mI (34755) FALL_DETECT: A=1.00g | G=22.9dps | ax=-0.16 ay=0.07 az=0.98 | gx=-13.3 gy=2.0 gz=-18.5[0m
+[0;32mI (35255) FALL_DETECT: A=1.01g | G=33.8dps | ax=-0.26 ay=0.06 az=0.97 | gx=-22.4 gy=-16.4 gz=-19.4[0m
+[0;32mI (35755) FALL_DETECT: A=1.28g | G=11.1dps | ax=0.26 ay=0.01 az=1.25 | gx=3.7 gy=-6.6 gz=-8.1[0m
+[0;33mW (36135) FALL_DETECT: Nghi ngo roi tu do: A=0.52g[0m
+[0;32mI (36255) FALL_DETECT: A=0.88g | G=66.6dps | ax=0.14 ay=0.20 az=0.85 | gx=22.4 gy=-9.7 gz=-62.0[0m
+[0;32mI (36755) FALL_DETECT: A=0.99g | G=30.2dps | ax=-0.05 ay=-0.07 az=0.99 | gx=17.0 gy=-4.7 gz=-24.6[0m
+[0;32mI (37155) FALL_DETECT: Huy trang thai roi tu do[0m
+[0;32mI (37255) FALL_DETECT: A=0.96g | G=9.2dps | ax=-0.11 ay=0.13 az=0.95 | gx=-4.7 gy=-0.6 gz=7.8[0m
+[0;32mI (37755) FALL_DETECT: A=1.23g | G=42.3dps | ax=-0.21 ay=0.48 az=1.11 | gx=5.6 gy=40.4 gz=11.5[0m
+[0;32mI (38255) FALL_DETECT: A=0.97g | G=59.3dps | ax=-0.35 ay=0.28 az=0.86 | gx=19.2 gy=-49.3 gz=26.7[0m
+[0;33mW (38655) FALL_DETECT: Nghi ngo roi tu do: A=0.37g[0m
+[0;32mI (38755) FALL_DETECT: A=0.78g | G=83.1dps | ax=-0.28 ay=0.01 az=0.73 | gx=-17.9 gy=64.0 gz=49.8[0m
+[0;32mI (39255) FALL_DETECT: A=0.97g | G=29.3dps | ax=-0.34 ay=0.07 az=0.91 | gx=2.7 gy=-7.8 gz=-28.1[0m
+[0;32mI (39675) FALL_DETECT: Huy trang thai roi tu do[0m
+[0;32mI (39755) FALL_DETECT: A=0.98g | G=22.7dps | ax=-0.19 ay=-0.13 az=0.96 | gx=1.3 gy=-7.7 gz=-21.4[0m
+[0;32mI (40255) FALL_DETECT: A=0.95g | G=10.2dps | ax=-0.13 ay=-0.02 az=0.94 | gx=-5.2 gy=5.9 gz=6.5[0m
+[0;32mI (40755) FALL_DETECT: A=0.94g | G=20.8dps | ax=-0.15 ay=-0.01 az=0.93 | gx=-11.5 gy=14.3 gz=-9.9[0m
+[0;33mW (41075) FALL_DETECT: Nghi ngo roi tu do: A=0.48g[0m
+[0;32mI (41255) FALL_DETECT: A=1.10g | G=288.8dps | ax=0.63 ay=0.76 az=-0.47 | gx=-241.7 gy=-109.9 gz=-113.8[0m
+[0;33mW (41475) FALL_DETECT: Phat hien va cham sau roi: A=2.82g[0m
+[0;32mI (41755) FALL_DETECT: A=1.61g | G=198.0dps | ax=1.41 ay=-0.59 az=0.49 | gx=123.8 gy=80.5 gz=132.0[0m
+[0;32mI (42255) FALL_DETECT: A=1.16g | G=243.7dps | ax=0.25 ay=1.01 az=0.50 | gx=-213.2 gy=-114.3 gz=29.5[0m
+[0;32mI (42755) FALL_DETECT: A=1.27g | G=86.3dps | ax=1.12 ay=-0.61 az=0.05 | gx=69.5 gy=46.8 gz=20.5[0m
+[0;32mI (43255) FALL_DETECT: A=0.41g | G=69.9dps | ax=0.19 ay=0.15 az=-0.33 | gx=8.9 gy=40.7 gz=56.1[0m
+[0;32mI (10262) FALL_DETECT: A=0.99g | G=3.0dps | ax=-0.33 ay=0.37 az=0.85 | gx=-1.5 gy=2.5 gz=-0.5[0m
+[0;32mI (10762) FALL_DETECT: A=0.99g | G=4.2dps | ax=-0.34 ay=0.36 az=0.86 | gx=-2.7 gy=0.4 gz=-3.3[0m
+[0;32mI (11262) FALL_DETECT: A=1.01g | G=4.0dps | ax=-0.32 ay=0.39 az=0.88 | gx=-2.7 gy=2.7 gz=1.1[0m
+[0;32mI (11762) FALL_DETECT: A=1.01g | G=2.9dps | ax=-0.32 ay=0.38 az=0.88 | gx=-1.4 gy=1.6 gz=-2.0[0m
+[0;32mI (12262) FALL_DETECT: A=1.03g | G=3.1dps | ax=-0.33 ay=0.37 az=0.90 | gx=-1.9 gy=2.1 gz=-1.3[0m
+[0;32mI (12762) FALL_DETECT: A=1.00g | G=1.7dps | ax=-0.33 ay=0.35 az=0.87 | gx=0.4 gy=0.6 gz=-1.6[0m
+[0;32mI (13262) FALL_DETECT: A=1.00g | G=3.5dps | ax=-0.33 ay=0.36 az=0.87 | gx=-2.7 gy=2.2 gz=-0.3[0m
+[0;32mI (13762) FALL_DETECT: A=0.91g | G=8.7dps | ax=-0.31 ay=0.40 az=0.76 | gx=-4.9 gy=7.1 gz=-1.4[0m
+[0;32mI (14262) FALL_DETECT: A=0.98g | G=8.0dps | ax=-0.34 ay=0.29 az=0.87 | gx=1.3 gy=-2.5 gz=-7.5[0m
+[0;32mI (14762) FALL_DETECT: A=1.00g | G=1.5dps | ax=-0.29 ay=0.35 az=0.89 | gx=-1.2 gy=0.6 gz=0.5[0m
+[0;32mI (15262) FALL_DETECT: A=1.00g | G=5.1dps | ax=-0.31 ay=0.36 az=0.87 | gx=-1.8 gy=3.5 gz=3.3[0m
+[0;32mI (15762) FALL_DETECT: A=1.01g | G=2.5dps | ax=-0.32 ay=0.35 az=0.89 | gx=-2.0 gy=0.5 gz=-1.5[0m
+[0;32mI (16262) FALL_DETECT: A=1.02g | G=3.3dps | ax=-0.33 ay=0.34 az=0.91 | gx=-0.5 gy=-0.2 gz=3.3[0m
+[0;32mI (16762) FALL_DETECT: A=1.02g | G=14.9dps | ax=-0.25 ay=0.43 az=0.90 | gx=-5.2 gy=14.0 gz=0.9[0m
+[0;32mI (17262) FALL_DETECT: A=0.99g | G=22.7dps | ax=-0.29 ay=0.43 az=0.84 | gx=-16.3 gy=-9.7 gz=-12.4[0m
+[0;32mI (17762) FALL_DETECT: A=1.03g | G=47.7dps | ax=-0.16 ay=-0.03 az=1.02 | gx=-16.7 gy=-6.4 gz=-44.2[0m
+[0;32mI (18262) FALL_DETECT: A=0.90g | G=27.6dps | ax=-0.09 ay=-0.02 az=0.89 | gx=-17.8 gy=17.5 gz=-11.7[0m
+[0;32mI (18762) FALL_DETECT: A=1.11g | G=41.7dps | ax=-0.07 ay=-0.00 az=1.10 | gx=33.2 gy=-12.3 gz=-22.0[0m
+[0;32mI (19262) FALL_DETECT: A=0.84g | G=18.8dps | ax=-0.17 ay=0.01 az=0.82 | gx=13.8 gy=-11.9 gz=4.7[0m
+[0;32mI (19762) FALL_DETECT: A=1.02g | G=5.5dps | ax=0.00 ay=-0.01 az=1.02 | gx=4.6 gy=-2.5 gz=1.8[0m
+[0;33mW (20102) FALL_DETECT: Nghi ngo roi tu do: A=0.55g[0m
+[0;32mI (20262) FALL_DETECT: A=1.54g | G=281.4dps | ax=1.03 ay=-1.03 az=0.50 | gx=-100.0 gy=-117.7 gz=-235.2[0m
+[0;32mI (20762) FALL_DETECT: A=1.07g | G=118.1dps | ax=0.74 ay=0.01 az=0.76 | gx=98.5 gy=-7.8 gz=64.7[0m
+[0;32mI (21122) FALL_DETECT: Huy trang thai roi tu do[0m
+[0;32mI (21262) FALL_DETECT: A=0.87g | G=14.9dps | ax=0.67 ay=-0.05 az=0.56 | gx=-1.2 gy=10.4 gz=-10.6[0m
+[0;32mI (21762) FALL_DETECT: A=0.99g | G=86.3dps | ax=0.67 ay=-0.09 az=0.71 | gx=-76.5 gy=38.4 gz=-10.9[0m
+[0;33mW (21842) FALL_DETECT: Nghi ngo roi tu do: A=0.48g[0m
+[0;33mW (22102) FALL_DETECT: Phat hien va cham sau roi: A=2.76g[0m
+[0;32mI (22262) FALL_DETECT: A=1.85g | G=262.0dps | ax=1.46 ay=-0.74 az=0.86 | gx=53.0 gy=-186.5 gz=-176.2[0m
+[0;33mW (22682) FALL_DETECT: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (22762) FALL_DETECT: A=0.93g | G=9.6dps | ax=0.90 ay=-0.23 az=-0.07 | gx=-7.8 gy=-3.4 gz=4.5[0m
+[0;33mW (23142) FALL_DETECT: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (23262) FALL_DETECT: A=1.01g | G=93.0dps | ax=0.96 ay=-0.04 az=-0.29 | gx=-88.9 gy=-0.3 gz=27.5[0m
+[0;33mW (23342) FALL_DETECT: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (23422) FALL_DETECT: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (23762) FALL_DETECT: A=1.00g | G=25.2dps | ax=0.94 ay=-0.19 az=-0.27 | gx=5.9 gy=23.9 gz=-5.3[0m
+[0;33mW (23862) FALL_DETECT: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (24262) FALL_DETECT: A=0.98g | G=41.8dps | ax=0.93 ay=-0.19 az=-0.25 | gx=-38.8 gy=13.5 gz=8.1[0m
+[0;33mW (24362) FALL_DETECT: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (24622) FALL_DETECT: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (24762) FALL_DETECT: A=0.98g | G=20.7dps | ax=0.93 ay=-0.20 az=-0.24 | gx=-18.8 gy=-8.7 gz=-0.4[0m
+[0;32mI (25262) FALL_DETECT: A=0.98g | G=24.2dps | ax=0.93 ay=-0.19 az=-0.25 | gx=-7.9 gy=18.9 gz=12.9[0m
+[0;33mW (25522) FALL_DETECT: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (25762) FALL_DETECT: A=0.98g | G=13.7dps | ax=0.93 ay=-0.19 az=-0.24 | gx=-12.2 gy=0.7 gz=-6.4[0m
+[0;32mI (26262) FALL_DETECT: A=0.99g | G=15.4dps | ax=0.93 ay=-0.20 az=-0.24 | gx=-15.4 gy=1.0 gz=0.0[0m
+[0;32mI (26762) FALL_DETECT: A=0.97g | G=17.9dps | ax=0.93 ay=-0.18 az=-0.23 | gx=-8.8 gy=13.0 gz=8.6[0m
+[0;32mI (27262) FALL_DETECT: A=0.98g | G=16.2dps | ax=0.93 ay=-0.19 az=-0.24 | gx=-12.2 gy=-4.5 gz=-9.6[0m
+[0;32mI (27762) FALL_DETECT: A=0.98g | G=15.0dps | ax=0.93 ay=-0.19 az=-0.23 | gx=-4.1 gy=9.2 gz=11.0[0m
+[0;31mE (28022) FALL_DETECT: CANH BAO: PHAT HIEN TE NGA![0m
+[0;32mI (28262) FALL_DETECT: A=0.97g | G=4.2dps | ax=0.93 ay=-0.18 az=-0.24 | gx=-2.5 gy=3.3 gz=-0.1[0m
+[0;32mI (28762) FALL_DETECT: A=0.97g | G=11.2dps | ax=0.93 ay=-0.19 az=-0.22 | gx=-8.0 gy=-2.6 gz=-7.4[0m
+[0;32mI (29262) FALL_DETECT: A=0.98g | G=12.9dps | ax=0.93 ay=-0.18 az=-0.23 | gx=-2.4 gy=8.6 gz=9.3[0m
+[0;32mI (29762) FALL_DETECT: A=0.97g | G=10.3dps | ax=0.93 ay=-0.18 az=-0.24 | gx=-3.6 gy=-4.7 gz=-8.5[0m
+[0;32mI (30262) FALL_DETECT: A=0.98g | G=5.8dps | ax=0.93 ay=-0.19 az=-0.24 | gx=-2.7 gy=5.0 gz=-0.8[0m
+[0;32mI (30762) FALL_DETECT: A=0.97g | G=9.1dps | ax=0.93 ay=-0.18 az=-0.24 | gx=-6.2 gy=3.5 gz=5.6[0m
+[0;32mI (31262) FALL_DETECT: A=0.97g | G=11.9dps | ax=0.93 ay=-0.18 az=-0.24 | gx=-5.6 gy=-3.1 gz=-10.0[0m
+[0;32mI (31762) FALL_DETECT: A=0.98g | G=12.8dps | ax=0.93 ay=-0.19 az=-0.24 | gx=0.7 gy=10.3 gz=7.5[0m
+[0;32mI (32262) FALL_DETECT: A=0.98g | G=7.1dps | ax=0.93 ay=-0.18 az=-0.23 | gx=-2.4 gy=-4.4 gz=-5.0[0m
+[0;32mI (32762) FALL_DETECT: A=0.98g | G=7.2dps | ax=0.93 ay=-0.18 az=-0.23 | gx=-2.5 gy=6.2 gz=-2.6[0m
+[0;32mI (33042) FALL_DETECT: Tat canh bao, vao cooldown[0m
+[0;32mI (33262) FALL_DETECT: A=0.98g | G=7.7dps | ax=0.93 ay=-0.18 az=-0.24 | gx=1.5 gy=4.2 gz=6.3[0m
+[0;32mI (33762) FALL_DETECT: A=0.97g | G=9.9dps | ax=0.93 ay=-0.18 az=-0.22 | gx=-0.2 gy=-4.1 gz=-9.0[0m
+[0;32mI (34262) FALL_DETECT: A=0.98g | G=12.2dps | ax=0.93 ay=-0.19 az=-0.24 | gx=-5.0 gy=10.2 gz=4.5[0m
+[0;32mI (34762) FALL_DETECT: A=0.98g | G=8.8dps | ax=0.93 ay=-0.18 az=-0.25 | gx=-7.5 gy=-4.7 gz=0.0[0m
+[0;32mI (35262) FALL_DETECT: A=0.98g | G=10.8dps | ax=0.93 ay=-0.19 az=-0.23 | gx=-8.7 gy=3.9 gz=-5.0[0m
+[0;32mI (35762) FALL_DETECT: A=0.98g | G=7.4dps | ax=0.93 ay=-0.18 az=-0.23 | gx=0.9 gy=2.9 gz=6.7[0m
+[0;32mI (36262) FALL_DETECT: A=0.97g | G=6.1dps | ax=0.93 ay=-0.18 az=-0.23 | gx=-1.9 gy=-3.6 gz=-4.5[0m
+[0;32mI (36762) FALL_DETECT: A=0.98g | G=8.6dps | ax=0.93 ay=-0.18 az=-0.24 | gx=-3.5 gy=7.6 gz=1.9[0m
+[0;32mI (37262) FALL_DETECT: A=0.98g | G=7.7dps | ax=0.93 ay=-0.18 az=-0.23 | gx=-5.5 gy=1.3 gz=5.3[0m
+[0;32mI (37762) FALL_DETECT: A=0.98g | G=10.5dps | ax=0.94 ay=-0.18 az=-0.23 | gx=-8.0 gy=-0.2 gz=-6.9[0m
+[0;32mI (38262) FALL_DETECT: A=0.98g | G=6.1dps | ax=0.94 ay=-0.18 az=-0.22 | gx=3.5 gy=4.5 gz=2.2[0m
+[0;32mI (38762) FALL_DETECT: A=0.98g | G=3.5dps | ax=0.93 ay=-0.18 az=-0.23 | gx=0.8 gy=3.2 gz=-1.1[0m
+[0;32mI (39262) FALL_DETECT: A=0.98g | G=8.0dps | ax=0.93 ay=-0.18 az=-0.24 | gx=4.0 gy=-2.7 gz=-6.4[0m
+[0;32mI (39762) FALL_DETECT: A=0.98g | G=7.1dps | ax=0.93 ay=-0.18 az=-0.24 | gx=3.8 gy=2.8 gz=5.3[0m
+[0;32mI (40262) FALL_DETECT: A=0.76g | G=264.9dps | ax=0.76 ay=-0.01 az=-0.07 | gx=260.8 gy=28.4 gz=-37.0[0m
+[0;32mI (40762) FALL_DETECT: A=4.07g | G=395.7dps | ax=0.77 ay=2.19 az=-3.35 | gx=151.9 gy=-338.8 gz=136.7[0m
+[0;32mI (41262) FALL_DETECT: A=0.39g | G=226.6dps | ax=0.12 ay=-0.24 az=0.29 | gx=16.8 gy=186.1 gz=-128.1[0m
+[0;32mI (41762) FALL_DETECT: A=1.07g | G=116.8dps | ax=-0.44 ay=-0.76 az=0.60 | gx=80.3 gy=-34.0 gz=77.7[0m
+[0;32mI (42262) FALL_DETECT: A=0.93g | G=162.3dps | ax=-0.37 ay=-0.44 az=0.72 | gx=100.0 gy=-30.8 gz=-124.0[0m
+[0;32mI (42762) FALL_DETECT: A=0.94g | G=26.6dps | ax=-0.32 ay=-0.19 az=0.87 | gx=11.8 gy=-3.0 gz=-23.7[0m
+[0;32mI (43062) FALL_DETECT: San sang phat hien lai[0m
+[0;32mI (43262) FALL_DETECT: A=0.91g | G=110.6dps | ax=-0.02 ay=-0.08 az=0.91 | gx=-77.9 gy=44.2 gz=65.0[0m
+[0;32mI (43762) FALL_DETECT: A=0.98g | G=164.8dps | ax=-0.05 ay=-0.20 az=0.96 | gx=-157.3 gy=-43.9 gz=22.5[0m
+[0;32mI (44262) FALL_DETECT: A=0.94g | G=70.6dps | ax=-0.14 ay=-0.91 az=-0.20 | gx=-69.1 gy=10.5 gz=9.9[0m
+[0;32mI (44762) FALL_DETECT: A=0.94g | G=506.1dps | ax=-0.28 ay=-0.83 az=-0.36 | gx=500.3 gy=-72.6 gz=25.1[0m
+[0;32mI (45262) FALL_DETECT: A=1.04g | G=54.6dps | ax=-0.27 ay=-0.44 az=0.91 | gx=29.7 gy=-8.5 gz=45.0[0m
+[0;32mI (45762) FALL_DETECT: A=1.00g | G=29.6dps | ax=-0.38 ay=-0.35 az=0.86 | gx=25.3 gy=14.7 gz=4.4[0m
+[0;32mI (46262) FALL_DETECT: A=0.80g | G=506.3dps | ax=-0.36 ay=-0.60 az=-0.40 | gx=-500.3 gy=37.1 gz=68.4[0m
+[0;32mI (46762) FALL_DETECT: A=1.04g | G=27.1dps | ax=-0.29 ay=-0.50 az=-0.86 | gx=25.0 gy=10.0 gz=-2.9[0m
+[0;32mI (47262) FALL_DETECT: A=1.09g | G=119.3dps | ax=-0.18 ay=-0.81 az=0.71 | gx=29.4 gy=-95.0 gz=-65.8[0m
+[0;33mW (47722) FALL_DETECT: Nghi ngo roi tu do: A=0.00g[0m
+[0;32mI (47762) FALL_DETECT: A=0.00g | G=0.0dps | ax=0.00 ay=0.00 az=0.00 | gx=0.0 gy=0.0 gz=0.0[0m

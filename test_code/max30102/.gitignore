@@ -1,0 +1,31 @@
+# ESP-IDF
+build/
+sdkconfig.old
+dependencies.lock
+
+# Optional: ignore local config
+# sdkconfig
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+build.ninja
+.ninja_log
+.ninja_deps
+compile_commands.json
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

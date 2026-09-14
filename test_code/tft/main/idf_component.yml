@@ -1,0 +1,5 @@
+dependencies:
+  idf:
+    version: ">=5.1"
+  jbrilha/esp_lcd_st7789: "^1.0.2"
+  atanisoft/esp_lcd_touch_xpt2046: "^1.0.6"

@@ -1,0 +1,84 @@
+{
+  "cleared_at": 1778785880.367109,
+  "cleared_by": "Trần Văn Hạnh",
+  "shift": "sáng 14/5",
+  "reason": "Sang ngày mới / bàn giao ca trực",
+  "deleted_count": 2,
+  "records": [
+    {
+      "patient_key": "B-R001-B002-P003",
+      "wing": "B",
+      "room": 1,
+      "bed": 2,
+      "patient": 3,
+      "handled_at": 1778785742.2816577,
+      "handled_by": "Trần Văn Hạnh",
+      "shift": "sáng 14/5",
+      "note": "Đã kiểm tra và xử lý xong",
+      "alert_signature": "FALL_DETECTED",
+      "alerts": [
+        {
+          "level": "critical",
+          "code": "FALL_DETECTED",
+          "message": "Phát hiện té ngã",
+          "value": 1,
+          "timestamp": 1778785742.1147525
+        }
+      ],
+      "priority": {
+        "score": 157,
+        "level": "Rất cao",
+        "reasons": [
+          "Phát hiện té ngã",
+          "Té ngã"
+        ]
+      },
+      "vital": {
+        "hr": 0,
+        "spo2": 0,
+        "temp": 36.5,
+        "battery": 100,
+        "seq": 110,
+        "status": 8,
+        "updated_at": 1778785742.1147525
+      },
+      "loadcell": null
+    },
+    {
+      "patient_key": "B-R001-B002-P003",
+      "wing": "B",
+      "room": 1,
+      "bed": 2,
+      "patient": 3,
+      "handled_at": 1778785772.1179893,
+      "handled_by": "Trần Văn Hạnh",
+      "shift": "sáng 14/5",
+      "note": "Đã kiểm tra và xử lý xong",
+      "alert_signature": "SOS_BUTTON",
+      "alerts": [
+        {
+          "level": "critical",
+          "code": "SOS_BUTTON",
+          "message": "Bệnh nhân bấm nút SOS/cầu cứu",
+          "value": 1,
+          "timestamp": 1778785766.5347397
+        }
+      ],
+      "priority": {
+        "score": 0,
+        "level": "Thấp",
+        "reasons": []
+      },
+      "vital": {
+        "hr": 0,
+        "spo2": 0,
+        "temp": 36.5,
+        "battery": 100,
+        "seq": 139,
+        "status": 0,
+        "updated_at": 1778785771.6809335
+      },
+      "loadcell": null
+    }
+  ]
+}

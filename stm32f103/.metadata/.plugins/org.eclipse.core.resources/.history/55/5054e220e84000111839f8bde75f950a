@@ -1,0 +1,370 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : STM32 CAN basic TX/RX test
+  *
+  * Test purpose:
+  *   - Send one CAN frame every 1 second
+  *   - Receive CAN frames by interrupt
+  *   - Print TX/RX log through USART1 at 115200 baud
+  *
+  * CAN test frame:
+  *   Standard ID : 0x123
+  *   DLC         : 8
+  *   Data        : 11 22 33 44 55 66 77 88
+  *
+  * Default CAN bitrate in this file:
+  *   125 kbps, matching:
+  *   Prescaler = 72
+  *   BS1       = 2TQ
+  *   BS2       = 1TQ
+  *   SJW       = 1TQ
+  *
+  * Hardware:
+  *   STM32 CAN_TX/CAN_RX -> CAN transceiver -> CANH/CANL -> USB-CAN
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+
+#include "main.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdint.h>
+
+/* Private variables ---------------------------------------------------------*/
+CAN_HandleTypeDef hcan;
+UART_HandleTypeDef huart1;
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_CAN_Init(void);
+static void MX_USART1_UART_Init(void);
+
+static void UART_Print(const char *msg);
+static uint8_t CAN_Filter_Config(void);
+static uint8_t CAN_Send_Test(void);
+static void CAN_Print_Error(const char *prefix);
+
+/* USER CODE BEGIN 0 */
+
+static void UART_Print(const char *msg)
+{
+    HAL_UART_Transmit(&huart1, (uint8_t *)msg, strlen(msg), HAL_MAX_DELAY);
+}
+
+static void CAN_Print_Error(const char *prefix)
+{
+    char buf[160];
+
+    snprintf(buf, sizeof(buf),
+             "%s | HAL_ERR=0x%08lX | ESR=0x%08lX | MSR=0x%08lX | TSR=0x%08lX\r\n",
+             prefix,
+             (unsigned long)HAL_CAN_GetError(&hcan),
+             (unsigned long)CAN1->ESR,
+             (unsigned long)CAN1->MSR,
+             (unsigned long)CAN1->TSR);
+
+    UART_Print(buf);
+}
+
+static uint8_t CAN_Filter_Config(void)
+{
+    CAN_FilterTypeDef filter;
+
+    memset(&filter, 0, sizeof(filter));
+
+    /*
+      Accept all CAN IDs.
+      This is useful for testing TX/RX.
+    */
+    filter.FilterBank = 0;
+    filter.FilterMode = CAN_FILTERMODE_IDMASK;
+    filter.FilterScale = CAN_FILTERSCALE_32BIT;
+
+    filter.FilterIdHigh = 0x0000;
+    filter.FilterIdLow = 0x0000;
+    filter.FilterMaskIdHigh = 0x0000;
+    filter.FilterMaskIdLow = 0x0000;
+
+    filter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+    filter.FilterActivation = ENABLE;
+
+#if defined(CAN2)
+    filter.SlaveStartFilterBank = 14;
+#endif
+
+    if (HAL_CAN_ConfigFilter(&hcan, &filter) != HAL_OK)
+    {
+        return 0;
+    }
+
+    return 1;
+}
+
+static uint8_t CAN_Send_Test(void)
+{
+    CAN_TxHeaderTypeDef txHeader;
+    uint8_t txData[8];
+    uint32_t txMailbox;
+    char logbuf[160];
+
+    memset(&txHeader, 0, sizeof(txHeader));
+
+    txHeader.StdId = 0x123;
+    txHeader.ExtId = 0;
+    txHeader.IDE = CAN_ID_STD;
+    txHeader.RTR = CAN_RTR_DATA;
+    txHeader.DLC = 8;
+    txHeader.TransmitGlobalTime = DISABLE;
+
+    txData[0] = 0x11;
+    txData[1] = 0x22;
+    txData[2] = 0x33;
+    txData[3] = 0x44;
+    txData[4] = 0x55;
+    txData[5] = 0x66;
+    txData[6] = 0x77;
+    txData[7] = 0x88;
+
+    if (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0U)
+    {
+        UART_Print("CAN TX mailbox full\r\n");
+        CAN_Print_Error("CAN TX mailbox full detail");
+        return 0;
+    }
+
+    if (HAL_CAN_AddTxMessage(&hcan, &txHeader, txData, &txMailbox) != HAL_OK)
+    {
+        CAN_Print_Error("CAN TX ERROR");
+        return 0;
+    }
+
+    snprintf(logbuf, sizeof(logbuf),
+             "CAN TX OK | MB=%lu | ID=0x%03lX | DLC=8 | DATA=11 22 33 44 55 66 77 88\r\n",
+             (unsigned long)txMailbox,
+             (unsigned long)txHeader.StdId);
+    UART_Print(logbuf);
+
+    return 1;
+}
+
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan_ptr)
+{
+    CAN_RxHeaderTypeDef rxHeader;
+    uint8_t rxData[8];
+    char logbuf[240];
+
+    if (HAL_CAN_GetRxMessage(hcan_ptr, CAN_RX_FIFO0, &rxHeader, rxData) != HAL_OK)
+    {
+        CAN_Print_Error("CAN RX ERROR");
+        return;
+    }
+
+    if (rxHeader.IDE == CAN_ID_STD)
+    {
+        snprintf(logbuf, sizeof(logbuf),
+                 "CAN RX STD | ID=0x%03lX | DLC=%lu | DATA=%02X %02X %02X %02X %02X %02X %02X %02X\r\n",
+                 (unsigned long)rxHeader.StdId,
+                 (unsigned long)rxHeader.DLC,
+                 rxData[0], rxData[1], rxData[2], rxData[3],
+                 rxData[4], rxData[5], rxData[6], rxData[7]);
+    }
+    else
+    {
+        snprintf(logbuf, sizeof(logbuf),
+                 "CAN RX EXT | ID=0x%08lX | DLC=%lu | DATA=%02X %02X %02X %02X %02X %02X %02X %02X\r\n",
+                 (unsigned long)rxHeader.ExtId,
+                 (unsigned long)rxHeader.DLC,
+                 rxData[0], rxData[1], rxData[2], rxData[3],
+                 rxData[4], rxData[5], rxData[6], rxData[7]);
+    }
+
+    UART_Print(logbuf);
+}
+
+void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan_ptr)
+{
+    (void)hcan_ptr;
+    CAN_Print_Error("CAN ERROR CALLBACK");
+}
+
+/* USER CODE END 0 */
+
+int main(void)
+{
+    HAL_Init();
+    SystemClock_Config();
+
+    MX_GPIO_Init();
+    MX_CAN_Init();
+    MX_USART1_UART_Init();
+
+    UART_Print("\r\n==============================\r\n");
+    UART_Print("STM32 CAN BASIC TEST START\r\n");
+    UART_Print("CAN bitrate: 125 kbps\r\n");
+    UART_Print("TX frame: STD ID=0x123 DATA=11 22 33 44 55 66 77 88\r\n");
+    UART_Print("==============================\r\n");
+
+    if (!CAN_Filter_Config())
+    {
+        UART_Print("CAN filter config failed\r\n");
+        Error_Handler();
+    }
+
+    if (HAL_CAN_Start(&hcan) != HAL_OK)
+    {
+        CAN_Print_Error("CAN start failed");
+        Error_Handler();
+    }
+
+    UART_Print("CAN started\r\n");
+
+    if (HAL_CAN_ActivateNotification(&hcan,
+                                     CAN_IT_RX_FIFO0_MSG_PENDING |
+                                     CAN_IT_ERROR |
+                                     CAN_IT_BUSOFF |
+                                     CAN_IT_LAST_ERROR_CODE) != HAL_OK)
+    {
+        CAN_Print_Error("CAN notification failed");
+        Error_Handler();
+    }
+
+    UART_Print("CAN RX interrupt and error notification enabled\r\n");
+
+    while (1)
+    {
+        CAN_Send_Test();
+        HAL_Delay(1000);
+    }
+}
+
+/**
+  * @brief System Clock Configuration
+  *
+  * This example assumes STM32F103 with external 8 MHz HSE:
+  *   SYSCLK = 72 MHz
+  *   APB1   = 36 MHz
+  *
+  * If your board uses another clock source, generate SystemClock_Config
+  * using CubeMX and keep the rest of this file unchanged.
+  */
+void SystemClock_Config(void)
+{
+    RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+    RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+    RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+    RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+    RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+    RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+    RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+
+    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+    {
+        Error_Handler();
+    }
+
+    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK |
+                                  RCC_CLOCKTYPE_SYSCLK |
+                                  RCC_CLOCKTYPE_PCLK1 |
+                                  RCC_CLOCKTYPE_PCLK2;
+
+    RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+    RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+    RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+    RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief CAN Initialization Function
+  *
+  * 125 kbps @ APB1 = 36 MHz:
+  *   Prescaler = 72
+  *   BS1       = 2TQ
+  *   BS2       = 1TQ
+  *
+  * Bitrate = 36 MHz / 72 / (1 + 2 + 1)
+  *         = 125000 bit/s
+  */
+static void MX_CAN_Init(void)
+{
+    hcan.Instance = CAN1;
+
+    hcan.Init.Prescaler = 72;
+    hcan.Init.Mode = CAN_MODE_NORMAL;
+    hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
+    hcan.Init.TimeSeg1 = CAN_BS1_2TQ;
+    hcan.Init.TimeSeg2 = CAN_BS2_1TQ;
+
+    hcan.Init.TimeTriggeredMode = DISABLE;
+    hcan.Init.AutoBusOff = ENABLE;
+    hcan.Init.AutoWakeUp = DISABLE;
+    hcan.Init.AutoRetransmission = ENABLE;
+    hcan.Init.ReceiveFifoLocked = DISABLE;
+    hcan.Init.TransmitFifoPriority = DISABLE;
+
+    if (HAL_CAN_Init(&hcan) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief USART1 Initialization Function
+  *
+  * USART1 is used for debug log.
+  * Baudrate: 115200
+  */
+static void MX_USART1_UART_Init(void)
+{
+    huart1.Instance = USART1;
+    huart1.Init.BaudRate = 115200;
+    huart1.Init.WordLength = UART_WORDLENGTH_8B;
+    huart1.Init.StopBits = UART_STOPBITS_1;
+    huart1.Init.Parity = UART_PARITY_NONE;
+    huart1.Init.Mode = UART_MODE_TX_RX;
+    huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+    huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+
+    if (HAL_UART_Init(&huart1) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+
+/**
+  * @brief GPIO Initialization Function
+  */
+static void MX_GPIO_Init(void)
+{
+    __HAL_RCC_GPIOD_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+}
+
+void Error_Handler(void)
+{
+    __disable_irq();
+
+    while (1)
+    {
+    }
+}
+
+#ifdef USE_FULL_ASSERT
+void assert_failed(uint8_t *file, uint32_t line)
+{
+    (void)file;
+    (void)line;
+}
+#endif

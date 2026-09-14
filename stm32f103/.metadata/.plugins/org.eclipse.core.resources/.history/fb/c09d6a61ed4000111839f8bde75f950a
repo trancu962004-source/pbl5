@@ -1,0 +1,455 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+#include <inttypes.h>
+
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
+#include "esp_bt.h"
+#include "esp_err.h"
+#include "esp_log.h"
+#include "nvs_flash.h"
+
+#include "driver/uart.h"
+
+#include "nimble/nimble_port.h"
+#include "nimble/nimble_port_freertos.h"
+#include "host/ble_hs.h"
+#include "services/gap/ble_svc_gap.h"
+
+#define TAG "GW_RX"
+
+#define MY_ROOM_ID              1
+#define MY_WING_ID              'B'
+#define MANAGED_BED_START       1
+#define MANAGED_BED_END         6
+
+#define NODE_TIMEOUT_MS         5000
+#define MAX_NODES               32
+
+#define COMPANY_ID_LOW          0xFF
+#define COMPANY_ID_HIGH         0xFF
+#define PACKET_MAGIC            0xA5
+
+#define NODE_TYPE_VITAL         1
+#define NODE_TYPE_LOADCELL      2
+
+#define UART_PORT_NUM           UART_NUM_1
+#define UART_TX_PIN             17
+#define UART_RX_PIN             16
+#define UART_BAUD_RATE          115200
+#define UART_BUF_SIZE           1024
+
+typedef struct __attribute__((packed)) {
+    uint8_t  magic;
+    uint8_t  wing_id;
+    uint8_t  room_id;
+    uint8_t  bed_id;
+    uint8_t  patient_id;
+    uint8_t  node_type;
+    uint16_t hr;
+    uint16_t spo2;
+    uint16_t temp_x100;
+    uint8_t  status;
+    uint8_t  battery;
+    uint8_t  seq;
+    uint8_t  checksum;
+} vital_adv_pkt_t;
+
+typedef struct __attribute__((packed)) {
+    uint8_t  magic;
+    uint8_t  wing_id;
+    uint8_t  room_id;
+    uint8_t  bed_id;
+    uint8_t  patient_id;
+    uint8_t  node_type;
+    uint16_t volume_ml;
+    uint16_t drops_per_min;
+    uint8_t  seq;
+    uint8_t  checksum;
+} loadcell_adv_pkt_t;
+
+typedef struct {
+    bool used;
+    uint8_t wing_id;
+    uint8_t room_id;
+    uint8_t bed_id;
+    uint8_t patient_id;
+    uint8_t node_type;
+    uint8_t last_seq;
+    uint32_t last_seen_ms;
+
+    bool has_vital;
+    uint16_t hr;
+    uint16_t spo2;
+    uint16_t temp_x100;
+    uint8_t status;
+    uint8_t battery;
+
+    bool has_loadcell;
+    uint16_t volume_ml;
+    uint16_t drops_per_min;
+} node_state_t;
+
+static uint8_t own_addr_type = 0;
+static node_state_t g_nodes[MAX_NODES];
+
+static uint8_t calc_checksum(const uint8_t *data, uint16_t len)
+{
+    uint8_t sum = 0;
+    for (uint16_t i = 0; i < len; i++) {
+        sum ^= data[i];
+    }
+    return sum;
+}
+
+static bool packet_belongs(uint8_t wing_id, uint8_t room_id, uint8_t bed_id)
+{
+    if (room_id != MY_ROOM_ID) return false;
+    if (wing_id != MY_WING_ID) return false;
+    if (bed_id < MANAGED_BED_START || bed_id > MANAGED_BED_END) return false;
+    return true;
+}
+
+static void uart_bridge_init(void)
+{
+    const uart_config_t uart_config = {
+        .baud_rate = UART_BAUD_RATE,
+        .data_bits = UART_DATA_8_BITS,
+        .parity = UART_PARITY_DISABLE,
+        .stop_bits = UART_STOP_BITS_1,
+        .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
+        .source_clk = UART_SCLK_DEFAULT,
+    };
+
+    ESP_ERROR_CHECK(uart_driver_install(UART_PORT_NUM, UART_BUF_SIZE, 0, 0, NULL, 0));
+    ESP_ERROR_CHECK(uart_param_config(UART_PORT_NUM, &uart_config));
+    ESP_ERROR_CHECK(uart_set_pin(UART_PORT_NUM, UART_TX_PIN, UART_RX_PIN,
+                                 UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
+}
+
+static int find_node(uint8_t wing_id, uint8_t room_id, uint8_t bed_id,
+                     uint8_t patient_id, uint8_t node_type)
+{
+    for (int i = 0; i < MAX_NODES; i++) {
+        if (g_nodes[i].used &&
+            g_nodes[i].wing_id == wing_id &&
+            g_nodes[i].room_id == room_id &&
+            g_nodes[i].bed_id == bed_id &&
+            g_nodes[i].patient_id == patient_id &&
+            g_nodes[i].node_type == node_type) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+static int alloc_node(uint8_t wing_id, uint8_t room_id, uint8_t bed_id,
+                      uint8_t patient_id, uint8_t node_type)
+{
+    for (int i = 0; i < MAX_NODES; i++) {
+        if (!g_nodes[i].used) {
+            memset(&g_nodes[i], 0, sizeof(g_nodes[i]));
+            g_nodes[i].used = true;
+            g_nodes[i].wing_id = wing_id;
+            g_nodes[i].room_id = room_id;
+            g_nodes[i].bed_id = bed_id;
+            g_nodes[i].patient_id = patient_id;
+            g_nodes[i].node_type = node_type;
+            g_nodes[i].last_seen_ms = (uint32_t)esp_log_timestamp();
+            return i;
+        }
+    }
+    return -1;
+}
+
+static int find_or_alloc_node(uint8_t wing_id, uint8_t room_id, uint8_t bed_id,
+                              uint8_t patient_id, uint8_t node_type)
+{
+    int idx = find_node(wing_id, room_id, bed_id, patient_id, node_type);
+    if (idx >= 0) {
+        return idx;
+    }
+    return alloc_node(wing_id, room_id, bed_id, patient_id, node_type);
+}
+
+static bool parse_vital_packet(const uint8_t *mfg, uint8_t len, vital_adv_pkt_t *pkt)
+{
+    if (!mfg || !pkt) return false;
+    if (len < 2 + sizeof(vital_adv_pkt_t)) return false;
+    if (mfg[0] != COMPANY_ID_LOW || mfg[1] != COMPANY_ID_HIGH) return false;
+
+    memcpy(pkt, &mfg[2], sizeof(vital_adv_pkt_t));
+    if (pkt->magic != PACKET_MAGIC) return false;
+    if (pkt->node_type != NODE_TYPE_VITAL) return false;
+
+    uint8_t cs = calc_checksum((const uint8_t *)pkt, sizeof(vital_adv_pkt_t) - 1);
+    return (cs == pkt->checksum);
+}
+
+static bool parse_loadcell_packet(const uint8_t *mfg, uint8_t len, loadcell_adv_pkt_t *pkt)
+{
+    if (!mfg || !pkt) return false;
+    if (len < 2 + sizeof(loadcell_adv_pkt_t)) return false;
+    if (mfg[0] != COMPANY_ID_LOW || mfg[1] != COMPANY_ID_HIGH) return false;
+
+    memcpy(pkt, &mfg[2], sizeof(loadcell_adv_pkt_t));
+    if (pkt->magic != PACKET_MAGIC) return false;
+    if (pkt->node_type != NODE_TYPE_LOADCELL) return false;
+
+    uint8_t cs = calc_checksum((const uint8_t *)pkt, sizeof(loadcell_adv_pkt_t) - 1);
+    return (cs == pkt->checksum);
+}
+
+static void handle_vital_packet(const vital_adv_pkt_t *pkt)
+{
+    if (!packet_belongs(pkt->wing_id, pkt->room_id, pkt->bed_id)) {
+        return;
+    }
+
+    int idx = find_or_alloc_node(pkt->wing_id, pkt->room_id, pkt->bed_id,
+                                 pkt->patient_id, pkt->node_type);
+    if (idx < 0) {
+        ESP_LOGW(TAG, "Node table full");
+        return;
+    }
+
+    if (g_nodes[idx].has_vital && pkt->seq == g_nodes[idx].last_seq) {
+        return;
+    }
+
+    g_nodes[idx].last_seen_ms = (uint32_t)esp_log_timestamp();
+    g_nodes[idx].last_seq = pkt->seq;
+    g_nodes[idx].has_vital = true;
+    g_nodes[idx].hr = pkt->hr;
+    g_nodes[idx].spo2 = pkt->spo2;
+    g_nodes[idx].temp_x100 = pkt->temp_x100;
+    g_nodes[idx].status = pkt->status;
+    g_nodes[idx].battery = pkt->battery;
+
+    ESP_LOGI(TAG,
+             "VITAL | W=%c R=%u B=%u P=%u | HR=%u SpO2=%u Temp=%.2f Bat=%u Seq=%u",
+             pkt->wing_id,
+             pkt->room_id,
+             pkt->bed_id,
+             pkt->patient_id,
+             pkt->hr,
+             pkt->spo2,
+             pkt->temp_x100 / 100.0f,
+             pkt->battery,
+             pkt->seq);
+
+    char line[160];
+    int n = snprintf(line, sizeof(line),
+                     "TYPE=VITAL,W=%c,R=%u,B=%u,P=%u,HR=%u,SPO2=%u,T=%.2f,BAT=%u,SEQ=%u\r\n",
+                     pkt->wing_id,
+                     pkt->room_id,
+                     pkt->bed_id,
+                     pkt->patient_id,
+                     pkt->hr,
+                     pkt->spo2,
+                     pkt->temp_x100 / 100.0f,
+                     pkt->battery,
+                     pkt->seq);
+    if (n > 0) {
+        uart_write_bytes(UART_PORT_NUM, line, n);
+    }
+}
+
+static void handle_loadcell_packet(const loadcell_adv_pkt_t *pkt)
+{
+    if (!packet_belongs(pkt->wing_id, pkt->room_id, pkt->bed_id)) {
+        return;
+    }
+
+    int idx = find_or_alloc_node(pkt->wing_id, pkt->room_id, pkt->bed_id,
+                                 pkt->patient_id, pkt->node_type);
+    if (idx < 0) {
+        ESP_LOGW(TAG, "Node table full");
+        return;
+    }
+
+    bool same_value = g_nodes[idx].has_loadcell &&
+                      g_nodes[idx].volume_ml == pkt->volume_ml &&
+                      g_nodes[idx].drops_per_min == pkt->drops_per_min;
+
+    if (g_nodes[idx].has_loadcell && pkt->seq == g_nodes[idx].last_seq) {
+        return;
+    }
+
+    g_nodes[idx].last_seen_ms = (uint32_t)esp_log_timestamp();
+    g_nodes[idx].last_seq = pkt->seq;
+    g_nodes[idx].has_loadcell = true;
+    g_nodes[idx].volume_ml = pkt->volume_ml;
+    g_nodes[idx].drops_per_min = pkt->drops_per_min;
+
+    if (same_value) {
+        return;
+    }
+
+    ESP_LOGI(TAG,
+             "LOADCELL | W=%c R=%u B=%u P=%u | ML=%u DPM=%u Seq=%u",
+             pkt->wing_id,
+             pkt->room_id,
+             pkt->bed_id,
+             pkt->patient_id,
+             pkt->volume_ml,
+             pkt->drops_per_min,
+             pkt->seq);
+
+    char line[160];
+    int n = snprintf(line, sizeof(line),
+                     "TYPE=LOADCELL,W=%c,R=%u,B=%u,P=%u,ML=%u,DPM=%u,SEQ=%u\r\n",
+                     pkt->wing_id,
+                     pkt->room_id,
+                     pkt->bed_id,
+                     pkt->patient_id,
+                     pkt->volume_ml,
+                     pkt->drops_per_min,
+                     pkt->seq);
+    if (n > 0) {
+        uart_write_bytes(UART_PORT_NUM, line, n);
+    }
+}
+
+static void start_scan(void);
+
+static int gap_event_cb(struct ble_gap_event *event, void *arg)
+{
+    (void)arg;
+
+    switch (event->type) {
+    case BLE_GAP_EVENT_DISC:
+    {
+        struct ble_hs_adv_fields fields;
+        memset(&fields, 0, sizeof(fields));
+
+        int rc = ble_hs_adv_parse_fields(&fields, event->disc.data, event->disc.length_data);
+        if (rc != 0 || fields.mfg_data == NULL) {
+            return 0;
+        }
+
+        const uint8_t *mfg = fields.mfg_data;
+        uint8_t mfg_len = fields.mfg_data_len;
+        if (mfg_len < 2 + 6) {
+            return 0;
+        }
+
+        uint8_t node_type = mfg[2 + 5];
+
+        if (node_type == NODE_TYPE_VITAL) {
+            vital_adv_pkt_t pkt;
+            if (parse_vital_packet(mfg, mfg_len, &pkt)) {
+                handle_vital_packet(&pkt);
+            }
+        } else if (node_type == NODE_TYPE_LOADCELL) {
+            loadcell_adv_pkt_t pkt;
+            if (parse_loadcell_packet(mfg, mfg_len, &pkt)) {
+                handle_loadcell_packet(&pkt);
+            }
+        }
+        return 0;
+    }
+
+    case BLE_GAP_EVENT_DISC_COMPLETE:
+        ESP_LOGW(TAG, "Scan complete -> restart");
+        start_scan();
+        return 0;
+
+    default:
+        return 0;
+    }
+}
+
+static void start_scan(void)
+{
+    struct ble_gap_disc_params disc_params;
+    memset(&disc_params, 0, sizeof(disc_params));
+
+    disc_params.passive = 0;
+    disc_params.itvl = 0x0010;
+    disc_params.window = 0x0010;
+    disc_params.filter_duplicates = 0;
+
+    int rc = ble_gap_disc(own_addr_type, BLE_HS_FOREVER, &disc_params, gap_event_cb, NULL);
+    if (rc != 0) {
+        ESP_LOGE(TAG, "ble_gap_disc rc=%d", rc);
+    } else {
+        ESP_LOGI(TAG, "Scan start | room=%d wing=%c beds=%d..%d",
+                 MY_ROOM_ID, MY_WING_ID, MANAGED_BED_START, MANAGED_BED_END);
+    }
+}
+
+static void on_sync(void)
+{
+    int rc = ble_hs_id_infer_auto(0, &own_addr_type);
+    if (rc != 0) {
+        ESP_LOGE(TAG, "ble_hs_id_infer_auto rc=%d", rc);
+        return;
+    }
+
+    ESP_LOGI(TAG, "BLE synced");
+    start_scan();
+}
+
+static void ble_host_task(void *param)
+{
+    (void)param;
+    nimble_port_run();
+    nimble_port_freertos_deinit();
+}
+
+static void node_monitor_task(void *arg)
+{
+    (void)arg;
+
+    while (1) {
+        uint32_t now = (uint32_t)esp_log_timestamp();
+
+        for (int i = 0; i < MAX_NODES; i++) {
+            if (g_nodes[i].used && (now - g_nodes[i].last_seen_ms > NODE_TIMEOUT_MS)) {
+                ESP_LOGW(TAG,
+                         "TIMEOUT | W=%c R=%u B=%u P=%u TYPE=%u",
+                         g_nodes[i].wing_id,
+                         g_nodes[i].room_id,
+                         g_nodes[i].bed_id,
+                         g_nodes[i].patient_id,
+                         g_nodes[i].node_type);
+                g_nodes[i].used = false;
+            }
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(500));
+    }
+}
+
+void app_main(void)
+{
+    esp_err_t ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        ret = nvs_flash_init();
+    }
+    ESP_ERROR_CHECK(ret);
+
+    memset(g_nodes, 0, sizeof(g_nodes));
+    uart_bridge_init();
+
+    esp_err_t rel = esp_bt_controller_mem_release(ESP_BT_MODE_CLASSIC_BT);
+    if (rel != ESP_OK && rel != ESP_ERR_INVALID_STATE) {
+        ESP_LOGW(TAG, "esp_bt_controller_mem_release rc=%s", esp_err_to_name(rel));
+    }
+
+    int rc = nimble_port_init();
+    if (rc != 0) {
+        ESP_LOGE(TAG, "nimble_port_init rc=%d", rc);
+        return;
+    }
+
+    ble_svc_gap_init();
+    ble_hs_cfg.sync_cb = on_sync;
+    nimble_port_freertos_init(ble_host_task);
+
+    xTaskCreate(node_monitor_task, "node_monitor_task", 4096, NULL, 5, NULL);
+}

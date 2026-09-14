@@ -1,0 +1,4 @@
+../Core/Src/gateway_process.c:11:6:Process_UART_Line	448	static
+../Core/Src/gateway_process.c:89:6:Heartbeat_Task	8	static
+../Core/Src/gateway_process.c:102:6:Fake_UART_Test_Once	4	static
+../Core/Src/gateway_process.c:132:6:CAN_Ext_Test_Task	4	static

@@ -1,0 +1,820 @@
+[0;32mI (105) esp_image: segment 1: paddr=0001aacc vaddr=3fc8beESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0xf (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40382a1e
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fcd5820,len:0x1820
+load:0x403cc710,len:0xbcc
+load:0x403ce710,len:0x2f5c
+entry 0x403cc71a
+[0;32mI (24) boot: ESP-IDF v5.3.3-dirty 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time May 14 2026 13:54:44[0m
+[0;32mI (25) boot: chip revision: v0.4[0m
+[0;32mI (28) boot: efuse block revision: v1.3[0m
+[0;32mI (32) boot.esp32c3: SPI Speed      : 80MHz[0m
+[0;32mI (37) boot.esp32c3: SPI Mode       : DIO[0m
+[0;32mI (42) boot.esp32c3: SPI Flash Size : 2MB[0m
+[0;32mI (47) boot: Enabling RNG early entropy source...[0m
+[0;32mI (52) boot: Partition Table:[0m
+[0;32mI (56) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (63) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (70) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (78) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (85) boot: End of partition table[0m
+[0;32mI (89) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=0aaa4h ( 43684) map[0m
+[0;32mI (105) esp_image: segment 1: paddr=0001aacc vaddr=3fc8be00 size=01334h (  4916) load[0m
+[0;32mI (107) esp_image: segment 2: paddr=0001be08 vaddr=40380000 size=04210h ( 16912) load[0m
+[0;32mI (118) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=1a94ch (108876) map[0m
+[0;32mI (141) esp_image: segment 4: paddr=0003a974 vaddr=40384210 size=07aa4h ( 31396) load[0m
+[0;32mI (150) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (151) boot: Disabling RNG early entropy source...[0m
+[0;32mI (162) cpu_start: Unicore app[0m
+[0;32mI (171) cpu_start: Pro cpu start user code[0m
+[0;32mI (171) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (171) app_init: Application information:[0m
+[0;32mI (174) app_init: Project name:     mpu[0m
+[0;32mI (178) app_init: App version:      59b0a3b-dirty[0m
+[0;32mI (183) app_init: Compile time:     May 14 2026 13:54:31[0m
+[0;32mI (189) app_init: ELF file SHA256:  e9378fea5...[0m
+[0;32mI (195) app_init: ESP-IDF:          v5.3.3-dirty[0m
+[0;32mI (200) efuse_init: Min chip rev:     v0.3[0m
+[0;32mI (205) efuse_init: Max chip rev:     v1.99 [0m
+[0;32mI (210) efuse_init: Chip rev:         v0.4[0m
+[0;32mI (215) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (222) heap_init: At 3FC8E050 len 00031FB0 (199 KiB): RAM[0m
+[0;32mI (228) heap_init: At 3FCC0000 len 0001C710 (113 KiB): Retention RAM[0m
+[0;32mI (235) heap_init: At 3FCDC710 len 00002950 (10 KiB): Retention RAM[0m
+[0;32mI (242) heap_init: At 50000000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (249) spi_flash: detected chip: generic[0m
+[0;32mI (253) spi_flash: flash io: dio[0m
+[0;33mW (257) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (270) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (277) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (284) main_task: Started on CPU0[0m
+[0;32mI (284) main_task: Calling app_main()[0m
+[0;32mI (284) gpio: GPIO[2]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (294) gpio: GPIO[1]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (304) gpio: GPIO[4]| InputEn: 1| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (314) gpio: GPIO[3]| InputEn: 1| OutputEn: 1| OpenDrain: 1| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (324) WATCH: Dang quet I2C...[0m
+[0;32mI (334) WATCH: Tim thay thiet bi I2C tai dia chi 0x48[0m
+[0;32mI (344) WATCH: Tim thay thiet bi I2C tai dia chi 0x57[0m
+[0;32mI (344) WATCH: Tim thay thiet bi I2C tai dia chi 0x68[0m
+[0;32mI (344) WATCH: MPU6050 dang o dia chi 0x68[0m
+[0;32mI (354) WATCH: MPU6050 WHO_AM_I = 0x68[0m
+[0;32mI (454) WATCH: MPU6050 init thanh cong[0m
+[0;32mI (454) WATCH: ====================================[0m
+[0;32mI (454) WATCH: BAT DAU DONG HO PHAT HIEN TE NGA[0m
+[0;32mI (454) WATCH: SDA GPIO4, SCL GPIO3[0m
+[0;32mI (454) WATCH: ALERT GPIO2[0m
+[0;32mI (464) WATCH: SOS BUTTON GPIO1[0m
+[0;32mI (464) WATCH: ====================================[0m
+[0;32mI (754) WATCH: A=0.89g | G=9.8dps | ax=0.30 ay=0.02 az=0.83 | gx=8.7 gy=2.6 gz=3.8[0m
+[0;32mI (1254) WATCH: A=0.89g | G=9.6dps | ax=0.30 ay=0.02 az=0.83 | gx=8.7 gy=2.3 gz=3.3[0m
+[0;32mI (1754) WATCH: A=0.88g | G=27.2dps | ax=0.28 ay=-0.06 az=0.83 | gx=27.1 gy=2.2 gz=-1.2[0m
+[0;32mI (2254) WATCH: A=0.81g | G=45.5dps | ax=0.14 ay=-0.20 az=0.77 | gx=-40.7 gy=2.3 gz=-20.3[0m
+[0;32mI (2754) WATCH: A=0.83g | G=42.3dps | ax=0.12 ay=-0.39 az=0.73 | gx=-13.5 gy=39.1 gz=-9.0[0m
+[0;32mI (3254) WATCH: A=0.85g | G=144.7dps | ax=0.11 ay=-0.58 az=0.61 | gx=-144.5 gy=-7.1 gz=-2.6[0m
+[0;32mI (3634) WATCH: Dang nhan nut SOS...[0m
+[0;32mI (3714) WATCH: Da tha nut SOS[0m
+[0;32mI (3754) WATCH: A=0.96g | G=15.2dps | ax=0.13 ay=-0.82 az=0.49 | gx=-8.7 gy=12.1 gz=-3.3[0m
+[0;32mI (4254) WATCH: A=0.93g | G=14.5dps | ax=0.12 ay=-0.71 az=0.60 | gx=13.9 gy=-0.9 gz=4.0[0m
+[0;32mI (4754) WATCH: A=0.93g | G=11.4dps | ax=0.12 ay=-0.68 az=0.63 | gx=6.9 gy=5.5 gz=7.2[0m
+[0;32mI (5254) WATCH: A=0.91g | G=9.4dps | ax=0.12 ay=-0.64 az=0.63 | gx=8.3 gy=3.1 gz=2.9[0m
+[0;32mI (5754) WATCH: A=0.91g | G=10.5dps | ax=0.14 ay=-0.64 az=0.63 | gx=9.9 gy=2.6 gz=2.4[0m
+[0;32mI (6254) WATCH: A=0.89g | G=10.1dps | ax=0.13 ay=-0.65 az=0.59 | gx=0.2 gy=9.6 gz=3.3[0m
+[0;32mI (6754) WATCH: A=0.91g | G=9.8dps | ax=0.13 ay=-0.64 az=0.63 | gx=8.5 gy=2.7 gz=3.9[0m
+[0;32mI (7254) WATCH: A=0.92g | G=10.4dps | ax=0.14 ay=-0.64 az=0.65 | gx=9.6 gy=-0.0 gz=3.9[0m
+[0;32mI (7754) WATCH: A=0.91g | G=6.1dps | ax=0.14 ay=-0.64 az=0.64 | gx=1.4 gy=0.7 gz=5.9[0m
+[0;32mI (8254) WATCH: A=0.92g | G=19.2dps | ax=0.13 ay=-0.71 az=0.57 | gx=18.7 gy=1.8 gz=4.1[0m
+[0;32mI (8754) WATCH: A=0.90g | G=39.1dps | ax=0.13 ay=-0.72 az=0.54 | gx=-38.7 gy=1.9 gz=5.4[0m
+[0;32mI (9254) WATCH: A=0.94g | G=6.0dps | ax=0.13 ay=-0.75 az=0.56 | gx=3.8 gy=-0.7 gz=4.6[0m
+[0;32mI (9754) WATCH: A=0.94g | G=42.8dps | ax=0.15 ay=-0.72 az=0.59 | gx=42.7 gy=0.8 gz=2.5[0m
+[0;32mI (9854) WATCH: Dang nhan nut SOS...[0m
+[0;32mI (9974) WATCH: Da tha nut SOS[0m
+[0;32mI (10254) WATCH: A=0.94g | G=13.7dps | ax=0.14 ay=-0.73 az=0.59 | gx=12.6 gy=2.2 gz=5.1[0m
+[0;32mI (10754) WATCH: A=0.93g | G=8.2dps | ax=0.14 ay=-0.73 az=0.55 | gx=7.1 gy=0.8 gz=4.1[0m
+[0;32mI (11254) WATCH: A=0.93g | G=9.5dps | ax=0.16 ay=-0.74 az=0.54 | gx=8.4 gy=2.7 gz=3.6[0m
+[0;32mI (11754) WATCH: A=0.94g | G=8.9dps | ax=0.15 ay=-0.75 az=0.55 | gx=7.1 gy=4.0 gz=3.7[0m
+[0;32mI (12254) WATCH: A=0.94g | G=8.1dps | ax=0.15 ay=-0.74 az=0.56 | gx=6.3 gy=1.1 gz=4.9[0m
+[0;32mI (12754) WATCH: A=0.94g | G=9.1dps | ax=0.15 ay=-0.75 az=0.54 | gx=7.8 gy=2.0 gz=4.2[0m
+[0;32mI (13254) WATCH: A=0.92g | G=9.5dps | ax=0.15 ay=-0.73 az=0.54 | gx=8.6 gy=2.9 gz=2.8[0m
+[0;32mI (13474) WATCH: Dang nhan nut SOS...[0m
+[0;32mI (13754) WATCH: A=0.91g | G=7.1dps | ax=0.13 ay=-0.69 az=0.58 | gx=-3.8 gy=3.9 gz=4.6[0m
+[0;32mI (14254) WATCH: A=0.94g | G=12.6dps | ax=0.09 ay=-0.74 az=0.57 | gx=2.2 gy=2.7 gz=12.1[0m
+[0;32mI (14754) WATCH: A=0.93g | G=23.2dps | ax=0.11 ay=-0.70 az=0.61 | gx=22.8 gy=-3.7 gz=-2.3[0m
+[0;32mI (14914) WATCH: Da tha nut SOS[0m
+[0;32mI (15254) WATCH: A=0.92g | G=5.8dps | ax=0.10 ay=-0.71 az=0.57 | gx=-0.2 gy=3.0 gz=5.0[0m
+[0;32mI (15514) WATCH: Dang nhan nut SOS...[0m
+[0;32mI (15714) WATCH: Da tha nut SOS[0m
+[0;32mI (15754) WATCH: A=0.93g | G=15.5dps | ax=0.09 ay=-0.73 az=0.57 | gx=14.6 gy=1.4 gz=4.9[0m
+[0;32mI (16014) WATCH: Dang nhan nut SOS...[0m
+[0;32mI (16174) WATCH: Da tha nut SOS[0m
+[0;32mI (16254) WATCH: A=0.93g | G=12.9dps | ax=0.08 ay=-0.75 az=0.55 | gx=11.8 gy=0.7 gz=5.1[0m
+[0;32mI (16754) WATCH: A=0.93g | G=12.2dps | ax=0.07 ay=-0.74 az=0.55 | gx=11.2 gy=2.4 gz=4.2[0m
+[0;32mI (17254) WATCH: A=0.93g | G=13.6dps | ax=0.07 ay=-0.75 az=0.55 | gx=12.6 gy=2.2 gz=4.6[0m
+[0;32mI (17754) WATCH: A=0.92g | G=8.3dps | ax=0.07 ay=-0.75 az=0.54 | gx=6.9 gy=2.5 gz=3.8[0m
+[0;32mI (18254) WATCH: A=0.93g | G=13.4dps | ax=0.06 ay=-0.73 az=0.57 | gx=11.8 gy=2.0 gz=6.0[0m
+[0;32mI (18754) WATCH: A=0.93g | G=8.8dps | ax=0.05 ay=-0.73 az=0.57 | gx=7.3 gy=2.4 gz=4.3[0m
+[0;32mI (19254) WATCH: A=0.93g | G=4.9dps | ax=0.05 ay=-0.74 az=0.56 | gx=0.1 gy=3.4 gz=3.5[0m
+[0;32mI (19754) WATCH: A=0.94g | G=68.5dps | ax=0.07 ay=-0.73 az=0.58 | gx=67.9 gy=5.2 gz=7.4[0m
+[0;32mI (20254) WATCH: A=0.95g | G=34.2dps | ax=0.09 ay=-0.76 az=0.55 | gx=33.8 gy=3.8 gz=3.6[0m
+[0;32mI (20754) WATCH: A=0.95g | G=29.0dps | ax=0.10 ay=-0.74 az=0.59 | gx=28.7 gy=4.3 gz=-1.0[0m
+[0;32mI (21254) WATCH: A=1.01g | G=117.4dps | ax=0.09 ay=-0.73 az=0.69 | gx=113.9 gy=8.4 gz=27.2[0m
+[0;32mI (21754) WATCH: A=0.81g | G=54.2dps | ax=0.03 ay=-0.74 az=0.33 | gx=-53.6 gy=-7.0 gz=-3.5[0m
+[0;32mI (22254) WATCH: A=0.95g | G=16.7dps | ax=0.11 ay=-0.78 az=0.52 | gx=-5.6 gy=15.6 gz=-2.0[0m
+[0;32mI (22754) WATCH: A=0.91g | G=29.5dps | ax=0.09 ay=-0.79 az=0.43 | gx=-28.9 gy=4.5 gz=-4.1[0m
+[0;32mI (23254) WATCH: A=0.94g | G=12.2dps | ax=0.10 ay=-0.79 az=0.49 | gx=11.3 gy=1.9 gz=4.1[0m
+[0;32mI (23674) WATCH: Dang nhan nut SOS...[0m
+[0;32mI (23754) WATCH: A=0.94g | G=10.6dps | ax=0.08 ay=-0.82 az=0.46 | gx=8.9 gy=-0.2 gz=5.6[0m
+[0;32mI (23774) WATCH: Da tha nut SOS[0m
+[0;32mI (24254) WATCH: A=0.94g | G=8.5dps | ax=0.09 ay=-0.81 az=0.47 | gx=6.8 gy=1.3 gz=4.9[0m
+[0;32mI (24754) WATCH: A=0.94g | G=8.6dps | ax=0.10 ay=-0.81 az=0.47 | gx=7.4 gy=1.5 gz=4.2[0m
+[0;32mI (25254) WATCH: A=0.94g | G=7.5dps | ax=0.10 ay=-0.81 az=0.47 | gx=6.0 gy=3.6 gz=2.8[0m
+[0;32mI (25754) WATCH: A=0.94g | G=9.8dps | ax=0.10 ay=-0.81 az=0.47 | gx=8.2 gy=2.6 gz=4.8[0m
+[0;32mI (26254) WATCH: A=0.94g | G=12.1dps | ax=0.10 ay=-0.81 az=0.47 | gx=11.2 gy=4.2 gz=1.4[0m
+[0;32mI (26754) WATCH: A=0.94g | G=46.7dps | ax=0.11 ay=-0.73 az=0.58 | gx=45.0 gy=5.1 gz=11.3[0m
+[0;32mI (27254) WATCH: A=0.94g | G=12.5dps | ax=0.11 ay=-0.78 az=0.51 | gx=11.8 gy=-1.2 gz=4.1[0m
+[0;32mI (27754) WATCH: A=0.94g | G=5.8dps | ax=0.12 ay=-0.79 az=0.50 | gx=2.7 gy=5.0 gz=1.1[0m
+[0;32mI (28254) WATCH: A=0.95g | G=121.2dps | ax=0.14 ay=-0.70 az=0.64 | gx=120.1 gy=2.1 gz=16.1[0m
+[0;32mI (28754) WATCH: A=0.93g | G=17.7dps | ax=0.11 ay=-0.77 az=0.51 | gx=-16.9 gy=5.4 gz=0.2[0m
+[0;32mI (29254) WATCH: A=0.94g | G=9.3dps | ax=0.11 ay=-0.78 az=0.52 | gx=8.9 gy=1.2 gz=2.5[0m
+[0;32mI (29754) WATCH: A=1.03g | G=107.0dps | ax=0.10 ay=-0.66 az=0.78 | gx=105.0 gy=6.6 gz=19.6[0m
+[0;32mI (29794) WATCH: Dang nhan nut SOS...[0m
+[0;32mI (29874) WATCH: Da tha nut SOS[0m
+[0;32mI (30254) WATCH: A=0.94g | G=24.8dps | ax=0.12 ay=-0.75 az=0.55 | gx=23.6 gy=-3.1 gz=6.9[0m
+[0;32mI (30754) WATCH: A=0.92g | G=10.3dps | ax=0.10 ay=-0.68 az=0.61 | gx=3.1 gy=-0.1 gz=9.8[0m
+[0;32mI (31254) WATCH: A=0.94g | G=14.8dps | ax=0.10 ay=-0.76 az=0.55 | gx=13.6 gy=5.7 gz=1.3[0m
+[0;32mI (31754) WATCH: A=0.93g | G=16.5dps | ax=0.12 ay=-0.71 az=0.59 | gx=15.4 gy=-4.5 gz=3.9[0m
+[0;32mI (32254) WATCH: A=0.92g | G=31.3dps | ax=0.06 ay=-0.68 az=0.62 | gx=-24.2 gy=-19.6 gz=3.7[0m
+[0;32mI (32754) WATCH: A=0.95g | G=31.2dps | ax=0.07 ay=-0.74 az=0.59 | gx=30.3 gy=5.4 gz=4.9[0m
+[0;33mW (32974) WATCH: Nghi ngo roi tu do: A=0.50g[0m
+[0;32mI (33254) WATCH: A=0.93g | G=16.3dps | ax=0.08 ay=-0.71 az=0.58 | gx=-13.2 gy=-0.5 gz=9.5[0m
+[0;32mI (33754) WATCH: A=0.92g | G=9.9dps | ax=0.07 ay=-0.71 az=0.58 | gx=8.2 gy=4.4 gz=3.4[0m
+[0;32mI (33994) WATCH: Huy trang thai roi tu do[0m
+[0;32mI (34254) WATCH: A=0.93g | G=22.2dps | ax=0.06 ay=-0.73 az=0.57 | gx=21.4 gy=-0.6 gz=5.9[0m
+[0;32mI (34754) WATCH: A=0.90g | G=26.4dps | ax=0.04 ay=-0.68 az=0.59 | gx=-25.8 gy=-0.5 gz=-5.1[0m
+[0;32mI (35254) WATCH: A=0.92g | G=10.6dps | ax=0.07 ay=-0.69 az=0.61 | gx=9.2 gy=0.8 gz=5.2[0m
+[0;32mI (35754) WATCH: A=0.94g | G=33.0dps | ax=0.03 ay=-0.64 az=0.69 | gx=-11.5 gy=29.6 gz=8.7[0m
+[0;32mI (36254) WATCH: A=0.90g | G=38.5dps | ax=0.05 ay=-0.64 az=0.63 | gx=-38.4 gy=2.0 gz=1.6[0m
+[0;32mI (36754) WATCH: A=0.91g | G=36.6dps | ax=0.05 ay=-0.62 az=0.67 | gx=-36.5 gy=-1.9 gz=-0.1[0m
+[0;32mI (37254) WATCH: A=1.02g | G=21.6dps | ax=0.05 ay=-0.75 az=0.68 | gx=6.6 gy=19.0 gz=8.0[0m
+[0;32mI (37754) WATCH: A=0.92g | G=9.5dps | ax=0.04 ay=-0.68 az=0.61 | gx=5.9 gy=6.7 gz=-3.4[0m
+[0;32mI (38254) WATCH: A=0.77g | G=310.2dps | ax=0.08 ay=-0.63 az=0.42 | gx=-308.8 gy=-28.3 gz=7.1[0m
+[0;32mI (38754) WATCH: A=1.03g | G=106.0dps | ax=0.05 ay=-0.76 az=0.70 | gx=89.9 gy=55.3 gz=9.4[0m
+[0;32mI (39254) WATCH: A=0.89g | G=140.0dps | ax=0.19 ay=-0.69 az=0.53 | gx=139.5 gy=-6.5 gz=-10.3[0m
+[0;32mI (39754) WATCH: A=0.74g | G=105.7dps | ax=0.04 ay=-0.60 az=0.43 | gx=-105.2 gy=0.3 gz=10.1[0m
+[0;32mI (40254) WATCH: A=0.94g | G=46.0dps | ax=0.10 ay=-0.72 az=0.59 | gx=38.3 gy=-22.9 gz=-11.4[0m
+[0;32mI (40754) WATCH: A=0.93g | G=13.7dps | ax=0.16 ay=-0.70 az=0.59 | gx=12.1 gy=-1.1 gz=6.3[0m
+[0;32mI (41254) WATCH: A=1.07g | G=37.1dps | ax=0.17 ay=-0.80 az=0.70 | gx=34.3 gy=14.1 gz=-0.6[0m
+[0;32mI (41754) WATCH: A=0.91g | G=12.8dps | ax=0.11 ay=-0.63 az=0.64 | gx=7.4 gy=6.7 gz=8.1[0m
+[0;32mI (42254) WATCH: A=0.94g | G=14.8dps | ax=0.10 ay=-0.74 az=0.57 | gx=-10.7 gy=9.6 gz=3.8[0m
+[0;32mI (42754) WATCH: A=0.98g | G=27.7dps | ax=0.12 ay=-0.85 az=0.47 | gx=-27.2 gy=2.7 gz=4.5[0m
+[0;32mI (43254) WATCH: A=1.15g | G=62.4dps | ax=0.13 ay=-0.85 az=0.76 | gx=62.0 gy=-0.0 gz=-6.8[0m
+[0;32mI (43754) WATCH: A=0.70g | G=38.0dps | ax=-0.23 ay=0.02 az=0.66 | gx=-33.8 gy=15.7 gz=-7.4[0m
+[0;32mI (44254) WATCH: A=0.92g | G=206.6dps | ax=0.16 ay=0.31 az=0.85 | gx=-102.7 gy=-157.7 gz=85.3[0m
+[0;33mW (44274) WATCH: Va cham manh truc tiep: A=3.29g, G=259.8dps[0m
+[0;32mI (44754) WATCH: A=4.29g | G=676.8dps | ax=1.38 ay=2.51 az=3.20 | gx=-93.7 gy=-446.1 gz=500.3[0m
+[0;33mW (45014) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (45254) WATCH: A=0.95g | G=107.3dps | ax=0.11 ay=-0.46 az=0.83 | gx=105.5 gy=7.8 gz=17.8[0m
+[0;33mW (45574) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (45754) WATCH: A=0.85g | G=32.3dps | ax=0.18 ay=-0.49 az=0.67 | gx=19.0 gy=-14.7 gz=21.5[0m
+[0;33mW (45854) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (45914) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (45974) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;33mW (46014) WATCH: Sau va cham, bat dau kiem tra bat dong...[0m
+[0;32mI (46254) WATCH: A=0.92g | G=20.9dps | ax=0.15 ay=-0.51 az=0.76 | gx=19.9 gy=-6.3 gz=0.3[0m
+[0;32mI (46754) WATCH: A=0.90g | G=3.4dps | ax=0.16 ay=-0.51 az=0.72 | gx=1.1 gy=2.9 gz=1.5[0m
+[0;32mI (47254) WATCH: A=0.90g | G=12.0dps | ax=0.17 ay=-0.49 az=0.73 | gx=-5.0 gy=10.8 gz=-1.4[0m
+[0;32mI (47754) WATCH: A=0.90g | G=15.0dps | ax=0.17 ay=-0.51 az=0.72 | gx=11.0 gy=-0.7 gz=10.1[0m
+[0;32mI (48254) WATCH: A=0.90g | G=11.0dps | ax=0.16 ay=-0.50 az=0.73 | gx=10.4 gy=-0.3 gz=3.7[0m
+[0;31mE (48514) WATCH: CANH BAO: PHAT HIEN TE NGA![0m
+[0;31mE (48514) WATCH: ====================================[0m
+[0;31mE (48514) WATCH: YEU CAU GOI HO TRO![0m
+[0;31mE (48514) WATCH: LY DO: FALL_DETECTED[0m
+[0;31mE (48514) WATCH: ====================================[0m
+[0;32mI (48764) WATCH: A=0.91g | G=7.6dps | ax=0.16 ay=-0.52 az=0.73 | gx=5.1 gy=4.8 gz=3.1[0m
+[0;32mI (49264) WATCH: A=0.91g | G=10.2dps | ax=0.16 ay=-0.52 az=0.73 | gx=9.4 gy=3.5 gz=1.6[0m
+[0;32mI (49764) WATCH: A=0.91g | G=8.8dps | ax=0.17 ay=-0.52 az=0.72 | gx=7.8 gy=0.8 gz=4.0[0m
+[0;32mI (50264) WATCH: A=0.91g | G=8.4dps | ax=0.17 ay=-0.51 az=0.73 | gx=7.3 gy=2.3 gz=3.4[0m
+[0;32mI (50764) WATCH: A=0.91g | G=8.1dps | ax=0.17 ay=-0.52 az=0.72 | gx=6.4 gy=3.4 gz=3.7[0m
+[0;32mI (51264) WATCH: A=0.90g | G=7.5dps | ax=0.17 ay=-0.52 az=0.72 | gx=4.2 gy=1.4 gz=6.0[0m
+[0;32mI (51764) WATCH: A=0.92g | G=12.3dps | ax=0.17 ay=-0.54 az=0.73 | gx=11.7 gy=1.3 gz=3.6[0m
+[0;32mI (52264) WATCH: A=0.90g | G=12.1dps | ax=0.15 ay=-0.59 az=0.67 | gx=2.1 gy=5.9 gz=10.4[0m
+[0;32mI (52764) WATCH: A=0.94g | G=26.4dps | ax=0.16 ay=-0.59 az=0.71 | gx=23.6 gy=7.6 gz=9.1[0m
+[0;32mI (53264) WATCH: A=0.98g | G=45.5dps | ax=0.17 ay=-0.56 az=0.78 | gx=45.1 gy=5.7 gz=-2.4[0m
+[0;32mI (53544) WATCH: Ket thuc canh bao te nga, vao cooldown[0m
+[0;32mI (53764) WATCH: A=0.92g | G=37.8dps | ax=0.12 ay=-0.51 az=0.75 | gx=34.6 gy=14.9 gz=-1.9[0m
+[0;32mI (54264) WATCH: A=0.91g | G=34.6dps | ax=0.14 ay=-0.49 az=0.75 | gx=-34.6 gy=-0.1 gz=-0.0[0m
+[0;32mI (54764) WATCH: A=1.11g | G=47.6dps | ax=0.12 ay=-0.62 az=0.91 | gx=47.3 gy=-0.6 gz=-5.6[0m
+[0;32mI (55264) WATCH: A=0.90g | G=88.5dps | ax=0.11 ay=-0.58 az=0.68 | gx=-87.6 gy=7.7 gz=9.9[0m
+[0;32mI (55764) WATCH: A=1.08g | G=33.9dps | ax=0.13 ay=-0.62 az=0.87 | gx=32.3 gy=4.2 gz=-9.3[0m
+[0;32mI (56264) WATCH: A=0.86g | G=19.4dps | ax=0.10 ay=-0.43 az=0.74 | gx=5.4 gy=6.0 gz=17.6[0m
+[0;32mI (56764) WATCH: A=0.91g | G=21.5dps | ax=0.12 ay=-0.50 az=0.76 | gx=-19.9 gy=1.1 gz=8.0[0m
+[0;32mI (57264) WATCH: A=0.88g | G=10.5dps | ax=0.14 ay=-0.50 az=0.72 | gx=-7.6 gy=-3.8 gz=6.2[0m
+[0;32mI (57764) WATCH: A=0.94g | G=22.5dps | ax=0.14 ay=-0.53 az=0.76 | gx=18.7 gy=11.7 gz=4.3[0m
+[0;32mI (58264) WATCH: A=0.91g | G=13.7dps | ax=0.17 ay=-0.53 az=0.72 | gx=-5.3 gy=11.7 gz=4.7[0m
+[0;32mI (58524) WATCH: Ket thuc canh bao goi ho tro[0m
+[0;32mI (58764) WATCH: A=0.85g | G=33.4dps | ax=0.13 ay=-0.48 az=0.69 | gx=32.7 gy=-3.5 gz=-5.8[0m
+[0;32mI (59264) WATCH: A=0.86g | G=42.7dps | ax=0.11 ay=-0.39 az=0.75 | gx=-36.7 gy=-0.5 gz=21.9[0m
+[0;32mI (59764) WATCH: A=0.99g | G=10.1dps | ax=0.12 ay=-0.54 az=0.82 | gx=9.2 gy=-3.5 gz=2.4[0m
+[0;32mI (60264) WATCH: A=0.80g | G=22.9dps | ax=0.10 ay=-0.38 az=0.70 | gx=20.8 gy=2.0 gz=-9.4[0m
+[0;32mI (60764) WATCH: A=0.86g | G=13.4dps | ax=0.11 ay=-0.42 az=0.75 | gx=-1.0 gy=9.3 gz=9.6[0m
+[0;32mI (61264) WATCH: A=0.89g | G=32.4dps | ax=0.11 ay=-0.56 az=0.69 | gx=24.9 gy=20.7 gz=0.4[0m
+[0;32mI (61764) WATCH: A=0.65g | G=182.0dps | ax=-0.27 ay=0.11 az=0.58 | gx=86.0 gy=136.7 gz=83.9[0m
+[0;32mI (62264) WATCH: A=0.96g | G=368.3dps | ax=-0.72 ay=-0.40 az=0.49 | gx=-326.1 gy=-105.5 gz=-134.9[0m
+[0;32mI (62764) WATCH: A=0.99g | G=66.8dps | ax=-0.53 ay=-0.51 az=0.67 | gx=65.9 gy=-10.6 gz=2.8[0m
+[0;32mI (63264) WATCH: A=0.84g | G=24.1dps | ax=-0.48 ay=-0.21 az=0.66 | gx=18.2 gy=15.7 gz=2.2[0m
+[0;32mI (63564) WATCH: San sang phat hien te nga lai[0m
+[0;32mI (63764) WATCH: A=0.88g | G=23.7dps | ax=-0.49 ay=-0.11 az=0.73 | gx=-17.1 gy=11.7 gz=11.5[0m
+[0;32mI (64264) WATCH: A=0.85g | G=29.6dps | ax=-0.62 ay=-0.18 az=0.57 | gx=11.4 gy=-15.6 gz=-22.5[0m
+[0;32mI (64764) WATCH: A=0.91g | G=87.0dps | ax=-0.55 ay=-0.18 az=0.70 | gx=-72.4 gy=-46.2 gz=-13.6[0m
+[0;32mI (65264) WATCH: A=0.86g | G=103.5dps | ax=-0.86 ay=0.05 az=0.10 | gx=-32.3 gy=-77.8 gz=-60.2[0m
+[0;32mI (65764) WATCH: A=0.84g | G=73.0dps | ax=-0.46 ay=-0.66 az=0.24 | gx=71.9 gy=11.7 gz=-5.1[0m
+[0;32mI (66264) WATCH: A=0.80g | G=99.0dps | ax=-0.46 ay=-0.60 az=0.28 | gx=79.4 gy=57.7 gz=12.5[0m
+[0;32mI (66764) WATCH: A=1.07g | G=67.0dps | ax=-0.42 ay=-0.97 az=0.19 | gx=-62.4 gy=-22.5 gz=-9.8[0m
+[0;32mI (67264) WATCH: A=0.94g | G=8.8dps | ax=-0.46 ay=-0.79 az=0.25 | gx=8.1 gy=1.3 gz=3.1[0m
+[0;32mI (67764) WATCH: A=0.95g | G=24.8dps | ax=-0.50 ay=-0.77 az=0.24 | gx=22.7 gy=8.1 gz=-5.9[0m
+[0;32mI (68264) WATCH: A=0.81g | G=98.5dps | ax=-0.65 ay=-0.41 az=0.27 | gx=87.4 gy=44.2 gz=11.0[0m
+[0;32mI (68764) WATCH: A=1.07g | G=22.2dps | ax=-0.68 ay=-0.50 az=0.66 | gx=20.4 gy=-2.3 gz=-8.4[0m
+[0;32mI (69264) WATCH: A=0.91g | G=73.4dps | ax=-0.74 ay=-0.49 az=0.23 | gx=-73.1 gy=2.2 gz=-6.5[0m
+[0;32mI (69764) WATCH: A=1.02g | G=11.9dps | ax=-0.67 ay=-0.78 az=0.07 | gx=7.7 gy=3.3 gz=8.5[0m
+[0;32mI (70264) WATCH: A=0.96g | G=7.7dps | ax=-0.68 ay=-0.67 az=-0.01 | gx=6.7 gy=2.3 gz=2.9[0m
+[0;32mI (70764) WATCH: A=1.05g | G=124.9dps | ax=-0.54 ay=-0.90 az=0.03 | gx=-52.4 gy=-92.2 gz=-65.9[0m
+[0;32mI (71264) WATCH: A=0.87g | G=90.9dps | ax=-0.58 ay=-0.59 az=0.26 | gx=55.1 gy=59.1 gz=41.6[0m
+[0;32mI (71764) WATCH: A=0.90g | G=108.0dps | ax=-0.49 ay=-0.62 az=0.43 | gx=106.6 gy=12.4 gz=11.4[0m
+[0;32mI (72264) WATCH: A=0.90g | G=43.8dps | ax=-0.64 ay=0.08 az=0.62 | gx=30.9 gy=31.0 gz=-1.8[0m
+[0;32mI (72764) WATCH: A=0.92g | G=32.7dps | ax=-0.71 ay=0.15 az=0.58 | gx=30.6 gy=11.1 gz=2.3[0m
+[0;32mI (73264) WATCH: A=1.01g | G=236.5dps | ax=-0.56 ay=0.28 az=0.80 | gx=-166.5 gy=-164.5 gz=34.2[0m
+[0;32mI (73764) WATCH: A=0.82g | G=116.4dps | ax=-0.68 ay=0.07 az=0.45 | gx=84.1 gy=80.3 gz=-5.2[0m
+[0;32mI (74264) WATCH: A=0.94g | G=437.5dps | ax=-0.80 ay=-0.23 az=0.45 | gx=-401.3 gy=77.0 gz=156.3[0m
+[0;31mE (74704) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (74704) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (74704) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (74714) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (74734) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (74734) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (74734) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (74744) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (74764) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (74764) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (74764) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (74774) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (74794) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (74794) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (74794) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (74804) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (74824) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (74824) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (74824) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (74834) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (74854) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (74854) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (74854) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (74864) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (74884) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (74884) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (74884) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (74894) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (74914) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (74914) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (74914) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (74924) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (74944) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (74944) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (74944) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (74954) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (74974) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (74974) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (74974) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (74984) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75004) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75004) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75004) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75014) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75034) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75034) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75034) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75044) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75064) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75064) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75064) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75074) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75094) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75094) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75094) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75104) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75124) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75124) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75124) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75134) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75154) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75154) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75154) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75164) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75184) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75184) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75184) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75194) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75214) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75214) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75214) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75224) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75244) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75244) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75244) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75254) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75274) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75274) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75274) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75284) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75304) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75304) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75304) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75314) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75334) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75334) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75334) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75344) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75364) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75364) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75364) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75374) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75394) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75394) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75394) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75404) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75424) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75424) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75424) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75434) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75454) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75454) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75454) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75464) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75484) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75484) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75484) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75494) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75514) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75514) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75514) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75524) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75544) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75544) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75544) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75554) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75574) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75574) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75574) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75584) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75604) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75604) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75604) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75614) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75634) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75634) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75634) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75644) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75664) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75664) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75664) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75674) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75694) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75694) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75694) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75704) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75724) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75724) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75724) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75734) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75754) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75754) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75754) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75764) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75784) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75784) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75784) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75794) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75814) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75814) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75814) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75824) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75844) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75844) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75844) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75854) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75874) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75874) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75874) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75884) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75904) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75904) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75904) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75914) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75934) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75934) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75934) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75944) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75964) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75964) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75964) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (75974) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (75994) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (75994) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (75994) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76004) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76024) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76024) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76024) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76034) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76054) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76054) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76054) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76064) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76084) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76084) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76084) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76094) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76114) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76114) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76114) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76124) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76144) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76144) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76144) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76154) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76174) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76174) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76174) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76184) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76204) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76204) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76204) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76214) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76234) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76234) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76234) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76244) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76264) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76264) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76264) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76274) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76294) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76294) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76294) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76304) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76324) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76324) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76324) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76334) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76354) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76354) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76354) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76364) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76384) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76384) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76384) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76394) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76414) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76414) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76414) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76424) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76444) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76444) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76444) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76454) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76474) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76474) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76474) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76484) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76504) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76504) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76504) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76514) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76534) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76534) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76534) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76544) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76564) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76564) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76564) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76574) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76594) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76594) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76594) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76604) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76624) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76624) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76624) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76634) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76654) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76654) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76654) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76664) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76684) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76684) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76684) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76694) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76714) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76714) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76714) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76724) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76744) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76744) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76744) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76754) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76774) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76774) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76774) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76784) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76804) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76804) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76804) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76814) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76834) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76834) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76834) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76844) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76864) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76864) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76864) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76874) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76894) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76894) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76894) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76904) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76924) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76924) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76924) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76934) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76954) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76954) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76954) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76964) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (76984) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (76984) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (76984) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (76994) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77014) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77014) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77014) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77024) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77044) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77044) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77044) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77054) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77074) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77074) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77074) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77084) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77104) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77104) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77104) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77114) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77134) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77134) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77134) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77144) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77164) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77164) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77164) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77174) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77194) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77194) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77194) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77204) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77224) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77224) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77224) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77234) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77254) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77254) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77254) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77264) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77284) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77284) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77284) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77294) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77314) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77314) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77314) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77324) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77344) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77344) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77344) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77354) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77374) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77374) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77374) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77384) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77404) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77404) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77404) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77414) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77434) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77434) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77434) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77444) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77464) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77464) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77464) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77474) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77494) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77494) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77494) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77504) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77524) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77524) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77524) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77534) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77554) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77554) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77554) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77564) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77584) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77584) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77584) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77594) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77614) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77614) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77614) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77624) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77644) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77644) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77644) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77654) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77674) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77674) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77674) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77684) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77704) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77704) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77704) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77714) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77734) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77734) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77734) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77744) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77764) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77764) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77764) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77774) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77794) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77794) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77794) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77804) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77824) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77824) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77824) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77834) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77854) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77854) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77854) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77864) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77884) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77884) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77884) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77894) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77914) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77914) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77914) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77924) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77944) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77944) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77944) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77954) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (77974) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (77974) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (77974) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (77984) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78004) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78004) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78004) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78014) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78034) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78034) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78034) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78044) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78064) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78064) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78064) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78074) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78094) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78094) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78094) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78104) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78124) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78124) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78124) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78134) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78154) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78154) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78154) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78164) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78184) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78184) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78184) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78194) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78214) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78214) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78214) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78224) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78244) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78244) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78244) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78254) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78274) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78274) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78274) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78284) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78304) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78304) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78304) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78314) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78334) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78334) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78334) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78344) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78364) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78364) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78364) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78374) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78394) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78394) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78394) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78404) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78424) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78424) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78424) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78434) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78454) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78454) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78454) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78464) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78484) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78484) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78484) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78494) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78514) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78514) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78514) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78524) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78544) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78544) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78544) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78554) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78574) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78574) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78574) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78584) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78604) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78604) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78604) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78614) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78634) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78634) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78634) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78644) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78664) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78664) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78664) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78674) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78694) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78694) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78694) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78704) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78724) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78724) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78724) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78734) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78754) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78754) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78754) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78764) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78784) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78784) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78784) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78794) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78814) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78814) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78814) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78824) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78844) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78844) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78844) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78854) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78874) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78874) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78874) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78884) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78904) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78904) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78904) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78914) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78934) i2c.master: I2C transaction unexpected nack detected[0m
+[0;31mE (78934) i2c.master: s_i2c_synchronous_transaction(892): I2C transaction failed[0m
+[0;31mE (78934) i2c.master: i2c_master_transmit_receive(1156): I2C transaction failed[0m
+[0;31mE (78944) WATCH: Loi doc MPU6050: ESP_ERR_INVALID_STATE[0m
+[0;31mE (78964) i2c.master: I2C transaction unexpected nack detected[0m

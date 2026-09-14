@@ -1,0 +1,2 @@
+source D:/nckh_test1/esp32c3/tft/build/bootloader/gdbinit/symbols
+source D:/nckh_test1/esp32c3/tft/build/bootloader/gdbinit/connect

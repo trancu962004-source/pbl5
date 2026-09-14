@@ -1,0 +1,20 @@
+23:24:07 **** Incremental Build of configuration Debug for project can_test1 ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "can_test1.elf" @"objects.list"   -mcpu=cortex-m3 -T"D:\nckh_test1\stm32f103\can_test1\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="can_test1.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: can_test1.elf
+ 
+arm-none-eabi-size  can_test1.elf 
+arm-none-eabi-objdump -h -S can_test1.elf  > "can_test1.list"
+arm-none-eabi-objcopy  -O ihex can_test1.elf  "can_test1.hex"
+   text	   data	    bss	    dec	    hex	filename
+  12664	     92	   2012	  14768	   39b0	can_test1.elf
+Finished building: default.size.stdout
+ 
+Finished building: can_test1.hex
+ 
+Finished building: can_test1.list
+ 
+
+23:24:08 Build Finished. 0 errors, 0 warnings. (took 933ms)
+

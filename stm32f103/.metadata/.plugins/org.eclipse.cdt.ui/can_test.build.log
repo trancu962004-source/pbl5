@@ -1,0 +1,64 @@
+09:51:35 **** Incremental Build of configuration Debug for project can_test ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c:17:1: error: unknown type name 'UART_HandleTypeDef'; did you mean 'CAN_HandleTypeDef'?
+   17 | UART_HandleTypeDef huart1;
+      | ^~~~~~~~~~~~~~~~~~
+      | CAN_HandleTypeDef
+../Core/Src/main.c: In function 'MX_USART1_UART_Init':
+../Core/Src/main.c:141:9: error: request for member 'Instance' in something not a structure or union
+  141 |   huart1.Instance = USART1;
+      |         ^
+../Core/Src/main.c:142:9: error: request for member 'Init' in something not a structure or union
+  142 |   huart1.Init.BaudRate = 115200;
+      |         ^
+../Core/Src/main.c:143:9: error: request for member 'Init' in something not a structure or union
+  143 |   huart1.Init.WordLength = UART_WORDLENGTH_8B;
+      |         ^
+../Core/Src/main.c:143:28: error: 'UART_WORDLENGTH_8B' undeclared (first use in this function)
+  143 |   huart1.Init.WordLength = UART_WORDLENGTH_8B;
+      |                            ^~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:143:28: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:144:9: error: request for member 'Init' in something not a structure or union
+  144 |   huart1.Init.StopBits = UART_STOPBITS_1;
+      |         ^
+../Core/Src/main.c:144:26: error: 'UART_STOPBITS_1' undeclared (first use in this function)
+  144 |   huart1.Init.StopBits = UART_STOPBITS_1;
+      |                          ^~~~~~~~~~~~~~~
+../Core/Src/main.c:145:9: error: request for member 'Init' in something not a structure or union
+  145 |   huart1.Init.Parity = UART_PARITY_NONE;
+      |         ^
+../Core/Src/main.c:145:24: error: 'UART_PARITY_NONE' undeclared (first use in this function)
+  145 |   huart1.Init.Parity = UART_PARITY_NONE;
+      |                        ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:146:9: error: request for member 'Init' in something not a structure or union
+  146 |   huart1.Init.Mode = UART_MODE_TX_RX;
+      |         ^
+../Core/Src/main.c:146:22: error: 'UART_MODE_TX_RX' undeclared (first use in this function)
+  146 |   huart1.Init.Mode = UART_MODE_TX_RX;
+      |                      ^~~~~~~~~~~~~~~
+../Core/Src/main.c:147:9: error: request for member 'Init' in something not a structure or union
+  147 |   huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+      |         ^
+../Core/Src/main.c:147:27: error: 'UART_HWCONTROL_NONE' undeclared (first use in this function)
+  147 |   huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+      |                           ^~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:148:9: error: request for member 'Init' in something not a structure or union
+  148 |   huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+      |         ^
+../Core/Src/main.c:148:30: error: 'UART_OVERSAMPLING_16' undeclared (first use in this function)
+  148 |   huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+      |                              ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:150:7: warning: implicit declaration of function 'HAL_UART_Init'; did you mean 'HAL_CAN_Init'? [-Wimplicit-function-declaration]
+  150 |   if (HAL_UART_Init(&huart1) != HAL_OK)
+      |       ^~~~~~~~~~~~~
+      |       HAL_CAN_Init
+../Core/Src/main.c: In function 'UART1_Print':
+../Core/Src/main.c:219:3: warning: implicit declaration of function 'HAL_UART_Transmit' [-Wimplicit-function-declaration]
+  219 |   HAL_UART_Transmit(&huart1, (uint8_t *)msg, strlen(msg), 100);
+      |   ^~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+
+09:51:36 Build Failed. 16 errors, 2 warnings. (took 1s.12ms)
+

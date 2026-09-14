@@ -1,0 +1,6 @@
+../Core/Src/uart_parser.c:7:13:Find_Field	24	static
+../Core/Src/uart_parser.c:33:9:Extract_Int_Field	40	static
+../Core/Src/uart_parser.c:60:9:Extract_Float_Field	32	static
+../Core/Src/uart_parser.c:79:9:Extract_Wing_Field	24	static
+../Core/Src/uart_parser.c:106:9:Parse_Vital_Line	64	static
+../Core/Src/uart_parser.c:158:9:Parse_Loadcell_Line	48	static

@@ -1,0 +1,10 @@
+01:21:19 **** Incremental Build of configuration Debug for project rx_f407 ****
+make -j12 all 
+arm-none-eabi-size  rx_f407.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15704	     92	   2148	  17944	   4618	rx_f407.elf
+Finished building: default.size.stdout
+ 
+
+01:21:19 Build Finished. 0 errors, 0 warnings. (took 367ms)
+

@@ -1,0 +1,19 @@
+# Build output
+build/
+
+# ESP-IDF generated config backup
+sdkconfig.old
+
+# VS Code settings
+.vscode/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,93 @@
+{
+  "cleared_at": 1778806270.7909462,
+  "cleared_by": "Trần Văn Hạnh",
+  "shift": "sáng 14/5",
+  "reason": "Sang ngày mới / bàn giao ca trực",
+  "deleted_count": 2,
+  "records": [
+    {
+      "patient_key": "B-R001-B002-P003",
+      "wing": "B",
+      "room": 1,
+      "bed": 2,
+      "patient": 3,
+      "handled_at": 1778785974.7410932,
+      "handled_by": "Trần Văn Hạnh",
+      "shift": "sáng 14/5",
+      "note": "Đã kiểm tra và xử lý xong",
+      "alert_signature": "FALL_DETECTED|SOS_BUTTON",
+      "alerts": [
+        {
+          "level": "critical",
+          "code": "SOS_BUTTON",
+          "message": "Bệnh nhân bấm nút SOS/cầu cứu",
+          "value": 1,
+          "timestamp": 1778785974.4857123
+        },
+        {
+          "level": "critical",
+          "code": "FALL_DETECTED",
+          "message": "Phát hiện té ngã",
+          "value": 1,
+          "timestamp": 1778785974.4857123
+        }
+      ],
+      "priority": {
+        "score": 327,
+        "level": "Rất cao",
+        "reasons": [
+          "Bệnh nhân bấm nút SOS/cầu cứu",
+          "Phát hiện té ngã",
+          "SOS",
+          "Té ngã"
+        ]
+      },
+      "vital": {
+        "hr": 0,
+        "spo2": 0,
+        "temp": 36.5,
+        "battery": 100,
+        "seq": 180,
+        "status": 24,
+        "updated_at": 1778785974.4857123
+      },
+      "loadcell": null
+    },
+    {
+      "patient_key": "B-R001-B002-P003",
+      "wing": "B",
+      "room": 1,
+      "bed": 2,
+      "patient": 3,
+      "handled_at": 1778785997.149281,
+      "handled_by": "Trần Văn Hạnh",
+      "shift": "sáng 14/5",
+      "note": "Đã kiểm tra và xử lý xong",
+      "alert_signature": "FALL_DETECTED",
+      "alerts": [
+        {
+          "level": "critical",
+          "code": "FALL_DETECTED",
+          "message": "Phát hiện té ngã",
+          "value": 1,
+          "timestamp": 1778785987.8527112
+        }
+      ],
+      "priority": {
+        "score": 0,
+        "level": "Thấp",
+        "reasons": []
+      },
+      "vital": {
+        "hr": 0,
+        "spo2": 0,
+        "temp": 36.5,
+        "battery": 100,
+        "seq": 201,
+        "status": 0,
+        "updated_at": 1778785996.2851653
+      },
+      "loadcell": null
+    }
+  ]
+}

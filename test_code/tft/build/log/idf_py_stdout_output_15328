@@ -1,0 +1,67 @@
+[0;32mI (106) esp_image: segment 1: paddr=0001bca4 vaddr=3fc8deESP-ROM:esp32c3-api1-20210207
+Build:Feb  7 2021
+rst:0x15 (USB_UART_CHIP_RESET),boot:0xd (SPI_FAST_FLASH_BOOT)
+Saved PC:0x40383f54
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fcd5820,len:0x1820
+load:0x403cc710,len:0xbcc
+load:0x403ce710,len:0x2f5c
+entry 0x403cc71a
+[0;32mI (24) boot: ESP-IDF v5.3.3-dirty 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time Apr 17 2026 01:18:27[0m
+[0;32mI (25) boot: chip revision: v0.4[0m
+[0;32mI (28) boot: efuse block revision: v1.3[0m
+[0;32mI (32) boot.esp32c3: SPI Speed      : 80MHz[0m
+[0;32mI (37) boot.esp32c3: SPI Mode       : DIO[0m
+[0;32mI (42) boot.esp32c3: SPI Flash Size : 2MB[0m
+[0;32mI (47) boot: Enabling RNG early entropy source...[0m
+[0;32mI (52) boot: Partition Table:[0m
+[0;32mI (56) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (63) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (70) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (78) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (85) boot: End of partition table[0m
+[0;32mI (89) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=0bc7ch ( 48252) map[0m
+[0;32mI (106) esp_image: segment 1: paddr=0001bca4 vaddr=3fc8de00 size=01414h (  5140) load[0m
+[0;32mI (107) esp_image: segment 2: paddr=0001d0c0 vaddr=40380000 size=02f58h ( 12120) load[0m
+[0;32mI (117) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=1bc74h (113780) map[0m
+[0;32mI (142) esp_image: segment 4: paddr=0003bc9c vaddr=40382f58 size=0ae18h ( 44568) load[0m
+[0;32mI (154) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (154) boot: Disabling RNG early entropy source...[0m
+[0;32mI (166) cpu_start: Unicore app[0m
+[0;32mI (174) cpu_start: Pro cpu start user code[0m
+[0;32mI (174) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (175) app_init: Application information:[0m
+[0;32mI (177) app_init: Project name:     tft[0m
+[0;32mI (182) app_init: App version:      1[0m
+[0;32mI (186) app_init: Compile time:     Apr 17 2026 01:18:10[0m
+[0;32mI (192) app_init: ELF file SHA256:  03bf82a74...[0m
+[0;32mI (198) app_init: ESP-IDF:          v5.3.3-dirty[0m
+[0;32mI (203) efuse_init: Min chip rev:     v0.3[0m
+[0;32mI (208) efuse_init: Max chip rev:     v1.99 [0m
+[0;32mI (213) efuse_init: Chip rev:         v0.4[0m
+[0;32mI (217) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (225) heap_init: At 3FC900F0 len 0002FF10 (191 KiB): RAM[0m
+[0;32mI (231) heap_init: At 3FCC0000 len 0001C710 (113 KiB): Retention RAM[0m
+[0;32mI (238) heap_init: At 3FCDC710 len 00002950 (10 KiB): Retention RAM[0m
+[0;32mI (245) heap_init: At 50000000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (252) spi_flash: detected chip: generic[0m
+[0;32mI (256) spi_flash: flash io: dio[0m
+[0;33mW (260) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (273) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (279) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (287) main_task: Started on CPU0[0m
+[0;32mI (287) main_task: Calling app_main()[0m
+[0;32mI (287) st7789_full: Backlight init[0m
+[0;32mI (297) gpio: GPIO[10]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (307) st7789_full: LCD init[0m
+[0;32mI (307) st7789_full: spi_bus_initialize[0m
+[0;32mI (317) st7789_full: esp_lcd_new_panel_io_spi[0m
+[0;32mI (317) gpio: GPIO[8]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (327) st7789_full: esp_lcd_new_panel_st7789[0m
+[0;32mI (327) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (337) st7789: LCD panel create success, version: 0.0.1[0m
+[0;32mI (657) st7789_full: lcd init done[0m
+[0;32mI (657) st7789_full: Start color test[0m
+[0;32mI (4507) st7789_full: Draw demo[0m
